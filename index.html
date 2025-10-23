@@ -17,13 +17,13 @@
       text-align: center;
       overflow-x: hidden;
       overflow-y: auto;
-      /* 🌟 PERUBAHAN: Padding atas disesuaikan agar konten lebih ke atas */
       padding: 30px 20px 20px 20px;
       box-sizing: border-box;
-      position: relative; /* Penting untuk background overlay */
+      position: relative; 
+      cursor: default; /* 🌟 BARU: Mengubah cursor default */
     }
 
-    /* 🌟 BARU: Happy Birthday Pattern Overlay */
+    /* 🌟 BARU: Pola background "Happy Birthday" */
     .birthday-pattern-overlay {
       position: absolute;
       top: 0;
@@ -33,8 +33,8 @@
       background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='5' y='40' font-family='Comic Sans MS, cursive' font-size='18' fill='%23ffb6c1' opacity='0.3'%3EHappy%3C/text%3E%3Ctext x='15' y='70' font-family='Comic Sans MS, cursive' font-size='18' fill='%23b3e5fc' opacity='0.3'%3EBirthday!%3C/text%3E%3C/svg%3E");
       background-size: 200px 200px;
       opacity: 0.4;
-      z-index: -2; /* Di bawah balon */
-      animation: movePattern 60s linear infinite; /* Animasi bergerak perlahan */
+      z-index: -2; 
+      animation: movePattern 60s linear infinite;
     }
     @keyframes movePattern {
       from { background-position: 0 0; }
@@ -79,7 +79,27 @@
       90% { opacity: 0.7; }
       100% { transform: translateY(-120vh); opacity: 0; }
     }
-    /* --- Akhir Animasi Balon --- */
+    
+    /* 🌟 BARU: Cursor Trail (Jejak Kursor) */
+    .sparkle-trail {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        background: white;
+        border-radius: 50%;
+        box-shadow: 0 0 10px white, 0 0 15px white;
+        pointer-events: none;
+        z-index: 9999;
+        opacity: 0;
+        transform: translate(-50%, -50%);
+        animation: fadeOut 0.5s forwards;
+    }
+    @keyframes fadeOut {
+        to {
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 0;
+        }
+    }
 
 
     .hidden {
@@ -101,7 +121,6 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      /* 🌟 PERUBAHAN: Menyesuaikan margin top untuk konten halaman */
       margin-top: 20px; 
     }
 
@@ -161,11 +180,28 @@
       margin-top: 10px;
     }
 
+    /* 🌟 BARU: Animasi pulse untuk tombol login */
+    #login button {
+        animation: buttonPulse 2s infinite ease-in-out;
+    }
+    @keyframes buttonPulse {
+        0%, 100% { transform: scale(1); box-shadow: 0 0 10px rgba(255, 158, 205, 0.3); }
+        50% { transform: scale(1.03); box-shadow: 0 0 20px rgba(255, 158, 205, 0.7); }
+    }
+    
+    #giftPage p {
+        /* 🌟 BARU: Animasi "breathe" untuk teks instruksi */
+        animation: breathe 2.5s infinite ease-in-out;
+    }
+    @keyframes breathe {
+        0%, 100% { opacity: 0.7; }
+        50% { opacity: 1; }
+    }
+
     button:hover { transform: scale(1.05); }
 
     .gift {
       width: 160px;
-      /* 🌟 PERUBAHAN: Menggeser kado lebih ke atas */
       margin-top: 30px; 
       animation: bounce 1.2s infinite ease-in-out;
       cursor: pointer;
@@ -184,13 +220,11 @@
     .cake-container {
       position: relative;
       display: inline-block;
-      /* 🌟 PERUBAHAN: Menggeser kue lebih ke atas */
       margin-top: 30px; 
       animation: fadeInUp 1s ease;
-      filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2)); /* 🌟 PERUBAHAN: Bayangan lebih bagus */
+      filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2)); 
     }
 
-    /* 🌟 BARU: Animasi Pulse untuk Kue */
     .cake-container:after {
         content: '';
         position: absolute;
@@ -213,7 +247,6 @@
     .cake {
       width: 260px;
       border-radius: 15px;
-      /* box-shadow: 0 0 25px rgba(255, 182, 193, 0.6); */ /* Dihapus, diganti drop-shadow di container */
       z-index: 2;
       position: relative;
     }
@@ -244,7 +277,6 @@
     h1 { color: #ff4b91; font-size: 28px; margin-bottom: 10px; }
     h2 { color: #59a7ff; font-size: 22px; margin-top: 0; }
 
-    /* 🌟 BARU: Style untuk quote di bawah kue */
     .quote-text {
       font-size: 18px;
       color: #777;
@@ -254,7 +286,26 @@
       line-height: 1.5;
     }
     
-    /* Perbaikan Desain Kartu Hadiah (Luar) */
+    /* 🌟 BARU: Animasi Reveal Teks H1 */
+    .reveal-text {
+        opacity: 0; /* Mulai dari tak terlihat */
+        position: relative;
+    }
+    .reveal-text > span {
+        display: inline-block;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: revealLetter 0.5s cubic-bezier(0.215, 0.610, 0.355, 1) forwards;
+    }
+    @keyframes revealLetter {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+
+    /* Desain Kartu Hadiah (Luar) */
     .action-cards {
       display: flex;
       flex-wrap: wrap;
@@ -287,18 +338,16 @@
       transform: scale(1.05) translateY(-5px);
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     }
-    /* 🌟 PERUBAHAN: Emoji lebih besar, teks di bawahnya */
     .action-btn .emoji-icon {
-      font-size: 40px; /* Ukuran emoji lebih besar */
+      font-size: 40px; 
       line-height: 1;
-      margin-bottom: 5px; /* Jarak antara emoji dan teks */
+      margin-bottom: 5px; 
     }
     .action-btn .button-text {
       font-size: 14px;
       line-height: 1.2;
     }
     
-    /* Gradient untuk tombol */
     .action-btn:nth-child(1) { background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); }
     .action-btn:nth-child(2) { background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%); }
     .action-btn:nth-child(3) { background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%); }
@@ -326,7 +375,6 @@
       visibility: visible;
     }
     
-    /* 🌟 PERUBAHAN: Modal content dengan gradient background */
     .modal-content {
       background: linear-gradient(160deg, #ffffff 0%, #fefefe 100%);
       padding: 25px;
@@ -357,7 +405,6 @@
       color: #333;
     }
     
-    /* Judul di dalam Modal */
     .modal-content h2 {
       color: #ff4b91;
       border-bottom: 3px solid #fde7f0;
@@ -365,38 +412,79 @@
       margin-top: 5px;
     }
     
-    /* 🌟 PERUBAHAN: Galeri Foto di dalam Modal */
-    .photos {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 20px;
+    /* 🌟 BARU: Galeri Foto (Slider/Carousel) */
+    .photo-slider {
+        position: relative;
+        width: 100%;
+        max-width: 400px; /* Batas lebar slider */
+        margin: 20px auto 0;
+        overflow: hidden;
+        border-radius: 15px;
+        box-shadow: 0 0 10px rgba(255, 182, 193, 0.5);
     }
-    .photos img {
-      width: 100%;
-      max-width: 200px;
-      border-radius: 15px;
-      box-shadow: 0 0 10px rgba(255, 182, 193, 0.5); /* Bayangan awal */
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      /* 🌟 BARU: Random border color */
-      border: 3px solid transparent;
+    .photo-slide {
+        display: none; /* Sembunyikan semua slide by default */
+        width: 100%;
+        animation: fadeEffect 0.5s; /* Animasi fade */
     }
-    /* Random border colors for photos */
-    .photos img:nth-child(odd) { border-color: #ff9a9e; }
-    .photos img:nth-child(even) { border-color: #a1c4fd; }
+    .photo-slide img {
+        width: 100%;
+        display: block;
+    }
+    /* Tombol Prev/Next */
+    .slider-nav {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        width: auto;
+        padding: 16px;
+        margin-top: -22px;
+        color: white;
+        font-weight: bold;
+        font-size: 24px;
+        transition: 0.3s ease;
+        border-radius: 0 3px 3px 0;
+        user-select: none;
+        background-color: rgba(0,0,0,0.3);
+    }
+    .slider-nav.next {
+        right: 0;
+        border-radius: 3px 0 0 3px;
+    }
+    .slider-nav:hover {
+        background-color: rgba(0,0,0,0.6);
+    }
+    /* Counter Teks */
+    .slide-counter {
+        color: #f2f2f2;
+        background-color: rgba(0,0,0,0.5);
+        font-size: 14px;
+        padding: 8px 12px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 0 0 10px 0;
+    }
+    @keyframes fadeEffect {
+        from {opacity: 0.4}
+        to {opacity: 1}
+    }
+    /* ----- Akhir Style Slider ----- */
 
-    .photos img:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(255, 182, 193, 0.8); /* Bayangan lebih kuat saat hover */
-    }
     
-    .modal-content p {
+    /* 🌟 PERUBAHAN: Style untuk "Surat Ucapan" */
+    .wish-letter {
       font-size: 17px;
-      color: #555;
+      color: #333; /* Teks lebih gelap agar mudah dibaca */
       text-align: left;
-      line-height: 1.6;
+      line-height: 1.7; /* Jarak baris lebih nyaman */
       white-space: pre-wrap;
+      background: #fffafb; /* Warna kertas sedikit off-white */
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px solid #fde7f0; /* Border pink tipis */
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Bayangan halus */
+      margin-top: 15px;
     }
     
     /* Desain Playlist */
@@ -444,12 +532,11 @@
       overflow: hidden;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
-    /* Trik lubang sobekan */
     .voucher::before {
       content: '';
       position: absolute;
       top: 0;
-      left: -5px; /* Geser sedikit agar terlihat */
+      left: -5px; 
       bottom: 0;
       width: 10px;
       background: radial-gradient(circle at 0 10px, transparent 4px, #fff8f9 5px) repeat-y;
@@ -459,7 +546,7 @@
       content: '';
       position: absolute;
       top: 0;
-      right: -5px; /* Geser sedikit agar terlihat */
+      right: -5px; 
       bottom: 0;
       width: 10px;
       background: radial-gradient(circle at 10px 10px, transparent 4px, #fff8f9 5px) repeat-y;
@@ -470,7 +557,8 @@
 </head>
 <body>
 
-  <div class="birthday-pattern-overlay"></div>
+  
+<div class="birthday-pattern-overlay"></div>
 
   <ul class="background-balloons">
     <li></li> <li></li> <li></li> <li></li> <li></li>
@@ -489,11 +577,11 @@
   <div id="giftPage" class="hidden">
     <h1>Hai Elza 💖</h1>
     <p>Klik kadonya untuk membuka kejutan 🎂</p>
-    <img id="giftImage" src="kado.png" alt="Kado Ulang Tahun" class="gift" onclick="explodeGift()">
+    <img id="giftImage" src="kado.png" alt="Kado Ulang Tahun" class.gift" onclick="explodeGift()">
   </div>
 
   <div id="surprise" class="hidden">
-    <h1>🎉 Selamat Ulang Tahun, Elza Savira Chairani Zakaria 🎂</h1>
+    <h1 class="reveal-text" id="main-greeting">🎉 Selamat Ulang Tahun, Elza Savira Chairani Zakaria 🎂</h1>
     <h2>26 Oktober 2025</h2>
 
     <div class="cake-container" id="cakeContainer">
@@ -525,13 +613,34 @@
     <div class="modal-content">
       <span class="modal-close" onclick="closeModal('modal-gallery')">&times;</span>
       <h2>Galeri Kenangan Kita 💖</h2>
-      <div class="photos">
-        <img src="foto1.jpg" alt="Foto kenangan 1">
-        <img src="foto2.jpg" alt="Foto kenangan 2">
-        <img src="foto3.jpg" alt="Foto kenangan 3">
-        <img src="foto4.jpg" alt="Foto kenangan 4">
-        <img src="foto5.jpg" alt="Foto kenangan 5">
+      
+      <div class="photo-slider">
+        <div class="slide-counter" id="slide-counter"></div>
+        
+        <div class="photo-slide">
+          <img src="foto1.jpg" alt="Foto kenangan 1">
+        </div>
+        
+        <div class="photo-slide">
+          <img src="foto2.jpg" alt="Foto kenangan 2">
+        </div>
+        
+        <div class="photo-slide">
+          <img src="foto3.jpg" alt="Foto kenangan 3">
+        </div>
+        
+        <div class="photo-slide">
+          <img src="foto4.jpg" alt="Foto kenangan 4">
+        </div>
+        
+        <div class="photo-slide">
+          <img src="foto5.jpg" alt="Foto kenangan 5">
+        </div>
+      
+        <a class="slider-nav prev" onclick="changePhoto(-1)">&#10094;</a>
+        <a class.slider-nav next" onclick="changePhoto(1)">&#10095;</a>
       </div>
+      
     </div>
   </div>
 
@@ -539,7 +648,7 @@
     <div class="modal-content">
       <span class="modal-close" onclick="closeModal('modal-wish')">&times;</span>
       <h2>Untuk Elza Tersayang...</h2>
-      <p>
+      <p class="wish-letter">
 Selamat ulang tahun ya, sayang!
 
 Semoga di hari yang spesial ini, kamu dikelilingi oleh semua cinta, tawa, dan kebahagiaan di dunia. Kamu adalah orang yang luar biasa, dan aku sangat bersyukur memilikimu.
@@ -676,6 +785,9 @@ Love you always 💕
           setTimeout(() => {
             surprisePage.style.opacity = '1';
             surprisePage.style.transform = 'scale(1)';
+            
+            // 🌟 BARU: Jalankan animasi teks H1
+            animateTextReveal('main-greeting');
           }, 20);
 
           addSparkles();
@@ -698,11 +810,43 @@ Love you always 💕
       }
     }
     
+    // 🌟 BARU: Fungsi untuk animasi Teks H1
+    function animateTextReveal(elementId) {
+        const greeting = document.getElementById(elementId);
+        // Cek jika teks sudah dianimasi
+        if (greeting.classList.contains('animated')) return;
+        greeting.classList.add('animated'); // Tandai sebagai sudah dianimasi
+
+        const text = greeting.innerText;
+        greeting.innerText = ''; // Kosongkan teks
+        greeting.style.opacity = 1; // Tampilkan elemen H1
+
+        text.split('').forEach((char, index) => {
+            const span = document.createElement('span');
+            span.innerText = char === ' ' ? '\u00A0' : char; // Handle spasi
+            span.style.animationDelay = `${index * 0.05}s`; // Atur delay per huruf
+            greeting.appendChild(span);
+        });
+    }
+
+    // 🌟 BARU: Variabel global untuk Slider Galeri
+    let currentSlideIndex = 1;
+    let slides = document.getElementsByClassName("photo-slide");
+    let counter = document.getElementById("slide-counter");
+
     function showModal(modalId) {
       const modal = document.getElementById(modalId);
       modal.classList.remove("hidden");
       setTimeout(() => {
         modal.classList.add("visible");
+        
+        // 🌟 BARU: Jika modal galeri, inisialisasi slider
+        if (modalId === 'modal-gallery') {
+            slides = document.getElementsByClassName("photo-slide"); // Update koleksi slides
+            counter = document.getElementById("slide-counter");
+            currentSlideIndex = 1; // Reset ke foto pertama
+            showPhoto(currentSlideIndex);
+        }
       }, 10);
     }
     
@@ -718,6 +862,44 @@ Love you always 💕
         modal.classList.add("hidden");
       }, 300);
     }
+
+    // 🌟 BARU: Fungsi untuk Galeri Slider
+    function changePhoto(n) {
+      showPhoto(currentSlideIndex += n);
+    }
+
+    function showPhoto(n) {
+      if (!slides || slides.length === 0) return; // Pengaman jika slides tidak ada
+      
+      let i;
+      if (n > slides.length) {currentSlideIndex = 1} // Kembali ke awal
+      if (n < 1) {currentSlideIndex = slides.length} // Pergi ke akhir
+      
+      // Sembunyikan semua slide
+      for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+      }
+      
+      // Tampilkan slide yang aktif
+      slides[currentSlideIndex-1].style.display = "block";
+      // Update counter
+      counter.innerText = `${currentSlideIndex} / ${slides.length}`;
+    }
+    
+    // 🌟 BARU: Fungsi untuk Cursor Trail
+    document.addEventListener('mousemove', function(e) {
+        let sparkle = document.createElement('div');
+        sparkle.className = 'sparkle-trail';
+        document.body.appendChild(sparkle);
+        
+        sparkle.style.left = e.pageX + 'px';
+        sparkle.style.top = e.pageY + 'px';
+        
+        // Hapus elemen setelah animasi selesai
+        setTimeout(() => {
+            sparkle.remove();
+        }, 500); // 500ms = durasi animasi fadeOut
+    });
 
   </script>
 
