@@ -1,52 +1,204 @@
-import streamlit as st
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎂 Happy Birthday Elza 💖</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Comic Sans MS", cursive;
+      background: linear-gradient(135deg, #ffb6c1, #b3e5fc);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      overflow-x: hidden;
+    }
 
-st.set_page_config(page_title="Happy Birthday 🎂", page_icon="🎉")
+    .card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 182, 193, 0.6);
+      padding: 30px;
+      width: 90%;
+      max-width: 400px;
+      transition: all 0.5s ease;
+    }
 
-# HTML + CSS
-birthday_html = """
-<style>
-body {
-    background-color: #fff0f6;
-    color: #333;
-    text-align: center;
-    font-family: 'Comic Sans MS', cursive, sans-serif;
-}
-h1 {
-    color: #ff4b4b;
-    font-size: 48px;
-}
-h2 {
-    color: #ff7aa8;
-}
-.heart {
-    animation: heartbeat 1s infinite;
-}
-@keyframes heartbeat {
-    0% { transform: scale(1); }
-    25% { transform: scale(1.2); }
-    50% { transform: scale(1); }
-    75% { transform: scale(1.2); }
-    100% { transform: scale(1); }
-}
-</style>
+    input {
+      width: 80%;
+      padding: 10px;
+      margin: 10px;
+      border: 2px solid pink;
+      border-radius: 10px;
+      outline: none;
+      text-align: center;
+      font-size: 16px;
+    }
 
-<h1 class="heart">💖 Selamat Ulang Tahun, Sayang 💖</h1>
-<h2>Hari ini dunia jadi lebih indah, karena kamu dilahirkan 💫</h2>
+    button {
+      background: linear-gradient(90deg, #ff9ecd, #9cd4ff);
+      border: none;
+      color: white;
+      font-weight: bold;
+      padding: 10px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
 
-<p style="font-size:20px; margin-top:20px;">
-Aku bersyukur setiap hari karena bisa memilikimu.<br>
-Terima kasih sudah jadi bagian terindah dalam hidupku. 🎂
-</p>
+    button:hover {
+      transform: scale(1.05);
+    }
 
-<img src="https://i.imgur.com/2yAf6XK.jpeg" width="60%" style="border-radius:20px; box-shadow:0 0 10px pink; margin:20px auto;">
+    .hidden {
+      display: none;
+    }
 
-<audio controls autoplay>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
-  Browser kamu tidak mendukung audio.
-</audio>
+    /* Animasi kue */
+    .cake {
+      position: relative;
+      width: 150px;
+      height: 120px;
+      background: #ffcccb;
+      margin: 20px auto;
+      border-radius: 10px 10px 0 0;
+      box-shadow: 0 10px 0 #ffb6c1 inset;
+    }
 
-<p style="margin-top:30px; font-size:18px;">Dibuat dengan ❤️ oleh seseorang yang mencintaimu</p>
-"""
+    .candle {
+      position: absolute;
+      width: 10px;
+      height: 40px;
+      background: #fff;
+      left: 50%;
+      transform: translateX(-50%);
+      top: -40px;
+      border-radius: 3px;
+    }
 
+    .flame {
+      position: absolute;
+      width: 10px;
+      height: 15px;
+      background: radial-gradient(circle, yellow 30%, orange 70%);
+      border-radius: 50%;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: flicker 0.3s infinite alternate;
+    }
 
-st.markdown(birthday_html, unsafe_allow_html=True)
+    @keyframes flicker {
+      from { transform: translateX(-50%) scale(1); opacity: 1; }
+      to { transform: translateX(-50%) scale(1.2); opacity: 0.8; }
+    }
+
+    .photos {
+      margin-top: 20px;
+    }
+
+    .photos img {
+      width: 80%;
+      max-width: 250px;
+      border-radius: 20px;
+      margin: 10px;
+      box-shadow: 0 0 10px pink;
+      transition: transform 0.3s ease;
+    }
+
+    .photos img:hover {
+      transform: scale(1.05);
+    }
+
+    h1 {
+      color: #ff4b91;
+      font-size: 28px;
+    }
+
+    h2 {
+      color: #59a7ff;
+      font-size: 22px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Form "login" -->
+  <div id="login" class="card">
+    <h1>🎀 Halo! 🎀</h1>
+    <p>Masukkan nama & tanggal ulang tahun ya 💕</p>
+    <input type="text" id="name" placeholder="Nama lengkap">
+    <input type="text" id="birthday" placeholder="Tanggal (dd-mm-yyyy)">
+    <button onclick="checkBirthday()">Masuk 🎁</button>
+  </div>
+
+  <!-- Halaman kejutan -->
+  <div id="surprise" class="hidden">
+    <h1>🎉 Selamat Ulang Tahun, Elza Savira Chairani Zakaria 🎂</h1>
+    <h2>26 Oktober 2025</h2>
+    <div class="cake">
+      <div class="candle">
+        <div class="flame"></div>
+      </div>
+    </div>
+    <p style="font-size:18px; color:#555;">Semoga hari ini penuh cinta, tawa, dan kebahagiaan 💖</p>
+    <div class="photos">
+      <img src="https://i.imgur.com/2yAf6XK.jpeg">
+      <img src="https://i.imgur.com/jpJ1JYH.jpeg">
+      <img src="https://i.imgur.com/w3duR07.jpeg">
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script>
+    function checkBirthday() {
+      const name = document.getElementById("name").value.trim().toLowerCase();
+      const birthday = document.getElementById("birthday").value.trim();
+
+      const correctName = "elza savira chairani zakaria";
+      const correctBirthday = "26-10-2025";
+
+      if (name === correctName && birthday === correctBirthday) {
+        document.getElementById("login").classList.add("hidden");
+        document.getElementById("surprise").classList.remove("hidden");
+        launchConfetti();
+      } else {
+        alert("Hmm... Coba isi nama & tanggal ulang tahun yang benar ya 💕");
+      }
+    }
+
+    // 🎉 Efek confetti sederhana
+    function launchConfetti() {
+      const duration = 3 * 1000;
+      const end = Date.now() + duration;
+
+      (function frame() {
+        confetti({
+          particleCount: 5,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0 },
+          colors: ["#ff9ecd", "#9cd4ff", "#ffffff"]
+        });
+        confetti({
+          particleCount: 5,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1 },
+          colors: ["#ff9ecd", "#9cd4ff", "#ffffff"]
+        });
+        if (Date.now() < end) {
+          requestAnimationFrame(frame);
+        }
+      })();
+    }
+  </script>
+
+  <!-- Library confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+</body>
+</html>
