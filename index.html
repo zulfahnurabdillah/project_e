@@ -1,417 +1,230 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🎂 Happy Birthday Elza 💖</title>
-  
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎂</text></svg>">
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
-  
-  <style>
-    body {
-      margin: 0;
-      font-family: "Quicksand", cursive;
-      background: linear-gradient(135deg, #ffb6c1, #b3e5fc);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      text-align: center;
-      overflow-x: hidden;
-      position: relative;
-      padding: 20px 0;
-      box-sizing: border-box;
-    }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎂 Happy Birthday Elza 💖</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Comic Sans MS", cursive;
+      background: linear-gradient(135deg, #ffb6c1, #b3e5fc);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
 
-    .hidden { display: none; }
+    .hidden { display: none; }
 
-    /* Transisi Halaman (Fade In/Out) */
-    .card, #giftPage, #surprise {
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-      opacity: 0;
-      transform: scale(0.9);
-      pointer-events: none;
-    }
-    
-    .visible {
-      opacity: 1;
-      transform: scale(1);
-      pointer-events: auto;
-    }
+    /* 🧁 Card login */
+    .card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 182, 193, 0.6);
+      padding: 30px;
+      width: 90%;
+      max-width: 400px;
+      transition: all 0.5s ease;
+    }
 
-    /* Card login */
-    .card {
-      background: white;
-      border-radius: 20px;
-      box-shadow: 0 0 20px rgba(255, 182, 193, 0.6);
-      padding: 30px;
-      width: 90%;
-      max-width: 400px;
-    }
-    
-    /* Animasi getar (shake) untuk error */
-    @keyframes shake {
-      0%, 100% { transform: translateX(0); }
-      25% { transform: translateX(-8px); }
-      75% { transform: translateX(8px); }
-    }
-    .shake {
-      animation: shake 0.3s ease-in-out;
-    }
-    
-    #errorMessage {
-      color: #e74c3c;
-      font-size: 14px;
-      font-weight: bold;
-      margin-top: 10px;
-      height: 16px;
-    }
+    input {
+      width: 80%;
+      padding: 10px;
+      margin: 10px;
+      border: 2px solid pink;
+      border-radius: 10px;
+      outline: none;
+      text-align: center;
+      font-size: 16px;
+    }
 
-    input {
-      width: 80%;
-      padding: 10px;
-      margin: 10px;
-      border: 2px solid pink;
-      border-radius: 10px;
-      outline: none;
-      text-align: center;
-      font-size: 16px;
-      font-family: "Quicksand", cursive;
-    }
+    button {
+      background: linear-gradient(90deg, #ff9ecd, #9cd4ff);
+      border: none;
+      color: white;
+      font-weight: bold;
+      padding: 10px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
 
-    button {
-      background: linear-gradient(90deg, #ff9ecd, #9cd4ff);
-      border: none;
-      color: white;
-      font-weight: bold;
-      padding: 10px 20px;
-      border-radius: 25px;
-      cursor: pointer;
-      transition: transform 0.2s ease;
-      font-family: "Quicksand", cursive;
-    }
+    button:hover { transform: scale(1.05); }
 
-    button:hover { transform: scale(1.05); }
+    /* 🎁 Kado animasi */
+    .gift {
+      width: 160px;
+      margin-top: 20px;
+      animation: bounce 1.2s infinite ease-in-out;
+      cursor: pointer;
+    }
 
-    /* Kado animasi */
-    .gift {
-      width: 160px;
-      margin-top: 20px;
-      animation: bounce 1.2s infinite ease-in-out;
-      cursor: pointer;
-    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
 
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-15px); }
-    }
+    .gift:hover {
+      transform: scale(1.1);
+      transition: 0.3s;
+    }
 
-    .gift:hover {
-      transform: scale(1.1);
-      transition: 0.3s;
-  D }
+    /* 🎂 Kue dengan gemerlap */
+    .cake-container {
+      position: relative;
+      display: inline-block;
+      margin-top: 20px;
+      animation: fadeInUp 1s ease;
+    }
 
-    /* Kue dengan gemerlap */
-    .cake-container {
-      position: relative;
-      display: inline-block;
-      margin-top: 20px;
-      animation: fadeInUp 1s ease;
-    }
+    .cake {
+      width: 260px;
+      border-radius: 15px;
+      box-shadow: 0 0 25px rgba(255, 182, 193, 0.6);
+      z-index: 2;
+      position: relative;
+    }
 
-    .cake {
-      width: 260px;
-      border-radius: 15px;
-      box-shadow: 0 0 25px rgba(255, 182, 193, 0.6);
-      z-index: 2;
-      position: relative;
-    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(40px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    /* ✨ Gemerlap animasi nyata */
+    .sparkle {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: radial-gradient(circle, #fff 30%, transparent 70%);
+      border-radius: 50%;
+      opacity: 0;
+      animation: sparkle 2s infinite ease-in-out;
+      pointer-events: none;
+    }
 
-    /* Gemerlap animasi nyata */
-    .sparkle {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      background: radial-gradient(circle, #fff 30%, transparent 70%);
-      border-radius: 50%;
-      opacity: 0;
-      animation: sparkle 2s infinite ease-in-out;
-      pointer-events: none;
-      z-index: 3;
-    }
+    @keyframes sparkle {
+      0% { transform: scale(0); opacity: 0; }
+      30% { transform: scale(1.4); opacity: 1; }
+      70% { transform: scale(1); opacity: 0.8; }
+      100% { transform: scale(0); opacity: 0; }
+    }
 
-    @keyframes sparkle {
-      0% { transform: scale(0); opacity: 0; }
-      30% { transform: scale(1.4); opacity: 1; }
-      70% { transform: scale(1); opacity: 0.8; }
-      100% { transform: scale(0); opacity: 0; }
-    }
+    .photos img {
+      width: 80%;
+      max-width: 250px;
+      border-radius: 20px;
+      margin: 10px;
+      box-shadow: 0 0 10px pink;
+      transition: transform 0.3s ease;
+    }
 
-    /* Kontainer Slideshow Foto */
-    .slideshow {
-      position: relative;
-      width: 90%;
-      max-width: 250px;
-      height: 250px;
-      margin: 20px auto;
-      border-radius: 20px;
-      box-shadow: 0 0 10px pink;
-      overflow: hidden;
-    }
+    .photos img:hover { transform: scale(1.05); }
 
-    .slideshow img {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 20px;
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
-      animation: simpleFade 12s infinite;
-    }
-    
-    .slideshow img:nth-child(1) { animation-delay: 0s; }
-    .slideshow img:nth-child(2) { animation-delay: 4s; }
-    .slideshow img:nth-child(3) { animation-delay: 8s; }
-
-    @keyframes simpleFade {
-      0%   { opacity: 0; }
-      8%   { opacity: 1; }
-      33%  { opacity: 1; }
-      41%  { opacity: 0; }
-      100% { opacity: 0; }
-    }
-
-    h1 { color: #ff4b91; font-size: 28px; margin-bottom: 10px;
-         min-height: 40px;
-    }
-  s   h2 { color: #59a7ff; font-size: 22px; margin-top: 0; }
-    
-    .from-message {
-      margin-top: 30px;
-      font-size: 16px;
-      color: #777;
-      font-style: italic;
-    }
-    
-    /* Kontainer Balon */
-    #balloon-container {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    .balloon {
-      position: absolute;
-      bottom: -150px;
-      width: 40px;
-      height: 50px;
-      background: rgba(255, 158, 205, 0.7);
-      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-      animation: flyUp 10s infinite ease-in;
-    }
-    
-    .balloon::after {
-      content: '';
-      position: absolute;
-      bottom: -10px;
-      left: 50%;
-      width: 1px;
-      height: 30px;
-      /* ✨ [PERBAIKAN] Huruf 'S' yang salah sudah dihapus dari baris di bawah ini */
-      background: rgba(255, 255, 255, 0.5);
-    }
-    
-    .balloon:nth-child(2) { background: rgba(156, 212, 255, 0.7); animation-duration: 12s; }
-    .balloon:nth-child(3) { background: rgba(255, 245, 165, 0.7); animation-duration: 9s; }
-    .balloon:nth-child(4) { background: rgba(200, 160, 255, 0.7); animation-duration: 11s; }
-
-    @keyframes flyUp {
-      0% {
-        transform: translateY(0) translateX(0);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-120vh) translateX(50vw);
-        opacity: 0;
-      }
-    }
-    
-  </style>
+    h1 { color: #ff4b91; font-size: 28px; margin-bottom: 10px; }
+    h2 { color: #59a7ff; font-size: 22px; margin-top: 0; }
+  </style>
 </head>
 <body>
 
-  <div id="balloon-container"></div>
+  <!-- 🧁 Halaman login -->
+  <div id="login" class="card">
+    <h1>🎀 Halo! 🎀</h1>
+    <p>Masukkan nama & tanggal ulang tahun ya 💕</p>
+    <input type="text" id="name" placeholder="Nama lengkap">
+    <input type="text" id="birthday" placeholder="Tanggal (dd-mm-yyyy)">
+    <button onclick="checkBirthday()">Masuk 🎁</button>
+  </div>
 
-    <div id="login" class="card visible">
-    <h1>🎀 Halo! 🎀</h1>
-    <p>Masukkan nama & tanggal ulang tahun ya 💕</p>
-    <input type="text" id="name" placeholder="Nama lengkap">
-    <input type="text" id="birthday" placeholder="Tanggal (dd-mm-yyyy)">
-    <button onclick="checkBirthday()">Masuk 🎁</button>
-    <p id="errorMessage" class="hidden"></p>
-  </div>
+  <!-- 🎁 Halaman kado -->
+  <div id="giftPage" class="hidden">
+    <h1>Hai Elza 💖</h1>
+    <p>Klik kadonya untuk membuka kejutan 🎂</p>
+    <img id="giftImage" src="kado.png" alt="Kado Ulang Tahun" class="gift" onclick="explodeGift()">
+  </div>
 
-    <div id="giftPage" class="hidden">
-    <h1>Hai Elza 💖</h1>
-    <p>Klik kadonya untuk membuka kejutan 🎂</p>
-    <img id="giftImage" src="kado.png" alt="Kado Ulang Tahun" class="gift" onclick="explodeGift()">
-</div>
+  <!-- 🎂 Halaman kejutan -->
+  <div id="surprise" class="hidden">
+    <h1>🎉 Selamat Ulang Tahun, Elza Savira Chairani Zakaria 🎂</h1>
+    <h2>26 Oktober 2025</h2>
 
-    <div id="surprise" class="hidden">
-    <h1 id="surprise-title"></h1>
-    <h2>26 Oktober 2025</h2>
+    <div class="cake-container" id="cakeContainer">
+      <img id="cakeImage" src="kue.png" alt="Kue Ulang Tahun" class="cake">
+    </div>
 
-    <div class="cake-container" id="cakeContainer">
-      <img id="cakeImage" src="kue.png" alt="Kue Ulang Tahun" class="cake">
-    </div>
+    <p style="font-size:18px; color:#555;">Semoga harimu penuh cinta, tawa, dan kebahagiaan 💕</p>
 
-    <p style="font-size:18px; color:#555;">Semoga harimu penuh cinta, tawa, dan kebahagiaan 💕</p>
+    <div class="photos">
+      <img src="foto1.jpg" alt="Foto kenangan 1">
+      <img src="foto2.jpg" alt="Foto kenangan 2">
+      <img src="foto3.jpg" alt="Foto kenangan 3">
+    </div>
+  </div>
 
-    <div class="slideshow">
-      <img src="foto1.jpg" alt="Foto kenangan 1">
-      <img src="foto2.jpg" alt="Foto kenangan 2">
-      <img src="foto3.jpg" alt="Foto kenangan 3">
-      </div>
-    
-    <p class="from-message">- Dengan cinta, [Nama Kamu] -</p>
-  </div>
+  <!-- 🎇 Script -->
+  <script>
+    function checkBirthday() {
+      const name = document.getElementById("name").value.trim().toLowerCase();
+      const birthday = document.getElementById("birthday").value.trim();
+      const correctName = "elza savira chairani zakaria";
+      const correctBirthday = "26-10-2025";
 
-  <script>
-    function checkBirthday() {
-      const name = document.getElementById("name").value.trim().toLowerCase();
-      const birthday = document.getElementById("birthday").value.trim();
-      const correctName = "elza savira chairani zakaria";
-      const correctBirthday = "26-10-2025";
+      if (name === correctName && birthday === correctBirthday) {
+        document.getElementById("login").classList.add("hidden");
+        document.getElementById("giftPage").classList.remove("hidden");
+      } else {
+        alert("Coba isi nama & tanggal yang benar ya 💕");
+      }
+    }
 
-      const loginCard = document.getElementById("login");
-      const errorMessage = document.getElementById("errorMessage");
+    // 💥 Ledakan saat kado diklik
+    function explodeGift() {
+      const gift = document.getElementById("giftImage");
+      gift.style.animation = "none";
+      
+      // Ledakan besar confetti warna-warni
+      const duration = 2500;
+      const end = Date.now() + duration;
 
-      if (name === correctName && birthday === correctBirthday) {
-        errorMessage.classList.add("hidden");
-        
-        loginCard.classList.remove("visible");
-        
-        setTimeout(() => {
-          loginCard.classList.add("hidden");
-          
-          const giftPage = document.getElementById("giftPage");
-          giftPage.classList.remove("hidden");
-          setTimeout(() => giftPage.classList.add("visible"), 50); 
-          
-        }, 600);
+      (function frame() {
+        confetti({
+          particleCount: 10,
+          startVelocity: 45,
+          spread: 360,
+          origin: { x: 0.5, y: 0.5 },
+          colors: ["#ff9ecd", "#9cd4ff", "#fff5a5", "#ffffff"]
+        });
+        if (Date.now() < end) requestAnimationFrame(frame);
+      })();
 
-      } else {
-        errorMessage.textContent = "Coba isi nama & tanggal yang benar ya 💕";
-        errorMessage.classList.remove("hidden");
-        loginCard.classList.add("shake");
-        
-        setTimeout(() => loginCard.classList.remove("shake"), 300);
-      }
-    }
+      // Setelah 2 detik muncul kejutan
+      setTimeout(() => {
+        document.getElementById("giftPage").classList.add("hidden");
+        document.getElementById("surprise").classList.remove("hidden");
+        addSparkles();
+      }, 2000);
+    }
 
-    function explodeGift() {
-      const gift = document.getElementById("giftImage");
-      gift.style.animation = "none";
-      gift.style.transform = "scale(1.1)";
-      
-      const duration = 2500;
-      const end = Date.now() + duration;
+    // ✨ Tambahkan gemerlap di sekitar kue
+    function addSparkles() {
+      const container = document.getElementById("cakeContainer");
+      for (let i = 0; i < 20; i++) {
+        const sparkle = document.createElement("div");
+        sparkle.classList.add("sparkle");
+        sparkle.style.left = `${Math.random() * 100}%`;
+        sparkle.style.top = `${Math.random() * 100}%`;
+        sparkle.style.animationDelay = `${Math.random() * 2}s`;
+        container.appendChild(sparkle);
+      }
+    }
+  </script>
 
-      (function frame() {
-        confetti({
-          particleCount: 10,
-          startVelocity: 45,
-          spread: 360,
-          origin: { x: 0.5, y: 0.5 },
-          colors: ["#ff9ecd", "#9cd4ff", "#fff5a5", "#ffffff"]
-        });
-        if (Date.now() < end) requestAnimationFrame(frame);
-      })();
-
-      setTimeout(() => {
-        const giftPage = document.getElementById("giftPage");
-        
-        giftPage.classList.remove("visible");
-        
-        setTimeout(() => {
-          giftPage.classList.add("hidden");
-          
-          const surprisePage = document.getElementById("surprise");
-          surprisePage.classList.remove("hidden");
-          setTimeout(() => surprisePage.classList.add("visible"), 50);
-          
-          addSparkles();
-          createBalloons();
-          startTypewriter();
-          
-        }, 600);
-        
-      }, 2000);
-    }
-
-    function addSparkles() {
-      const container = document.getElementById("cakeContainer");
-      for (let i = 0; i < 20; i++) {
-        const sparkle = document.createElement("div");
-        sparkle.classList.add("sparkle");
-        sparkle.style.left = `${Math.random() * 100}%`;
-        sparkle.style.top = `${Math.random() * 100}%`;
-        sparkle.style.animationDelay = `${Math.random() * 2}s`;
-        container.appendChild(sparkle);
-      }
-    }
-    
-    function startTypewriter() {
-      const text = "🎉 Selamat Ulang Tahun, Elza Savira Chairani Zakaria 🎂";
-      const targetElement = document.getElementById("surprise-title");
-      typeWriter(text, 0, targetElement);
-    }
-    
-    function typeWriter(txt, i, el) {
-      if (i < txt.length) {
-        el.innerHTML += txt.charAt(i);
-        i++;
-        setTimeout(() => typeWriter(txt, i, el), 75);
-      }
-    }
-    
-    function createBalloons() {
-      const container = document.getElementById("balloon-container");
-      for (let i = 0; i < 10; i++) {
-        const balloon = document.createElement("div");
-        balloon.classList.add("balloon");
-  s       
-        balloon.style.left = `${Math.random() * 90}%`; 
-        balloon.style.animationDelay = `${Math.random() * 5}s`;
-        
-        const colors = ['rgba(255, 158, 205, 0.7)', 'rgba(156, 212, 255, 0.7)', 'rgba(255, 245, 165, 0.7)'];
-        balloon.style.background = colors[Math.floor(Math.random() * colors.length)];
-        
-        container.appendChild(balloon);
-    D }
-    }
-    
-  </script>
-
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <!-- 🎊 Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
 </body>
 </html>
