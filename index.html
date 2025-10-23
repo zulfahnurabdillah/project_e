@@ -18,6 +18,9 @@
       overflow-x: hidden;
     }
 
+    .hidden { display: none; }
+
+    /* 🧁 Card login */
     .card {
       background: white;
       border-radius: 20px;
@@ -54,99 +57,71 @@
       transform: scale(1.05);
     }
 
-    .hidden { display: none; }
-
-    /* 🎁 Animasi kado */
+    /* 🎁 Gambar kado */
     .gift {
-      position: relative;
-      width: 120px;
-      height: 120px;
-      background: #ff9ecd;
-      margin: 30px auto;
-      border-radius: 10px;
-      cursor: pointer;
-      animation: shake 1s infinite;
-    }
-
-    .gift::before {
-      content: "";
-      position: absolute;
-      width: 100%;
-      height: 20px;
-      background: #ffb6c1;
-      top: 0;
-      border-radius: 10px 10px 0 0;
-    }
-
-    .ribbon {
-      position: absolute;
-      width: 20px;
-      height: 100%;
-      background: #9cd4ff;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .gift::after {
-      content: "";
-      position: absolute;
-      width: 60px;
-      height: 30px;
-      background: #ff9ecd;
-      border-radius: 50% 50% 0 0;
-      top: -30px;
-      left: 30px;
-      box-shadow: 0 2px 3px rgba(0,0,0,0.1);
-    }
-
-    @keyframes shake {
-      0%, 100% { transform: rotate(0); }
-      25% { transform: rotate(3deg); }
-      50% { transform: rotate(-3deg); }
-      75% { transform: rotate(2deg); }
-    }
-
-    /* 🎂 Kue ulang tahun */
-    .cake {
-      position: relative;
       width: 150px;
-      height: 120px;
-      background: #ffcccb;
-      margin: 20px auto;
-      border-radius: 10px 10px 0 0;
-      box-shadow: 0 10px 0 #ffb6c1 inset;
+      margin-top: 20px;
+      animation: bounce 1.2s infinite ease-in-out;
+      cursor: pointer;
     }
 
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0) rotate(0); }
+      50% { transform: translateY(-15px) rotate(3deg); }
+    }
+
+    .gift:hover {
+      transform: scale(1.1) rotate(-5deg);
+      transition: 0.3s;
+    }
+
+    /* 🎂 Gambar kue + lilin */
+    .cake-container {
+      position: relative;
+      display: inline-block;
+      animation: fadeInUp 1s ease;
+    }
+
+    .cake {
+      width: 250px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(255, 182, 193, 0.6);
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 🕯️ Lilin animasi */
     .candle {
       position: absolute;
-      width: 10px;
+      width: 12px;
       height: 40px;
-      background: #fff;
+      background: white;
+      border-radius: 5px;
+      top: -40px;
       left: 50%;
       transform: translateX(-50%);
-      top: -40px;
-      border-radius: 3px;
+      box-shadow: 0 0 5px rgba(255,255,255,0.7);
     }
 
     .flame {
       position: absolute;
-      width: 10px;
-      height: 15px;
+      width: 15px;
+      height: 20px;
       background: radial-gradient(circle, yellow 30%, orange 70%);
       border-radius: 50%;
-      top: -15px;
+      top: -20px;
       left: 50%;
       transform: translateX(-50%);
       animation: flicker 0.3s infinite alternate;
+      box-shadow: 0 0 20px yellow;
     }
 
     @keyframes flicker {
       from { transform: translateX(-50%) scale(1); opacity: 1; }
       to { transform: translateX(-50%) scale(1.2); opacity: 0.8; }
-    }
-
-    .photos {
-      margin-top: 20px;
     }
 
     .photos img {
@@ -158,17 +133,15 @@
       transition: transform 0.3s ease;
     }
 
-    .photos img:hover {
-      transform: scale(1.05);
-    }
+    .photos img:hover { transform: scale(1.05); }
 
-    h1 { color: #ff4b91; font-size: 28px; }
-    h2 { color: #59a7ff; font-size: 22px; }
+    h1 { color: #ff4b91; font-size: 28px; margin-bottom: 10px; }
+    h2 { color: #59a7ff; font-size: 22px; margin-top: 0; }
   </style>
 </head>
 <body>
 
-  <!-- Form "login" -->
+  <!-- 🧁 Halaman login -->
   <div id="login" class="card">
     <h1>🎀 Halo! 🎀</h1>
     <p>Masukkan nama & tanggal ulang tahun ya 💕</p>
@@ -180,30 +153,32 @@
   <!-- 🎁 Halaman kado -->
   <div id="giftPage" class="hidden">
     <h1>Hai Elza 💖</h1>
-    <p>Klik kadonya untuk melihat kejutan 🎂</p>
-    <div class="gift" onclick="showCake()">
-      <div class="ribbon"></div>
-    </div>
+    <p>Klik kadonya untuk membuka kejutan 🎂</p>
+    <img id="giftImage" src="kado.png" alt="Kado Ulang Tahun" class="gift" onclick="showCake()">
   </div>
 
   <!-- 🎂 Halaman kejutan -->
   <div id="surprise" class="hidden">
     <h1>🎉 Selamat Ulang Tahun, Elza Savira Chairani Zakaria 🎂</h1>
     <h2>26 Oktober 2025</h2>
-    <div class="cake">
+
+    <div class="cake-container">
+      <img id="cakeImage" src="kue.jpg" alt="Kue Ulang Tahun" class="cake">
       <div class="candle">
         <div class="flame"></div>
       </div>
     </div>
-    <p style="font-size:18px; color:#555;">Semoga hari ini penuh cinta, tawa, dan kebahagiaan 💖</p>
+
+    <p style="font-size:18px; color:#555;">Semoga harimu penuh cinta, tawa, dan kebahagiaan 💕</p>
+
     <div class="photos">
-      <img src="https://i.imgur.com/2yAf6XK.jpeg">
-      <img src="https://i.imgur.com/jpJ1JYH.jpeg">
-      <img src="https://i.imgur.com/w3duR07.jpeg">
+      <img src="foto1.jpg" alt="Foto kenangan 1">
+      <img src="foto2.jpg" alt="Foto kenangan 2">
+      <img src="foto3.jpg" alt="Foto kenangan 3">
     </div>
   </div>
 
-  <!-- Script -->
+  <!-- 🎇 Script logika -->
   <script>
     function checkBirthday() {
       const name = document.getElementById("name").value.trim().toLowerCase();
@@ -215,7 +190,7 @@
         document.getElementById("login").classList.add("hidden");
         document.getElementById("giftPage").classList.remove("hidden");
       } else {
-        alert("Hmm... Coba isi nama & tanggal ulang tahun yang benar ya 💕");
+        alert("Coba isi nama & tanggal yang benar ya 💕");
       }
     }
 
@@ -249,7 +224,8 @@
     }
   </script>
 
-  <!-- Confetti Library -->
+  <!-- 🎊 Library Confetti -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
 </body>
 </html>
