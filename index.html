@@ -7,9 +7,10 @@
   <style>
     body {
       margin: 0;
-      font-family: "Comic Sans MS", cursive;
+      /* Menambahkan font fallback yang lebih baik */
+      font-family: "Comic Sans MS", "Chalkboard SE", "Marker Felt", cursive, sans-serif;
       background: linear-gradient(135deg, #ffb6c1, #b3e5fc);
-      height: 100vh;
+      min-height: 100vh; /* Menggunakan min-height agar bisa scroll */
       display: flex;
       justify-content: center;
       align-items: center;
@@ -17,11 +18,15 @@
       text-align: center;
       overflow-x: hidden;
       overflow-y: auto;
+      padding: 20px; /* Menambahkan padding agar konten tidak mepet di layar kecil */
+      box-sizing: border-box;
     }
 
-    .hidden { display: none; }
+    .hidden {
+      display: none;
+    }
 
-    /* 🧁 Card login */
+    /* 🧁 Card login & Konten Halaman */
     .card {
       background: white;
       border-radius: 20px;
@@ -29,7 +34,31 @@
       padding: 30px;
       width: 90%;
       max-width: 400px;
-      transition: all 0.5s ease;
+    }
+    
+    /* Style dasar untuk transisi halaman */
+    #login, #giftPage, #surprise {
+      transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* State awal untuk halaman yang tersembunyi (selain login) */
+    #giftPage, #surprise {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    
+    /* Animasi shake untuk error */
+    .shake {
+      animation: shake 0.5s ease-in-out;
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-8px); }
+      40%, 80% { transform: translateX(8px); }
     }
 
     input {
@@ -41,6 +70,27 @@
       outline: none;
       text-align: center;
       font-size: 16px;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    /* Efek focus pada input */
+    input:focus {
+      border-color: #ff9ecd;
+      box-shadow: 0 0 8px rgba(255, 158, 205, 0.5);
+    }
+
+    /* Style untuk pesan error */
+    .error-msg {
+      color: #d9534f;
+      font-size: 14px;
+      font-weight: bold;
+      height: 18px; /* Memberi ruang agar layout tidak "lompat" */
+      margin-top: 5px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .error-msg.visible {
+      opacity: 1;
     }
 
     button {
@@ -52,6 +102,7 @@
       border-radius: 25px;
       cursor: pointer;
       transition: transform 0.2s ease;
+      margin-top: 10px;
     }
 
     button:hover { transform: scale(1.05); }
@@ -114,11 +165,21 @@
       100% { transform: scale(0); opacity: 0; }
     }
 
+    /* 📸 Galeri foto menggunakan Flexbox */
+    .photos {
+      display: flex;
+      flex-wrap: wrap; /* Foto akan turun jika tidak muat */
+      justify-content: center; /* Foto terpusat */
+      gap: 15px; /* Jarak antar foto */
+      margin-top: 20px;
+      padding: 0 10px;
+    }
+    
     .photos img {
-      width: 80%;
-      max-width: 250px;
+      width: 100%; /* Lebar responsif */
+      max-width: 250px; /* Batas lebar maksimum */
       border-radius: 20px;
-      margin: 10px;
+      margin: 0; /* Margin diatur oleh 'gap' di parent */
       box-shadow: 0 0 10px pink;
       transition: transform 0.3s ease;
     }
@@ -131,23 +192,21 @@
 </head>
 <body>
 
-  <!-- 🧁 Halaman login -->
   <div id="login" class="card">
     <h1>🎀 Halo! 🎀</h1>
     <p>Masukkan nama & tanggal ulang tahun ya 💕</p>
     <input type="text" id="name" placeholder="Nama lengkap">
     <input type="text" id="birthday" placeholder="Tanggal (dd-mm-yyyy)">
+    <p id="error-msg" class="error-msg"></p>
     <button onclick="checkBirthday()">Masuk 🎁</button>
   </div>
 
-  <!-- 🎁 Halaman kado -->
   <div id="giftPage" class="hidden">
     <h1>Hai Elza 💖</h1>
     <p>Klik kadonya untuk membuka kejutan 🎂</p>
     <img id="giftImage" src="kado.png" alt="Kado Ulang Tahun" class="gift" onclick="explodeGift()">
   </div>
 
-  <!-- 🎂 Halaman kejutan -->
   <div id="surprise" class="hidden">
     <h1>🎉 Selamat Ulang Tahun, Elza Savira Chairani Zakaria 🎂</h1>
     <h2>26 Oktober 2025</h2>
@@ -165,53 +224,129 @@
     </div>
   </div>
 
-  <!-- 🎇 Script -->
   <script>
     function checkBirthday() {
       const name = document.getElementById("name").value.trim().toLowerCase();
       const birthday = document.getElementById("birthday").value.trim();
       const correctName = "elza savira chairani zakaria";
       const correctBirthday = "26-10-2025";
+      
+      const loginPage = document.getElementById("login");
+      const giftPage = document.getElementById("giftPage");
+      const errorMsg = document.getElementById("error-msg");
 
       if (name === correctName && birthday === correctBirthday) {
-        document.getElementById("login").classList.add("hidden");
-        document.getElementById("giftPage").classList.remove("hidden");
+        errorMsg.classList.remove("visible"); // Sembunyikan error jika benar
+        
+        // 1. Fade out halaman login
+        loginPage.style.opacity = '0';
+        loginPage.style.transform = 'scale(0.95)';
+
+        setTimeout(() => {
+          // 2. Sembunyikan login, tampilkan giftPage (secara display)
+          loginPage.classList.add("hidden");
+          giftPage.classList.remove("hidden");
+
+          // 3. Fade in halaman gift (beri jeda sedikit untuk reflow)
+          setTimeout(() => {
+            giftPage.style.opacity = '1';
+            giftPage.style.transform = 'scale(1)';
+          }, 20);
+
+        }, 500); // 500ms = durasi transisi di CSS
+        
       } else {
-        alert("Coba isi nama & tanggal yang benar ya 💕");
+        // Tampilkan pesan error
+        errorMsg.textContent = "Coba isi nama & tanggal yang benar ya 💕";
+        errorMsg.classList.add("visible");
+        // Tambahkan animasi getar
+        loginPage.classList.add("shake");
+        // Hapus kelas shake setelah animasi selesai
+        setTimeout(() => {
+          loginPage.classList.remove("shake");
+        }, 500);
       }
     }
 
     // 💥 Ledakan saat kado diklik
     function explodeGift() {
       const gift = document.getElementById("giftImage");
-      gift.style.animation = "none";
+      gift.style.animation = "none"; // Stop animasi bounce
       
-      // Ledakan besar confetti warna-warni
-      const duration = 2500;
+      // Hitung posisi kado untuk ledakan
+      const rect = gift.getBoundingClientRect();
+      const originX = (rect.left + rect.width / 2) / window.innerWidth;
+      const originY = (rect.top + rect.height / 2) / window.innerHeight;
+
+      // 💥 Ledakan besar dari KADO
+      confetti({
+        particleCount: 150,
+        spread: 100,
+        origin: { x: originX, y: originY },
+        startVelocity: 60,
+        colors: ["#ff9ecd", "#9cd4ff", "#fff5a5", "#ffffff"]
+      });
+
+      // 🎊 Tembakan confetti dari samping
+      const duration = 2000; // 2 detik (sesuai setTimeout di bawah)
       const end = Date.now() + duration;
 
       (function frame() {
+        // Cannon kiri
         confetti({
-          particleCount: 10,
-          startVelocity: 45,
-          spread: 360,
-          origin: { x: 0.5, y: 0.5 },
-          colors: ["#ff9ecd", "#9cd4ff", "#fff5a5", "#ffffff"]
+          particleCount: 3,
+          startVelocity: 40,
+          spread: 60,
+          origin: { x: 0, y: 0.7 },
+          colors: ["#ff9ecd", "#9cd4ff"]
         });
-        if (Date.now() < end) requestAnimationFrame(frame);
-      })();
+        // Cannon kanan
+        confetti({
+          particleCount: 3,
+          startVelocity: 40,
+          spread: 60,
+          origin: { x: 1, y: 0.7 },
+          colors: ["#ff9ecd", "#9cd4ff"]
+        });
 
-      // Setelah 2 detik muncul kejutan
+        if (Date.now() < end) {
+          requestAnimationFrame(frame);
+        }
+      }());
+
+
+      // Setelah 2 detik, ganti halaman
       setTimeout(() => {
-        document.getElementById("giftPage").classList.add("hidden");
-        document.getElementById("surprise").classList.remove("hidden");
-        addSparkles();
-      }, 2000);
+        const giftPage = document.getElementById("giftPage");
+        const surprisePage = document.getElementById("surprise");
+        
+        // 1. Fade out halaman kado
+        giftPage.style.opacity = '0';
+        giftPage.style.transform = 'scale(0.95)';
+
+        setTimeout(() => {
+          // 2. Sembunyikan kado, tampilkan kejutan
+          giftPage.classList.add("hidden");
+          surprisePage.classList.remove("hidden");
+
+          // 3. Fade in halaman kejutan
+          setTimeout(() => {
+            surprisePage.style.opacity = '1';
+            surprisePage.style.transform = 'scale(1)';
+          }, 20);
+
+          addSparkles();
+        }, 500); // Durasi transisi
+
+      }, 2000); // Waktu ledakan confetti
     }
 
     // ✨ Tambahkan gemerlap di sekitar kue
     function addSparkles() {
       const container = document.getElementById("cakeContainer");
+      // Cek agar tidak menambah sparkles berulang kali
+      if (container.querySelectorAll('.sparkle').length > 0) return; 
+
       for (let i = 0; i < 20; i++) {
         const sparkle = document.createElement("div");
         sparkle.classList.add("sparkle");
@@ -223,7 +358,6 @@
     }
   </script>
 
-  <!-- 🎊 Confetti Library -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
 </body>
