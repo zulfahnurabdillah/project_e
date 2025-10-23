@@ -12,18 +12,36 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      /* 🌟 PERUBAHAN: Konten dimulai dari atas, bukan di tengah */
       justify-content: flex-start;
       align-items: center;
       text-align: center;
       overflow-x: hidden;
       overflow-y: auto;
-      /* 🌟 PERUBAHAN: Padding atas ditambah agar tidak terlalu mepet */
-      padding: 50px 20px 20px 20px;
+      /* 🌟 PERUBAHAN: Padding atas disesuaikan agar konten lebih ke atas */
+      padding: 30px 20px 20px 20px;
       box-sizing: border-box;
+      position: relative; /* Penting untuk background overlay */
     }
-    
-    /* 🌟 BARU: Animasi latar belakang balon */
+
+    /* 🌟 BARU: Happy Birthday Pattern Overlay */
+    .birthday-pattern-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='5' y='40' font-family='Comic Sans MS, cursive' font-size='18' fill='%23ffb6c1' opacity='0.3'%3EHappy%3C/text%3E%3Ctext x='15' y='70' font-family='Comic Sans MS, cursive' font-size='18' fill='%23b3e5fc' opacity='0.3'%3EBirthday!%3C/text%3E%3C/svg%3E");
+      background-size: 200px 200px;
+      opacity: 0.4;
+      z-index: -2; /* Di bawah balon */
+      animation: movePattern 60s linear infinite; /* Animasi bergerak perlahan */
+    }
+    @keyframes movePattern {
+      from { background-position: 0 0; }
+      to { background-position: 200px 200px; }
+    }
+
+    /* Balon Latar Belakang */
     .background-balloons {
       position: fixed;
       top: 0;
@@ -46,30 +64,20 @@
       animation: floatUp 25s infinite linear;
       opacity: 0;
     }
-    .background-balloons li:nth-child(1) { left: 10%; width: 50px; height: 50px; animation-duration: 20s; animation-delay: 0s; }
-    .background-balloons li:nth-child(2) { left: 20%; width: 30px; height: 30px; animation-duration: 17s; animation-delay: 2s; }
-    .background-balloons li:nth-child(3) { left: 35%; width: 60px; height: 60px; animation-duration: 22s; animation-delay: 0s; }
-    .background-balloons li:nth-child(4) { left: 50%; width: 40px; height: 40px; animation-duration: 18s; animation-delay: 5s; }
-    .background-balloons li:nth-child(5) { left: 65%; width: 50px; height: 50px; animation-duration: 20s; animation-delay: 0s; }
-    .background-balloons li:nth-child(6) { left: 80%; width: 30px; height: 30px; animation-duration: 24s; animation-delay: 3s; }
-    .background-balloons li:nth-child(7) { left: 90%; width: 45px; height: 45px; animation-duration: 19s; animation-delay: 7s; }
-    .background-balloons li:nth-child(8) { left: 55%; width: 35px; height: 35px; animation-duration: 21s; animation-delay: 4s; }
+    .background-balloons li:nth-child(1) { left: 10%; width: 50px; height: 50px; animation-duration: 20s; animation-delay: 0s; background: rgba(255, 200, 220, 0.3); }
+    .background-balloons li:nth-child(2) { left: 20%; width: 30px; height: 30px; animation-duration: 17s; animation-delay: 2s; background: rgba(180, 220, 255, 0.3); }
+    .background-balloons li:nth-child(3) { left: 35%; width: 60px; height: 60px; animation-duration: 22s; animation-delay: 0s; background: rgba(255, 240, 180, 0.3); }
+    .background-balloons li:nth-child(4) { left: 50%; width: 40px; height: 40px; animation-duration: 18s; animation-delay: 5s; background: rgba(255, 200, 220, 0.3); }
+    .background-balloons li:nth-child(5) { left: 65%; width: 50px; height: 50px; animation-duration: 20s; animation-delay: 0s; background: rgba(180, 220, 255, 0.3); }
+    .background-balloons li:nth-child(6) { left: 80%; width: 30px; height: 30px; animation-duration: 24s; animation-delay: 3s; background: rgba(255, 240, 180, 0.3); }
+    .background-balloons li:nth-child(7) { left: 90%; width: 45px; height: 45px; animation-duration: 19s; animation-delay: 7s; background: rgba(255, 200, 220, 0.3); }
+    .background-balloons li:nth-child(8) { left: 55%; width: 35px; height: 35px; animation-duration: 21s; animation-delay: 4s; background: rgba(180, 220, 255, 0.3); }
 
     @keyframes floatUp {
-      0% {
-        transform: translateY(0);
-        opacity: 0;
-      }
-      10% {
-        opacity: 0.7;
-      }
-      90% {
-        opacity: 0.7;
-      }
-      100% {
-        transform: translateY(-120vh);
-        opacity: 0;
-      }
+      0% { transform: translateY(0); opacity: 0; }
+      10% { opacity: 0.7; }
+      90% { opacity: 0.7; }
+      100% { transform: translateY(-120vh); opacity: 0; }
     }
     /* --- Akhir Animasi Balon --- */
 
@@ -93,6 +101,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      /* 🌟 PERUBAHAN: Menyesuaikan margin top untuk konten halaman */
+      margin-top: 20px; 
     }
 
     #giftPage, #surprise {
@@ -155,7 +165,8 @@
 
     .gift {
       width: 160px;
-      margin-top: 20px;
+      /* 🌟 PERUBAHAN: Menggeser kado lebih ke atas */
+      margin-top: 30px; 
       animation: bounce 1.2s infinite ease-in-out;
       cursor: pointer;
     }
@@ -173,14 +184,36 @@
     .cake-container {
       position: relative;
       display: inline-block;
-      margin-top: 20px;
+      /* 🌟 PERUBAHAN: Menggeser kue lebih ke atas */
+      margin-top: 30px; 
       animation: fadeInUp 1s ease;
+      filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2)); /* 🌟 PERUBAHAN: Bayangan lebih bagus */
+    }
+
+    /* 🌟 BARU: Animasi Pulse untuk Kue */
+    .cake-container:after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        border-radius: 15px;
+        box-shadow: 0 0 0 rgba(255, 182, 193, 0.7);
+        animation: pulse 2s infinite ease-out;
+        z-index: 1;
+        pointer-events: none;
+    }
+    @keyframes pulse {
+        0% { transform: scale(1); opacity: 0.7; }
+        70% { transform: scale(1.05); opacity: 0; }
+        100% { transform: scale(1); opacity: 0; }
     }
 
     .cake {
       width: 260px;
       border-radius: 15px;
-      box-shadow: 0 0 25px rgba(255, 182, 193, 0.6);
+      /* box-shadow: 0 0 25px rgba(255, 182, 193, 0.6); */ /* Dihapus, diganti drop-shadow di container */
       z-index: 2;
       position: relative;
     }
@@ -210,8 +243,18 @@
     
     h1 { color: #ff4b91; font-size: 28px; margin-bottom: 10px; }
     h2 { color: #59a7ff; font-size: 22px; margin-top: 0; }
+
+    /* 🌟 BARU: Style untuk quote di bawah kue */
+    .quote-text {
+      font-size: 18px;
+      color: #777;
+      margin-top: 25px;
+      font-style: italic;
+      max-width: 80%;
+      line-height: 1.5;
+    }
     
-    /* 🌟 PERUBAHAN: Desain Kartu Hadiah (Luar) */
+    /* Perbaikan Desain Kartu Hadiah (Luar) */
     .action-cards {
       display: flex;
       flex-wrap: wrap;
@@ -244,13 +287,15 @@
       transform: scale(1.05) translateY(-5px);
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     }
-    /* Teks di dalam tombol */
-    .action-btn span:first-child {
-      font-size: 36px;
-      line-height: 1.2;
+    /* 🌟 PERUBAHAN: Emoji lebih besar, teks di bawahnya */
+    .action-btn .emoji-icon {
+      font-size: 40px; /* Ukuran emoji lebih besar */
+      line-height: 1;
+      margin-bottom: 5px; /* Jarak antara emoji dan teks */
     }
-    .action-btn span:last-child {
-      margin-top: 5px;
+    .action-btn .button-text {
+      font-size: 14px;
+      line-height: 1.2;
     }
     
     /* Gradient untuk tombol */
@@ -260,7 +305,7 @@
     .action-btn:nth-child(4) { background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%); }
     
     
-    /* 🌟 PERUBAHAN: Desain Modal (Popup) */
+    /* Modal (Popup) Styling */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -281,8 +326,9 @@
       visibility: visible;
     }
     
+    /* 🌟 PERUBAHAN: Modal content dengan gradient background */
     .modal-content {
-      background: #fff;
+      background: linear-gradient(160deg, #ffffff 0%, #fefefe 100%);
       padding: 25px;
       border-radius: 20px;
       width: 90%;
@@ -292,6 +338,7 @@
       overflow-y: auto;
       transform: scale(0.9);
       transition: transform 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     }
     .modal-overlay.visible .modal-content {
       transform: scale(1);
@@ -318,6 +365,7 @@
       margin-top: 5px;
     }
     
+    /* 🌟 PERUBAHAN: Galeri Foto di dalam Modal */
     .photos {
       display: flex;
       flex-wrap: wrap;
@@ -329,10 +377,19 @@
       width: 100%;
       max-width: 200px;
       border-radius: 15px;
-      box-shadow: 0 0 10px pink;
-      transition: transform 0.3s ease;
+      box-shadow: 0 0 10px rgba(255, 182, 193, 0.5); /* Bayangan awal */
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      /* 🌟 BARU: Random border color */
+      border: 3px solid transparent;
     }
-    .photos img:hover { transform: scale(1.05); }
+    /* Random border colors for photos */
+    .photos img:nth-child(odd) { border-color: #ff9a9e; }
+    .photos img:nth-child(even) { border-color: #a1c4fd; }
+
+    .photos img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(255, 182, 193, 0.8); /* Bayangan lebih kuat saat hover */
+    }
     
     .modal-content p {
       font-size: 17px;
@@ -342,7 +399,7 @@
       white-space: pre-wrap;
     }
     
-    /* 🌟 PERUBAHAN: Desain Playlist */
+    /* Desain Playlist */
     .playlist {
       list-style-type: none;
       padding-left: 0;
@@ -369,7 +426,7 @@
       opacity: 0.8;
     }
     
-    /* 🌟 PERUBAHAN: Desain Voucher (Tiket Sobek) */
+    /* Desain Voucher (Tiket Sobek) */
     .voucher-list {
       display: flex;
       flex-direction: column;
@@ -384,17 +441,17 @@
       font-weight: bold;
       color: #d9534f;
       position: relative;
-      overflow: hidden; /* Sembunyikan lubang yang keluar */
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
     /* Trik lubang sobekan */
     .voucher::before {
       content: '';
       position: absolute;
       top: 0;
-      left: 0;
+      left: -5px; /* Geser sedikit agar terlihat */
       bottom: 0;
       width: 10px;
-      /* Gradient untuk lubang di kiri */
       background: radial-gradient(circle at 0 10px, transparent 4px, #fff8f9 5px) repeat-y;
       background-size: 10px 20px;
     }
@@ -402,10 +459,9 @@
       content: '';
       position: absolute;
       top: 0;
-      right: 0;
+      right: -5px; /* Geser sedikit agar terlihat */
       bottom: 0;
       width: 10px;
-      /* Gradient untuk lubang di kanan */
       background: radial-gradient(circle at 10px 10px, transparent 4px, #fff8f9 5px) repeat-y;
       background-size: 10px 20px;
     }
@@ -413,6 +469,8 @@
   </style>
 </head>
 <body>
+
+  <div class="birthday-pattern-overlay"></div>
 
   <ul class="background-balloons">
     <li></li> <li></li> <li></li> <li></li> <li></li>
@@ -442,18 +500,22 @@
       <img id="cakeImage" src="kue.png" alt="Kue Ulang Tahun" class="cake">
     </div>
 
+    <p class="quote-text">
+      "Semoga hari ini menjadi awal dari tahun yang penuh keajaiban dan cinta!"
+    </p>
+
     <div class="action-cards">
       <button class="action-btn" onclick="showModal('modal-gallery')">
-        <span>📸</span><span>Galeri Kenangan</span>
+        <span class="emoji-icon">🖼️</span><span class="button-text">Galeri Kenangan</span>
       </button>
       <button class="action-btn" onclick="showModal('modal-wish')">
-        <span>💌</span><span>Ucapan Spesial</span>
+        <span class="emoji-icon">💖</span><span class="button-text">Ucapan Spesial</span>
       </button>
       <button class="action-btn" onclick="showModal('modal-playlist')">
-        <span>🎶</span><span>Playlist Untukmu</span>
+        <span class="emoji-icon">🎶</span><span class="button-text">Playlist Untukmu</span>
       </button>
       <button class="action-btn" onclick="showModal('modal-voucher')">
-        <span>🎟️</span><span>Voucher Kencan</span>
+        <span class="emoji-icon">🎁</span><span class="button-text">Voucher Kencan</span>
       </button>
     </div>
   </div>
@@ -467,6 +529,8 @@
         <img src="foto1.jpg" alt="Foto kenangan 1">
         <img src="foto2.jpg" alt="Foto kenangan 2">
         <img src="foto3.jpg" alt="Foto kenangan 3">
+        <img src="foto4.jpg" alt="Foto kenangan 4">
+        <img src="foto5.jpg" alt="Foto kenangan 5">
       </div>
     </div>
   </div>
@@ -497,6 +561,8 @@ Love you always 💕
         <li>"Sempurna" - Andra and The BackBone</li>
         <li>"Here's Your Perfect" - Jamie Miller</li>
         <li>"Satu-satunya" - HIVI!</li>
+        <li>"Sahabat Dulu" - Prinsa Mandagie</li>
+        <li>"Tak Ingin Usai" - Keisya Levronka</li>
       </ul>
       <p style="text-align:center; margin-top:15px;">...dan semua lagu yang mengingatkanku padamu!</p>
     </div>
