@@ -14,39 +14,43 @@
   <style>
     body {
       margin: 0;
-      /* ✨ [MODIFIKASI] Menggunakan Google Font */
       font-family: "Quicksand", cursive;
       background: linear-gradient(135deg, #ffb6c1, #b3e5fc);
-      height: 100vh;
+      /*         ✨ [PERBAIKAN] ✨
+        1. Ubah 'height' menjadi 'min-height'
+        2. Hapus 'overflow-y: auto'
+      */
+      min-height: 100vh; /* <-- 1. DIUBAH */
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
       text-align: center;
       overflow-x: hidden;
-      overflow-y: auto;
-      /* ✨ [BARU] Menampung balon */
+      /* overflow-y: auto; <-- 2. DIHAPUS */
       position: relative; 
+      /* Tambahkan padding agar konten tidak terlalu mepet ke atas/bawah */
+      padding: 20px 0;
+      box-sizing: border-box; /* Agar padding tidak menambah tinggi */
     }
 
     .hidden { display: none; }
 
-    /* ✨ [BARU] Transisi Halaman (Fade In/Out) */
+    /* Transisi Halaman (Fade In/Out) */
     .card, #giftPage, #surprise {
       transition: opacity 0.6s ease-out, transform 0.6s ease-out;
       opacity: 0;
       transform: scale(0.9);
-      pointer-events: none; /* Tidak bisa diklik saat transparan */
+      pointer-events: none; 
     }
     
-    /* ✨ [BARU] Kelas untuk memunculkan elemen */
     .visible {
       opacity: 1;
       transform: scale(1);
       pointer-events: auto;
     }
 
-    /* 🧁 Card login */
+    /* Card login */
     .card {
       background: white;
       border-radius: 20px;
@@ -54,10 +58,9 @@
       padding: 30px;
       width: 90%;
       max-width: 400px;
-      /* Dihapus: transition (sudah ada di atas) */
     }
     
-    /* ✨ [BARU] Animasi getar (shake) untuk error */
+    /* Animasi getar (shake) untuk error */
     @keyframes shake {
       0%, 100% { transform: translateX(0); }
       25% { transform: translateX(-8px); }
@@ -67,13 +70,12 @@
       animation: shake 0.3s ease-in-out;
     }
     
-    /* ✨ [BARU] Style pesan error */
     #errorMessage {
       color: #e74c3c;
       font-size: 14px;
       font-weight: bold;
       margin-top: 10px;
-      height: 16px; /* Beri tinggi agar layout tidak lompat */
+      height: 16px; 
     }
 
     input {
@@ -102,7 +104,7 @@
 
     button:hover { transform: scale(1.05); }
 
-    /* 🎁 Kado animasi */
+    /* Kado animasi */
     .gift {
       width: 160px;
       margin-top: 20px;
@@ -120,7 +122,7 @@
       transition: 0.3s;
     }
 
-    /* 🎂 Kue dengan gemerlap */
+    /* Kue dengan gemerlap */
     .cake-container {
       position: relative;
       display: inline-block;
@@ -141,7 +143,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* ✨ Gemerlap animasi nyata */
+    /* Gemerlap animasi nyata */
     .sparkle {
       position: absolute;
       width: 10px;
@@ -151,7 +153,7 @@
       opacity: 0;
       animation: sparkle 2s infinite ease-in-out;
       pointer-events: none;
-      z-index: 3; /* Pastikan di atas kue */
+      z-index: 3; 
     }
 
     @keyframes sparkle {
@@ -161,53 +163,48 @@
       100% { transform: scale(0); opacity: 0; }
     }
 
-    /* ✨ [BARU] Kontainer Slideshow Foto */
+    /* Kontainer Slideshow Foto */
     .slideshow {
       position: relative;
       width: 90%;
       max-width: 250px;
-      height: 250px; /* Sesuaikan tinggi agar pas */
+      height: 250px; 
       margin: 20px auto;
       border-radius: 20px;
       box-shadow: 0 0 10px pink;
-      overflow: hidden; /* Agar foto tidak keluar border */
+      overflow: hidden; 
     }
 
-    /* ✨ [BARU] Style untuk foto di slideshow */
     .slideshow img {
       position: absolute;
       left: 0;
       top: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover; /* Foto akan mengisi kotak tanpa gepeng */
+      object-fit: cover; 
       border-radius: 20px;
       opacity: 0;
       transition: opacity 1s ease-in-out;
-      animation: simpleFade 12s infinite; /* 12s = 3 foto @ 4s */
+      animation: simpleFade 12s infinite; 
     }
     
-    /* ✨ [BARU] Delay animasi untuk tiap foto */
     .slideshow img:nth-child(1) { animation-delay: 0s; }
     .slideshow img:nth-child(2) { animation-delay: 4s; }
     .slideshow img:nth-child(3) { animation-delay: 8s; }
 
-    /* ✨ [BARU] Animasi slideshow */
     @keyframes simpleFade {
       0%   { opacity: 0; }
-      8%   { opacity: 1; } /* Muncul (1s) */
-      33%  { opacity: 1; } /* Diam (3s) */
-      41%  { opacity: 0; } /* Hilang (1s) */
+      8%   { opacity: 1; } 
+      33%  { opacity: 1; } 
+      41%  { opacity: 0; } 
       100% { opacity: 0; }
     }
 
     h1 { color: #ff4b91; font-size: 28px; margin-bottom: 10px; 
-         /* ✨ [BARU] Beri tinggi agar tidak lompat saat ngetik */
          min-height: 40px; 
     }
     h2 { color: #59a7ff; font-size: 22px; margin-top: 0; }
     
-    /* ✨ [BARU] Pesan "Dari Kamu" */
     .from-message {
       margin-top: 30px;
       font-size: 16px;
@@ -215,7 +212,7 @@
       font-style: italic;
     }
     
-    /* ✨ [BARU] Kontainer Balon */
+    /* Kontainer Balon */
     #balloon-container {
       position: absolute;
       top: 0;
@@ -223,14 +220,13 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
-      pointer-events: none; /* Tidak bisa diklik */
-      z-index: -1; /* Di belakang semua konten */
+      pointer-events: none; 
+      z-index: -1; 
     }
 
-    /* ✨ [BARU] Style Balon */
     .balloon {
       position: absolute;
-      bottom: -150px; /* Mulai dari bawah layar */
+      bottom: -150px; 
       width: 40px;
       height: 50px;
       background: rgba(255, 158, 205, 0.7);
@@ -238,7 +234,6 @@
       animation: flyUp 10s infinite ease-in;
     }
     
-    /* Efek benang balon */
     .balloon::after {
       content: '';
       position: absolute;
@@ -249,19 +244,17 @@
       background: rgba(255, 255, 255, 0.5);
     }
     
-    /* Warna balon bervariasi */
     .balloon:nth-child(2) { background: rgba(156, 212, 255, 0.7); animation-duration: 12s; }
     .balloon:nth-child(3) { background: rgba(255, 245, 165, 0.7); animation-duration: 9s; }
     .balloon:nth-child(4) { background: rgba(200, 160, 255, 0.7); animation-duration: 11s; }
 
-    /* ✨ [BARU] Animasi Balon Terbang */
     @keyframes flyUp {
       0% {
         transform: translateY(0) translateX(0);
         opacity: 1;
       }
       100% {
-        transform: translateY(-120vh) translateX(50vw); /* Terbang ke atas dan sedikit ke samping */
+        transform: translateY(-120vh) translateX(50vw); 
         opacity: 0;
       }
     }
@@ -284,7 +277,7 @@
   <div id="giftPage" class="hidden">
     <h1>Hai Elza 💖</h1>
     <p>Klik kadonya untuk membuka kejutan 🎂</p>
-        <img id="giftImage" src="kado.png" alt="Kado Ulang Tahun" class="gift" onclick="explodeGift()">
+    <img id="giftImage" src="kado_tutup.jpg" alt="Kado Ulang Tahun" class="gift" onclick="explodeGift()">
   </div>
 
   <div id="surprise" class="hidden">
@@ -317,43 +310,35 @@
       const errorMessage = document.getElementById("errorMessage");
 
       if (name === correctName && birthday === correctBirthday) {
-        errorMessage.classList.add("hidden"); // Sembunyikan error jika benar
+        errorMessage.classList.add("hidden"); 
         
-        // ✨ [MODIFIKASI] Transisi Fade-out untuk Login
         loginCard.classList.remove("visible");
         
         setTimeout(() => {
-          loginCard.classList.add("hidden"); // Sembunyikan login
+          loginCard.classList.add("hidden"); 
           
-          // Munculkan halaman kado
           const giftPage = document.getElementById("giftPage");
-          giftPage.classList.remove("hidden"); // Hapus display:none
-          // Beri jeda sedikit agar transisi 'visible' berjalan
+          giftPage.classList.remove("hidden"); 
           setTimeout(() => giftPage.classList.add("visible"), 50); 
           
-        }, 600); // Tunggu animasi fade-out selesai
+        }, 600); 
 
       } else {
-        // ✨ [MODIFIKASI] Ganti alert dengan animasi getar & pesan error
         errorMessage.textContent = "Coba isi nama & tanggal yang benar ya 💕";
         errorMessage.classList.remove("hidden");
         loginCard.classList.add("shake");
         
-        // Hapus kelas 'shake' setelah animasi selesai
         setTimeout(() => loginCard.classList.remove("shake"), 300);
       }
     }
 
-    // 💥 Ledakan saat kado diklik
     function explodeGift() {
       const gift = document.getElementById("giftImage");
-      gift.style.animation = "none"; // Stop animasi bounce
+      gift.style.animation = "none"; 
       
-      // ✨ [MODIFIKASI] Ganti gambar kado menjadi kado_buka.png
-      gift.src = "kado_buka.png";
-      gift.style.transform = "scale(1.1)"; // Sedikit membesar
+      gift.src = "kado_buka.jpg";
+      gift.style.transform = "scale(1.1)"; 
       
-      // Ledakan besar confetti warna-warni
       const duration = 2500;
       const end = Date.now() + duration;
 
@@ -368,31 +353,27 @@
         if (Date.now() < end) requestAnimationFrame(frame);
       })();
 
-      // Setelah 2 detik muncul kejutan
       setTimeout(() => {
         const giftPage = document.getElementById("giftPage");
         
-        // ✨ [MODIFIKASI] Transisi Fade-out untuk Halaman Kado
         giftPage.classList.remove("visible");
         
         setTimeout(() => {
-          giftPage.classList.add("hidden"); // Sembunyikan halaman kado
+          giftPage.classList.add("hidden"); 
           
-          // Munculkan halaman kejutan
           const surprisePage = document.getElementById("surprise");
           surprisePage.classList.remove("hidden");
-          setTimeout(() => surprisePage.classList.add("visible"), 50); // Fade-in
+          setTimeout(() => surprisePage.classList.add("visible"), 50); 
           
           addSparkles();
-          createBalloons(); // ✨ [BARU] Panggil fungsi balon
-          startTypewriter(); // ✨ [BARU] Panggil fungsi ketik
+          createBalloons(); 
+          startTypewriter(); 
           
-        }, 600); // Tunggu fade-out kado selesai
+    D }, 600); 
         
       }, 2000);
     }
 
-    // ✨ Tambahkan gemerlap di sekitar kue
     function addSparkles() {
       const container = document.getElementById("cakeContainer");
       for (let i = 0; i < 20; i++) {
@@ -405,34 +386,29 @@
       }
     }
     
-    // ✨ [BARU] Fungsi untuk memulai Typewriter
     function startTypewriter() {
       const text = "🎉 Selamat Ulang Tahun, Elza Savira Chairani Zakaria 🎂";
       const targetElement = document.getElementById("surprise-title");
       typeWriter(text, 0, targetElement);
     }
     
-    // ✨ [BARU] Fungsi Typewriter (rekursif)
     function typeWriter(txt, i, el) {
       if (i < txt.length) {
         el.innerHTML += txt.charAt(i);
         i++;
-        setTimeout(() => typeWriter(txt, i, el), 75); // Kecepatan ketik (ms)
+        setTimeout(() => typeWriter(txt, i, el), 75); 
       }
     }
     
-    // ✨ [BARU] Fungsi membuat balon
     function createBalloons() {
       const container = document.getElementById("balloon-container");
-      for (let i = 0; i < 10; i++) { // Buat 10 balon
+      for (let i = 0; i < 10; i++) { 
         const balloon = document.createElement("div");
         balloon.classList.add("balloon");
         
-        // Posisi horizontal acak & delay acak
         balloon.style.left = `${Math.random() * 90}%`; 
         balloon.style.animationDelay = `${Math.random() * 5}s`;
         
-        // Warna balon acak (opsional, ganti/hapus jika sudah pakai nth-child)
         const colors = ['rgba(255, 158, 205, 0.7)', 'rgba(156, 212, 255, 0.7)', 'rgba(255, 245, 165, 0.7)'];
         balloon.style.background = colors[Math.floor(Math.random() * colors.length)];
         
@@ -446,4 +422,3 @@
 
 </body>
 </html>
-
