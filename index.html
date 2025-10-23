@@ -54,11 +54,59 @@
       transform: scale(1.05);
     }
 
-    .hidden {
-      display: none;
+    .hidden { display: none; }
+
+    /* 🎁 Animasi kado */
+    .gift {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      background: #ff9ecd;
+      margin: 30px auto;
+      border-radius: 10px;
+      cursor: pointer;
+      animation: shake 1s infinite;
     }
 
-    /* Animasi kue */
+    .gift::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 20px;
+      background: #ffb6c1;
+      top: 0;
+      border-radius: 10px 10px 0 0;
+    }
+
+    .ribbon {
+      position: absolute;
+      width: 20px;
+      height: 100%;
+      background: #9cd4ff;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .gift::after {
+      content: "";
+      position: absolute;
+      width: 60px;
+      height: 30px;
+      background: #ff9ecd;
+      border-radius: 50% 50% 0 0;
+      top: -30px;
+      left: 30px;
+      box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: rotate(0); }
+      25% { transform: rotate(3deg); }
+      50% { transform: rotate(-3deg); }
+      75% { transform: rotate(2deg); }
+    }
+
+    /* 🎂 Kue ulang tahun */
     .cake {
       position: relative;
       width: 150px;
@@ -114,15 +162,8 @@
       transform: scale(1.05);
     }
 
-    h1 {
-      color: #ff4b91;
-      font-size: 28px;
-    }
-
-    h2 {
-      color: #59a7ff;
-      font-size: 22px;
-    }
+    h1 { color: #ff4b91; font-size: 28px; }
+    h2 { color: #59a7ff; font-size: 22px; }
   </style>
 </head>
 <body>
@@ -136,7 +177,16 @@
     <button onclick="checkBirthday()">Masuk 🎁</button>
   </div>
 
-  <!-- Halaman kejutan -->
+  <!-- 🎁 Halaman kado -->
+  <div id="giftPage" class="hidden">
+    <h1>Hai Elza 💖</h1>
+    <p>Klik kadonya untuk melihat kejutan 🎂</p>
+    <div class="gift" onclick="showCake()">
+      <div class="ribbon"></div>
+    </div>
+  </div>
+
+  <!-- 🎂 Halaman kejutan -->
   <div id="surprise" class="hidden">
     <h1>🎉 Selamat Ulang Tahun, Elza Savira Chairani Zakaria 🎂</h1>
     <h2>26 Oktober 2025</h2>
@@ -158,24 +208,27 @@
     function checkBirthday() {
       const name = document.getElementById("name").value.trim().toLowerCase();
       const birthday = document.getElementById("birthday").value.trim();
-
       const correctName = "elza savira chairani zakaria";
       const correctBirthday = "26-10-2025";
 
       if (name === correctName && birthday === correctBirthday) {
         document.getElementById("login").classList.add("hidden");
-        document.getElementById("surprise").classList.remove("hidden");
-        launchConfetti();
+        document.getElementById("giftPage").classList.remove("hidden");
       } else {
         alert("Hmm... Coba isi nama & tanggal ulang tahun yang benar ya 💕");
       }
     }
 
-    // 🎉 Efek confetti sederhana
+    function showCake() {
+      document.getElementById("giftPage").classList.add("hidden");
+      document.getElementById("surprise").classList.remove("hidden");
+      launchConfetti();
+    }
+
+    // 🎉 Efek confetti
     function launchConfetti() {
       const duration = 3 * 1000;
       const end = Date.now() + duration;
-
       (function frame() {
         confetti({
           particleCount: 5,
@@ -191,14 +244,12 @@
           origin: { x: 1 },
           colors: ["#ff9ecd", "#9cd4ff", "#ffffff"]
         });
-        if (Date.now() < end) {
-          requestAnimationFrame(frame);
-        }
+        if (Date.now() < end) requestAnimationFrame(frame);
       })();
     }
   </script>
 
-  <!-- Library confetti -->
+  <!-- Confetti Library -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 </body>
 </html>
