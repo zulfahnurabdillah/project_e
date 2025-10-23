@@ -16,6 +16,7 @@
       flex-direction: column;
       text-align: center;
       overflow-x: hidden;
+      overflow-y: auto;
     }
 
     .hidden { display: none; }
@@ -53,39 +54,40 @@
       transition: transform 0.2s ease;
     }
 
-    button:hover {
-      transform: scale(1.05);
-    }
+    button:hover { transform: scale(1.05); }
 
-    /* 🎁 Gambar kado */
+    /* 🎁 Kado animasi */
     .gift {
-      width: 150px;
+      width: 160px;
       margin-top: 20px;
       animation: bounce 1.2s infinite ease-in-out;
       cursor: pointer;
     }
 
     @keyframes bounce {
-      0%, 100% { transform: translateY(0) rotate(0); }
-      50% { transform: translateY(-15px) rotate(3deg); }
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
     }
 
     .gift:hover {
-      transform: scale(1.1) rotate(-5deg);
+      transform: scale(1.1);
       transition: 0.3s;
     }
 
-    /* 🎂 Gambar kue + lilin */
+    /* 🎂 Kue dengan gemerlap */
     .cake-container {
       position: relative;
       display: inline-block;
+      margin-top: 20px;
       animation: fadeInUp 1s ease;
     }
 
     .cake {
-      width: 250px;
+      width: 260px;
       border-radius: 15px;
-      box-shadow: 0 0 20px rgba(255, 182, 193, 0.6);
+      box-shadow: 0 0 25px rgba(255, 182, 193, 0.6);
+      z-index: 2;
+      position: relative;
     }
 
     @keyframes fadeInUp {
@@ -93,35 +95,23 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* 🕯️ Lilin animasi */
-    .candle {
+    /* ✨ Gemerlap animasi nyata */
+    .sparkle {
       position: absolute;
-      width: 12px;
-      height: 40px;
-      background: white;
-      border-radius: 5px;
-      top: -40px;
-      left: 50%;
-      transform: translateX(-50%);
-      box-shadow: 0 0 5px rgba(255,255,255,0.7);
-    }
-
-    .flame {
-      position: absolute;
-      width: 15px;
-      height: 20px;
-      background: radial-gradient(circle, yellow 30%, orange 70%);
+      width: 10px;
+      height: 10px;
+      background: radial-gradient(circle, #fff 30%, transparent 70%);
       border-radius: 50%;
-      top: -20px;
-      left: 50%;
-      transform: translateX(-50%);
-      animation: flicker 0.3s infinite alternate;
-      box-shadow: 0 0 20px yellow;
+      opacity: 0;
+      animation: sparkle 2s infinite ease-in-out;
+      pointer-events: none;
     }
 
-    @keyframes flicker {
-      from { transform: translateX(-50%) scale(1); opacity: 1; }
-      to { transform: translateX(-50%) scale(1.2); opacity: 0.8; }
+    @keyframes sparkle {
+      0% { transform: scale(0); opacity: 0; }
+      30% { transform: scale(1.4); opacity: 1; }
+      70% { transform: scale(1); opacity: 0.8; }
+      100% { transform: scale(0); opacity: 0; }
     }
 
     .photos img {
@@ -154,7 +144,7 @@
   <div id="giftPage" class="hidden">
     <h1>Hai Elza 💖</h1>
     <p>Klik kadonya untuk membuka kejutan 🎂</p>
-    <img id="giftImage" src="kado.png" alt="Kado Ulang Tahun" class="gift" onclick="showCake()">
+    <img id="giftImage" src="kado.png" alt="Kado Ulang Tahun" class="gift" onclick="explodeGift()">
   </div>
 
   <!-- 🎂 Halaman kejutan -->
@@ -162,11 +152,8 @@
     <h1>🎉 Selamat Ulang Tahun, Elza Savira Chairani Zakaria 🎂</h1>
     <h2>26 Oktober 2025</h2>
 
-    <div class="cake-container">
+    <div class="cake-container" id="cakeContainer">
       <img id="cakeImage" src="kue.png" alt="Kue Ulang Tahun" class="cake">
-      <div class="candle">
-        <div class="flame"></div>
-      </div>
     </div>
 
     <p style="font-size:18px; color:#555;">Semoga harimu penuh cinta, tawa, dan kebahagiaan 💕</p>
@@ -178,7 +165,7 @@
     </div>
   </div>
 
-  <!-- 🎇 Script logika -->
+  <!-- 🎇 Script -->
   <script>
     function checkBirthday() {
       const name = document.getElementById("name").value.trim().toLowerCase();
@@ -194,39 +181,50 @@
       }
     }
 
-    function showCake() {
-      document.getElementById("giftPage").classList.add("hidden");
-      document.getElementById("surprise").classList.remove("hidden");
-      launchConfetti();
-    }
-
-    // 🎉 Efek confetti
-    function launchConfetti() {
-      const duration = 3 * 1000;
+    // 💥 Ledakan saat kado diklik
+    function explodeGift() {
+      const gift = document.getElementById("giftImage");
+      gift.style.animation = "none";
+      
+      // Ledakan besar confetti warna-warni
+      const duration = 2500;
       const end = Date.now() + duration;
+
       (function frame() {
         confetti({
-          particleCount: 5,
-          angle: 60,
-          spread: 55,
-          origin: { x: 0 },
-          colors: ["#ff9ecd", "#9cd4ff", "#ffffff"]
-        });
-        confetti({
-          particleCount: 5,
-          angle: 120,
-          spread: 55,
-          origin: { x: 1 },
-          colors: ["#ff9ecd", "#9cd4ff", "#ffffff"]
+          particleCount: 10,
+          startVelocity: 45,
+          spread: 360,
+          origin: { x: 0.5, y: 0.5 },
+          colors: ["#ff9ecd", "#9cd4ff", "#fff5a5", "#ffffff"]
         });
         if (Date.now() < end) requestAnimationFrame(frame);
       })();
+
+      // Setelah 2 detik muncul kejutan
+      setTimeout(() => {
+        document.getElementById("giftPage").classList.add("hidden");
+        document.getElementById("surprise").classList.remove("hidden");
+        addSparkles();
+      }, 2000);
+    }
+
+    // ✨ Tambahkan gemerlap di sekitar kue
+    function addSparkles() {
+      const container = document.getElementById("cakeContainer");
+      for (let i = 0; i < 20; i++) {
+        const sparkle = document.createElement("div");
+        sparkle.classList.add("sparkle");
+        sparkle.style.left = `${Math.random() * 100}%`;
+        sparkle.style.top = `${Math.random() * 100}%`;
+        sparkle.style.animationDelay = `${Math.random() * 2}s`;
+        container.appendChild(sparkle);
+      }
     }
   </script>
 
-  <!-- 🎊 Library Confetti -->
+  <!-- 🎊 Confetti Library -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
 </body>
 </html>
-
