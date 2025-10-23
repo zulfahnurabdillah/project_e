@@ -7,10 +7,9 @@
   <style>
     body {
       margin: 0;
-      /* Menambahkan font fallback yang lebih baik */
       font-family: "Comic Sans MS", "Chalkboard SE", "Marker Felt", cursive, sans-serif;
       background: linear-gradient(135deg, #ffb6c1, #b3e5fc);
-      min-height: 100vh; /* Menggunakan min-height agar bisa scroll */
+      min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -18,7 +17,7 @@
       text-align: center;
       overflow-x: hidden;
       overflow-y: auto;
-      padding: 20px; /* Menambahkan padding agar konten tidak mepet di layar kecil */
+      padding: 20px;
       box-sizing: border-box;
     }
 
@@ -36,7 +35,6 @@
       max-width: 400px;
     }
     
-    /* Style dasar untuk transisi halaman */
     #login, #giftPage, #surprise {
       transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
       width: 100%;
@@ -45,13 +43,11 @@
       align-items: center;
     }
 
-    /* State awal untuk halaman yang tersembunyi (selain login) */
     #giftPage, #surprise {
       opacity: 0;
       transform: scale(0.95);
     }
     
-    /* Animasi shake untuk error */
     .shake {
       animation: shake 0.5s ease-in-out;
     }
@@ -73,18 +69,16 @@
       transition: border-color 0.3s, box-shadow 0.3s;
     }
 
-    /* Efek focus pada input */
     input:focus {
       border-color: #ff9ecd;
       box-shadow: 0 0 8px rgba(255, 158, 205, 0.5);
     }
 
-    /* Style untuk pesan error */
     .error-msg {
       color: #d9534f;
       font-size: 14px;
       font-weight: bold;
-      height: 18px; /* Memberi ruang agar layout tidak "lompat" */
+      height: 18px;
       margin-top: 5px;
       opacity: 0;
       transition: opacity 0.3s;
@@ -146,7 +140,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* ✨ Gemerlap animasi nyata */
     .sparkle {
       position: absolute;
       width: 10px;
@@ -164,30 +157,149 @@
       70% { transform: scale(1); opacity: 0.8; }
       100% { transform: scale(0); opacity: 0; }
     }
-
-    /* 📸 Galeri foto menggunakan Flexbox */
-    .photos {
+    
+    h1 { color: #ff4b91; font-size: 28px; margin-bottom: 10px; }
+    h2 { color: #59a7ff; font-size: 22px; margin-top: 0; }
+    
+    /* 🌟 BARU: Action Cards (Tombol Hadiah) */
+    .action-cards {
       display: flex;
-      flex-wrap: wrap; /* Foto akan turun jika tidak muat */
-      justify-content: center; /* Foto terpusat */
-      gap: 15px; /* Jarak antar foto */
-      margin-top: 20px;
-      padding: 0 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 30px;
+      max-width: 600px;
     }
     
-    .photos img {
-      width: 100%; /* Lebar responsif */
-      max-width: 250px; /* Batas lebar maksimum */
+    .action-btn {
+      background: white;
+      border: 2px solid #ff9ecd;
+      border-radius: 15px;
+      color: #ff4b91;
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      font-size: 16px;
+      font-weight: bold;
+      width: 140px;
+      height: 100px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 10px rgba(255, 182, 193, 0.4);
+    }
+    .action-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 15px rgba(255, 182, 193, 0.6);
+    }
+    
+    /* 🌟 BARU: Modal (Popup) Styling */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s;
+    }
+    .modal-overlay.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .modal-content {
+      background: #fff;
+      padding: 25px;
       border-radius: 20px;
-      margin: 0; /* Margin diatur oleh 'gap' di parent */
+      width: 90%;
+      max-width: 500px;
+      position: relative;
+      max-height: 85vh; /* Batas tinggi modal */
+      overflow-y: auto; /* Bisa di-scroll jika konten panjang */
+      transform: scale(0.9);
+      transition: transform 0.3s ease;
+    }
+    .modal-overlay.visible .modal-content {
+      transform: scale(1);
+    }
+    
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 28px;
+      font-weight: bold;
+      color: #aaa;
+      cursor: pointer;
+    }
+    .modal-close:hover {
+      color: #333;
+    }
+    
+    /* 📸 Galeri foto di dalam Modal */
+    .photos {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .photos img {
+      width: 100%;
+      max-width: 200px;
+      border-radius: 15px;
       box-shadow: 0 0 10px pink;
       transition: transform 0.3s ease;
     }
-
     .photos img:hover { transform: scale(1.05); }
+    
+    /* 💌 Konten Modal Ucapan */
+    .modal-content p {
+      font-size: 17px;
+      color: #555;
+      text-align: left;
+      line-height: 1.6;
+      white-space: pre-wrap; /* Agar spasi dan enter tetap ada */
+    }
+    
+    /* 🎶 Konten Modal Playlist */
+    .modal-content ul {
+      list-style-type: none;
+      padding-left: 0;
+      text-align: left;
+    }
+    .modal-content li {
+      font-size: 18px;
+      color: #555;
+      padding: 8px 0;
+      border-bottom: 1px dashed #eee;
+    }
+    
+    /* 🎟️ Konten Modal Voucher */
+    .voucher-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    .voucher {
+      background: #fff8f9;
+      border: 2px dashed #ff9ecd;
+      border-radius: 10px;
+      padding: 15px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #d9534f;
+    }
 
-    h1 { color: #ff4b91; font-size: 28px; margin-bottom: 10px; }
-    h2 { color: #59a7ff; font-size: 22px; margin-top: 0; }
   </style>
 </head>
 <body>
@@ -215,14 +327,72 @@
       <img id="cakeImage" src="kue.png" alt="Kue Ulang Tahun" class="cake">
     </div>
 
-    <p style="font-size:18px; color:#555;">Semoga harimu penuh cinta, tawa, dan kebahagiaan 💕</p>
-
-    <div class="photos">
-      <img src="foto1.jpg" alt="Foto kenangan 1">
-      <img src="foto2.jpg" alt="Foto kenangan 2">
-      <img src="foto3.jpg" alt="Foto kenangan 3">
+    <div class="action-cards">
+      <button class="action-btn" onclick="showModal('modal-gallery')">📸<br>Galeri Kenangan</button>
+      <button class="action-btn" onclick="showModal('modal-wish')">💌<br>Ucapan Spesial</button>
+      <button class="action-btn" onclick="showModal('modal-playlist')">🎶<br>Playlist Untukmu</button>
+      <button class="action-btn" onclick="showModal('modal-voucher')">🎟️<br>Voucher Kencan</button>
     </div>
   </div>
+
+  
+  <div id="modal-gallery" class="modal-overlay hidden" onclick="closeModal('modal-gallery', event)">
+    <div class="modal-content">
+      <span class="modal-close" onclick="closeModal('modal-gallery')">&times;</span>
+      <h2>Galeri Kenangan Kita 💖</h2>
+      <div class="photos">
+        <img src="foto1.jpg" alt="Foto kenangan 1">
+        <img src="foto2.jpg" alt="Foto kenangan 2">
+        <img src="foto3.jpg" alt="Foto kenangan 3">
+        </div>
+    </div>
+  </div>
+
+  <div id="modal-wish" class="modal-overlay hidden" onclick="closeModal('modal-wish', event)">
+    <div class="modal-content">
+      <span class="modal-close" onclick="closeModal('modal-wish')">&times;</span>
+      <h2>Untuk Elza Tersayang...</h2>
+      <p>
+Selamat ulang tahun ya, sayang!
+
+Semoga di hari yang spesial ini, kamu dikelilingi oleh semua cinta, tawa, dan kebahagiaan di dunia. Kamu adalah orang yang luar biasa, dan aku sangat bersyukur memilikimu.
+
+Semoga semua impian dan cita-citamu tercapai. Aku akan selalu ada di sini untuk mendukungmu, di setiap langkahmu.
+
+Love you always 💕
+      </p>
+    </div>
+  </div>
+
+  <div id="modal-playlist" class="modal-overlay hidden" onclick="closeModal('modal-playlist', event)">
+    <div class="modal-content">
+      <span class="modal-close" onclick="closeModal('modal-playlist')">&times;</span>
+      <h2>Playlist Hari Ini 🎧</h2>
+      <ul>
+        <li>🎵 "Lover" - Taylor Swift</li>
+        <li>🎵 "A Thousand Years" - Christina Perri</li>
+        <li>🎵 "Sempurna" - Andra and The BackBone</li>
+        <li>🎵 "Here's Your Perfect" - Jamie Miller</li>
+        <li>🎵 "Satu-satunya" - HIVI!</li>
+      </ul>
+      <p style="text-align:center; margin-top:15px;">...dan semua lagu yang mengingatkanku padamu!</p>
+    </div>
+  </div>
+
+  <div id="modal-voucher" class="modal-overlay hidden" onclick="closeModal('modal-voucher', event)">
+    <div class="modal-content">
+      <span class="modal-close" onclick="closeModal('modal-voucher')">&times;</span>
+      <h2>Voucher Kencan Spesial 🎟️</h2>
+      <div class="voucher-list">
+        <div class="voucher">Jatah 1x Traktiran Es Krim (Bebas Pilih!)</div>
+        <div class="voucher">Jatah 1x Nonton Film di Bioskop (Kamu yang Pilih Film)</div>
+        <div class="voucher">Jatah 1x Jalan-jalan Seharian (Tanpa Ngeluh!)</div>
+        <div class="voucher">Jatah 1x Ditemenin Belanja</div>
+      </div>
+      <p style="text-align:center; margin-top:15px; font-size: 14px; color: #888;">*Berlaku selamanya, tidak bisa diuangkan, dan harus diklaim ya! 😉</p>
+    </div>
+  </div>
+
 
   <script>
     function checkBirthday() {
@@ -236,49 +406,40 @@
       const errorMsg = document.getElementById("error-msg");
 
       if (name === correctName && birthday === correctBirthday) {
-        errorMsg.classList.remove("visible"); // Sembunyikan error jika benar
+        errorMsg.classList.remove("visible");
         
-        // 1. Fade out halaman login
         loginPage.style.opacity = '0';
         loginPage.style.transform = 'scale(0.95)';
 
         setTimeout(() => {
-          // 2. Sembunyikan login, tampilkan giftPage (secara display)
           loginPage.classList.add("hidden");
           giftPage.classList.remove("hidden");
 
-          // 3. Fade in halaman gift (beri jeda sedikit untuk reflow)
           setTimeout(() => {
             giftPage.style.opacity = '1';
             giftPage.style.transform = 'scale(1)';
           }, 20);
 
-        }, 500); // 500ms = durasi transisi di CSS
+        }, 500);
         
       } else {
-        // Tampilkan pesan error
         errorMsg.textContent = "Coba isi nama & tanggal yang benar ya 💕";
         errorMsg.classList.add("visible");
-        // Tambahkan animasi getar
         loginPage.classList.add("shake");
-        // Hapus kelas shake setelah animasi selesai
         setTimeout(() => {
           loginPage.classList.remove("shake");
         }, 500);
       }
     }
 
-    // 💥 Ledakan saat kado diklik
     function explodeGift() {
       const gift = document.getElementById("giftImage");
-      gift.style.animation = "none"; // Stop animasi bounce
+      gift.style.animation = "none";
       
-      // Hitung posisi kado untuk ledakan
       const rect = gift.getBoundingClientRect();
       const originX = (rect.left + rect.width / 2) / window.innerWidth;
       const originY = (rect.top + rect.height / 2) / window.innerHeight;
 
-      // 💥 Ledakan besar dari KADO
       confetti({
         particleCount: 150,
         spread: 100,
@@ -287,12 +448,10 @@
         colors: ["#ff9ecd", "#9cd4ff", "#fff5a5", "#ffffff"]
       });
 
-      // 🎊 Tembakan confetti dari samping
-      const duration = 2000; // 2 detik (sesuai setTimeout di bawah)
+      const duration = 2000;
       const end = Date.now() + duration;
 
       (function frame() {
-        // Cannon kiri
         confetti({
           particleCount: 3,
           startVelocity: 40,
@@ -300,7 +459,6 @@
           origin: { x: 0, y: 0.7 },
           colors: ["#ff9ecd", "#9cd4ff"]
         });
-        // Cannon kanan
         confetti({
           particleCount: 3,
           startVelocity: 40,
@@ -315,36 +473,30 @@
       }());
 
 
-      // Setelah 2 detik, ganti halaman
       setTimeout(() => {
         const giftPage = document.getElementById("giftPage");
         const surprisePage = document.getElementById("surprise");
         
-        // 1. Fade out halaman kado
         giftPage.style.opacity = '0';
         giftPage.style.transform = 'scale(0.95)';
 
         setTimeout(() => {
-          // 2. Sembunyikan kado, tampilkan kejutan
           giftPage.classList.add("hidden");
           surprisePage.classList.remove("hidden");
 
-          // 3. Fade in halaman kejutan
           setTimeout(() => {
             surprisePage.style.opacity = '1';
             surprisePage.style.transform = 'scale(1)';
           }, 20);
 
           addSparkles();
-        }, 500); // Durasi transisi
+        }, 500);
 
-      }, 2000); // Waktu ledakan confetti
+      }, 2000);
     }
 
-    // ✨ Tambahkan gemerlap di sekitar kue
     function addSparkles() {
       const container = document.getElementById("cakeContainer");
-      // Cek agar tidak menambah sparkles berulang kali
       if (container.querySelectorAll('.sparkle').length > 0) return; 
 
       for (let i = 0; i < 20; i++) {
@@ -356,6 +508,31 @@
         container.appendChild(sparkle);
       }
     }
+    
+    // 🌟 BARU: Fungsi untuk Modal (Popup)
+    function showModal(modalId) {
+      const modal = document.getElementById(modalId);
+      modal.classList.remove("hidden"); // Hapus display:none
+      setTimeout(() => { // Beri jeda 10ms agar transisi opacity/transform berjalan
+        modal.classList.add("visible");
+      }, 10);
+    }
+    
+    function closeModal(modalId, event) {
+      // Cek apakah yang diklik adalah overlay (latar belakang), bukan konten modal
+      if (event && event.target !== event.currentTarget) {
+        return; // Jika yang diklik adalah konten, jangan tutup modal
+      }
+      
+      const modal = document.getElementById(modalId);
+      modal.classList.remove("visible"); // Mulai transisi fade-out
+      
+      // Tambahkan "hidden" (display:none) SETELAH transisi selesai
+      setTimeout(() => {
+        modal.classList.add("hidden");
+      }, 300); // 300ms = durasi transisi di CSS
+    }
+
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
