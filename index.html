@@ -12,16 +12,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
   
   <style>
-    /* ✨ [PERBAIKAN ERROR BACKGROUND] ✨
-      * Ini adalah perbaikan utama untuk masalah background hilang.
-      * Kita gunakan 'min-height: 100vh' agar body bisa memanjang.
-      * Kita hapus 'overflow-y: auto' agar scroll kembali normal.
-    */
     body {
       margin: 0;
       font-family: "Quicksand", cursive;
       background: linear-gradient(135deg, #ffb6c1, #b3e5fc);
-      /* DIUBAH: 'height' menjadi 'min-height' */
       min-height: 100vh;
       display: flex;
       justify-content: center;
@@ -29,9 +23,7 @@
       flex-direction: column;
       text-align: center;
       overflow-x: hidden;
-      /* DIHAPUS: baris 'overflow-y: auto' */
       position: relative;
-      /* DITAMBAH: Padding agar konten tidak mepet saat scroll */
       padding: 20px 0;
       box-sizing: border-box;
     }
@@ -122,7 +114,7 @@
     .gift:hover {
       transform: scale(1.1);
       transition: 0.3s;
-    }
+  D }
 
     /* Kue dengan gemerlap */
     .cake-container {
@@ -205,7 +197,7 @@
     h1 { color: #ff4b91; font-size: 28px; margin-bottom: 10px;
          min-height: 40px;
     }
-    h2 { color: #59a7ff; font-size: 22px; margin-top: 0; }
+  s   h2 { color: #59a7ff; font-size: 22px; margin-top: 0; }
     
     .from-message {
       margin-top: 30px;
@@ -243,7 +235,8 @@
       left: 50%;
       width: 1px;
       height: 30px;
-  S     background: rgba(255, 255, 255, 0.5);
+      /* ✨ [PERBAIKAN] Huruf 'S' yang salah sudah dihapus dari baris di bawah ini */
+      background: rgba(255, 255, 255, 0.5);
     }
     
     .balloon:nth-child(2) { background: rgba(156, 212, 255, 0.7); animation-duration: 12s; }
@@ -267,7 +260,7 @@
 
   <div id="balloon-container"></div>
 
-  <div id="login" class="card visible">
+    <div id="login" class="card visible">
     <h1>🎀 Halo! 🎀</h1>
     <p>Masukkan nama & tanggal ulang tahun ya 💕</p>
     <input type="text" id="name" placeholder="Nama lengkap">
@@ -276,13 +269,13 @@
     <p id="errorMessage" class="hidden"></p>
   </div>
 
-  <div id="giftPage" class="hidden">
+    <div id="giftPage" class="hidden">
     <h1>Hai Elza 💖</h1>
     <p>Klik kadonya untuk membuka kejutan 🎂</p>
-        <img id="giftImage" src="kado.png" alt="Kado Ulang Tahun" class="gift" onclick="explodeGift()">
-  </div>
+    <img id="giftImage" src="kado.png" alt="Kado Ulang Tahun" class="gift" onclick="explodeGift()">
+</div>
 
-  <div id="surprise" class="hidden">
+    <div id="surprise" class="hidden">
     <h1 id="surprise-title"></h1>
     <h2>26 Oktober 2025</h2>
 
@@ -334,16 +327,11 @@
       }
     }
 
-    // 💥 Ledakan saat kado diklik
     function explodeGift() {
       const gift = document.getElementById("giftImage");
-      gift.style.animation = "none"; // Stop animasi bounce
+      gift.style.animation = "none";
+      gift.style.transform = "scale(1.1)";
       
-      // ✨ [PERUBAHAN GAMBAR] Baris untuk mengganti 'src' DIHAPUS
-      // gift.src = "kado_buka.png"; <-- SUDAH DIHAPUS
-      gift.style.transform = "scale(1.1)"; // Sedikit membesar
-      
-      // Ledakan besar confetti warna-warni
       const duration = 2500;
       const end = Date.now() + duration;
 
@@ -351,14 +339,13 @@
         confetti({
           particleCount: 10,
           startVelocity: 45,
-  D         spread: 360,
+          spread: 360,
           origin: { x: 0.5, y: 0.5 },
           colors: ["#ff9ecd", "#9cd4ff", "#fff5a5", "#ffffff"]
         });
         if (Date.now() < end) requestAnimationFrame(frame);
       })();
 
-      // Setelah 2 detik muncul kejutan
       setTimeout(() => {
         const giftPage = document.getElementById("giftPage");
         
@@ -370,7 +357,7 @@
           const surprisePage = document.getElementById("surprise");
           surprisePage.classList.remove("hidden");
           setTimeout(() => surprisePage.classList.add("visible"), 50);
-         s         
+          
           addSparkles();
           createBalloons();
           startTypewriter();
@@ -380,7 +367,6 @@
       }, 2000);
     }
 
-    // ✨ Tambahkan gemerlap di sekitar kue
     function addSparkles() {
       const container = document.getElementById("cakeContainer");
       for (let i = 0; i < 20; i++) {
@@ -393,39 +379,34 @@
       }
     }
     
-    // ✨ [BARU] Fungsi untuk memulai Typewriter
     function startTypewriter() {
       const text = "🎉 Selamat Ulang Tahun, Elza Savira Chairani Zakaria 🎂";
       const targetElement = document.getElementById("surprise-title");
       typeWriter(text, 0, targetElement);
     }
     
-    // ✨ [BARU] Fungsi Typewriter (rekursif)
     function typeWriter(txt, i, el) {
       if (i < txt.length) {
         el.innerHTML += txt.charAt(i);
         i++;
-        setTimeout(() => typeWriter(txt, i, el), 75); // Kecepatan ketik (ms)
+        setTimeout(() => typeWriter(txt, i, el), 75);
       }
     }
     
-    // ✨ [BARU] Fungsi membuat balon
     function createBalloons() {
       const container = document.getElementById("balloon-container");
-      for (let i = 0; i < 10; i++) { // Buat 10 balon
+      for (let i = 0; i < 10; i++) {
         const balloon = document.createElement("div");
         balloon.classList.add("balloon");
-        
-        // Posisi horizontal acak & delay acak
+  s       
         balloon.style.left = `${Math.random() * 90}%`; 
         balloon.style.animationDelay = `${Math.random() * 5}s`;
         
-        // Warna balon acak (opsional, ganti/hapus jika sudah pakai nth-child)
         const colors = ['rgba(255, 158, 205, 0.7)', 'rgba(156, 212, 255, 0.7)', 'rgba(255, 245, 165, 0.7)'];
         balloon.style.background = colors[Math.floor(Math.random() * colors.length)];
         
-  D       container.appendChild(balloon);
-      }
+        container.appendChild(balloon);
+    D }
     }
     
   </script>
