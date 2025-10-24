@@ -17,8 +17,8 @@
       text-align: center;
       overflow-x: hidden;
       overflow-y: auto;
-      /* 🌟 PERUBAHAN: Padding atas dikurangi agar semua lebih ke atas */
-      padding: 15px 20px 20px 20px;
+      /* 🌟 PERUBAHAN: Padding atas dikurangi */
+      padding: 10px 20px 20px 20px;
       box-sizing: border-box;
       position: relative; 
       cursor: default; 
@@ -126,18 +126,21 @@
       box-shadow: 0 0 20px rgba(255, 182, 193, 0.6);
       padding: 30px;
       width: 90%;
-      max-width: 400px;
+      /* 🌟 PERUBAHAN: Komponen diperkecil */
+      max-width: 380px;
     }
     
     #login, #giftPage, #surprise {
       transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
       width: 100%;
+      /* 🌟 PERUBAHAN: Lebar maksimum web dibatasi */
+      max-width: 900px;
       display: flex;
       flex-direction: column;
       align-items: center;
       margin-top: 0px; 
-      /* 🌟 PERUBAHAN: Padding atas dikurangi agar lebih ke atas */
-      padding-top: 10px; 
+      /* 🌟 PERUBAHAN: Padding atas dikurangi */
+      padding-top: 5px; 
     }
     #login {
         margin-top: 0;
@@ -238,7 +241,8 @@
     .cake-container {
       position: relative;
       display: inline-block;
-      margin-top: 20px; 
+      /* 🌟 PERUBAHAN: Jarak atas dikurangi */
+      margin-top: 15px; 
       animation: fadeInUp 1s ease;
       filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2)); 
     }
@@ -298,7 +302,8 @@
     .quote-text {
       font-size: 18px;
       color: #777;
-      margin-top: 25px;
+      /* 🌟 PERUBAHAN: Jarak atas dikurangi */
+      margin-top: 20px;
       font-style: italic;
       max-width: 80%;
       line-height: 1.5;
@@ -323,16 +328,17 @@
     }
 
 
-    /* 🌟 PERUBAHAN: Layout Action Cards (di bawah judul, di atas kue) */
+    /* Layout Action Cards */
     .action-cards {
       display: flex;
-      flex-wrap: wrap; /* Tetap izinkan wrap di layar super kecil */
+      flex-wrap: wrap; 
       justify-content: center;
       gap: 15px;
-      /* 🌟 PERUBAHAN: Menghapus margin negatif agar tidak menutupi judul */
-      margin-top: 25px; /* Jarak dari judul/tanggal */
-      margin-bottom: 30px; /* Jarak ke kue */
-      max-width: 620px; /* 🌟 PERUBAHAN: Dilebarkan agar 4 card sejajar */
+      /* 🌟 PERUBAHAN: Jarak vertikal dikurangi */
+      margin-top: 20px; 
+      margin-bottom: 25px; 
+      /* 🌟 PERUBAHAN: Lebar disesuaikan dengan tombol baru */
+      max-width: 570px;
     }
     
     .action-btn {
@@ -342,8 +348,9 @@
       font-family: "Comic Sans MS", cursive, sans-serif;
       font-size: 14px;
       font-weight: bold;
-      width: 140px;
-      height: 120px;
+      /* 🌟 PERUBAHAN: Komponen tombol diperkecil */
+      width: 130px;
+      height: 110px;
       padding: 15px 10px;
       cursor: pointer;
       display: flex;
@@ -400,7 +407,8 @@
       padding: 25px;
       border-radius: 20px;
       width: 90%;
-      max-width: 500px;
+      /* 🌟 PERUBAHAN: Komponen diperkecil */
+      max-width: 480px;
       position: relative;
       max-height: 85vh;
       overflow-y: auto;
@@ -432,7 +440,7 @@
       margin-top: 5px;
     }
     
-    /* 🌟 PERUBAHAN: Galeri Foto (GRID) */
+    /* Galeri Foto (GRID) */
     .gallery-text {
         font-size: 16px;
         color: #555;
@@ -442,13 +450,13 @@
     }
     .photos-grid {
       display: grid;
-      /* 🌟 PERUBAHAN: Ukuran minimal foto 200px */
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 15px; 
       margin-top: 20px;
       justify-items: center;
-      width: 90%; /* Batasi lebar grid */
-      max-width: 900px; /* Batas maksimum agar tidak terlalu lebar di PC */
+      width: 90%; 
+      /* 🌟 PERUBAHAN: Komponen diperkecil */
+      max-width: 700px;
     }
     
     .photos-grid figure {
@@ -458,18 +466,18 @@
         transition: transform 0.3s ease;
     }
     .photos-grid figure:hover {
-        transform: scale(1.05); /* Efek hover di pembungkus */
+        transform: scale(1.05); 
     }
     
     .photos-grid img {
       width: 100%;
       height: auto;
-      aspect-ratio: 1/1; /* Agar foto kotak */
-      object-fit: cover; /* Pastikan foto mengisi kotak dengan baik */
+      aspect-ratio: 1/1; 
+      object-fit: cover; 
       border-radius: 10px;
       box-shadow: 0 0 8px rgba(255, 182, 193, 0.4);
       transition: box-shadow 0.3s ease;
-      border: 3px solid transparent; /* Border default */
+      border: 3px solid transparent; 
     }
     
     .photos-grid figure:nth-child(3n+1) img { border-color: #ff9a9e; }
@@ -570,10 +578,12 @@
       background-size: 10px 20px;
     }
     
-    /* 🌟 BARU: Styling untuk Halaman Galeri Penuh */
+    /* Styling untuk Halaman Galeri Penuh */
     #galleryPage {
       transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
       width: 100%;
+      /* 🌟 PERUBAHAN: Lebar maksimum web dibatasi */
+      max-width: 900px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -805,7 +815,7 @@ Love you always 💕
         
         loginPage.style.opacity = '0';
         loginPage.style.transform = 'scale(0.95)';
-        document.body.classList.remove('login-active'); // Hapus class penengah
+        document.body.classList.remove('login-active'); 
 
         setTimeout(() => {
           loginPage.classList.add("hidden");
@@ -830,7 +840,7 @@ Love you always 💕
 
     function explodeGift() {
       const gift = document.getElementById("giftImage");
-      gift.style.animation = "none"; // Hentikan animasi bounce
+      gift.style.animation = "none"; 
       
       const rect = gift.getBoundingClientRect();
       const originX = (rect.left + rect.width / 2) / window.innerWidth;
@@ -1038,12 +1048,11 @@ Love you always 💕
     animateParticles();
 
     
-    // 🌟 BARU: Fungsi untuk pindah ke Halaman Galeri
+    // Fungsi untuk pindah ke Halaman Galeri
     function showGalleryPage() {
         const surprisePage = document.getElementById('surprise');
         const galleryPage = document.getElementById('galleryPage');
 
-        // Sembunyikan halaman surprise
         surprisePage.style.opacity = '0';
         surprisePage.style.transform = 'scale(0.95)';
 
@@ -1051,21 +1060,19 @@ Love you always 💕
             surprisePage.classList.add("hidden");
             galleryPage.classList.remove("hidden");
             
-            // Tampilkan halaman galeri
             setTimeout(() => {
                 galleryPage.style.opacity = '1';
                 galleryPage.style.transform = 'scale(1)';
-                window.scrollTo(0, 0); // Selalu scroll ke atas halaman
+                window.scrollTo(0, 0); 
             }, 20);
-        }, 500); // 500ms = durasi transisi
+        }, 500); 
     }
 
-    // 🌟 BARU: Fungsi untuk kembali dari Halaman Galeri
+    // Fungsi untuk kembali dari Halaman Galeri
     function hideGalleryPage() {
         const surprisePage = document.getElementById('surprise');
         const galleryPage = document.getElementById('galleryPage');
 
-        // Sembunyikan halaman galeri
         galleryPage.style.opacity = '0';
         galleryPage.style.transform = 'scale(0.95)';
 
@@ -1073,7 +1080,6 @@ Love you always 💕
             galleryPage.classList.add("hidden");
             surprisePage.classList.remove("hidden");
             
-            // Tampilkan kembali halaman surprise
             setTimeout(() => {
                 surprisePage.style.opacity = '1';
                 surprisePage.style.transform = 'scale(1)';
