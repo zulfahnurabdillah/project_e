@@ -12,7 +12,7 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start; /* Default untuk halaman 2 & 3 */
+      justify-content: flex-start; 
       align-items: center;
       text-align: center;
       overflow-x: hidden;
@@ -23,9 +23,19 @@
       cursor: default; 
     }
 
-    /* 🌟 PERUBAHAN: Khusus untuk halaman login agar card berada di tengah */
     body.login-active {
-        justify-content: center; /* Pusatkan secara vertikal */
+        justify-content: center; 
+    }
+
+    /* 🌟 BARU: Canvas untuk efek background interaktif */
+    #interactiveBgCanvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -3; /* Di bawah semua elemen lain */
+        pointer-events: none; /* Jangan menghalangi interaksi mouse */
     }
 
     .birthday-pattern-overlay {
@@ -124,11 +134,9 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      /* 🌟 PERUBAHAN: margin-top lebih kecil untuk halaman 2 & 3 agar lebih ke atas */
       margin-top: 0px; 
-      padding-top: 20px; /* Tambahkan padding agar ada sedikit ruang dari atas */
+      padding-top: 20px; 
     }
-    /* 🌟 PERUBAHAN: Khusus untuk card login, reset margin-top */
     #login {
         margin-top: 0;
     }
@@ -210,10 +218,8 @@
 
     .gift {
       width: 160px;
-      /* 🌟 PERBAIKAN: Pastikan animasi bounce tetap ada */
       animation: bounce 1.2s infinite ease-in-out; 
       cursor: pointer;
-      /* 🌟 PERUBAHAN: margin-top lebih kecil untuk kado agar lebih ke atas */
       margin-top: 20px; 
     }
 
@@ -230,7 +236,6 @@
     .cake-container {
       position: relative;
       display: inline-block;
-      /* 🌟 PERUBAHAN: margin-top lebih kecil untuk kue agar lebih ke atas */
       margin-top: 20px; 
       animation: fadeInUp 1s ease;
       filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2)); 
@@ -316,16 +321,30 @@
     }
 
 
-    /* Desain Kartu Hadiah (Luar) */
+    /* 🌟 PERUBAHAN UTAMA: Layout Action Cards (di atas kue, 4 sejajar) */
     .action-cards {
       display: flex;
-      flex-wrap: wrap;
+      flex-wrap: wrap; /* Izinkan wrapping jika layar kecil */
       justify-content: center;
       gap: 15px;
-      margin-top: 30px;
+      /* 🌟 PERUBAHAN: Posisi disesuaikan agar di atas kue */
+      margin-top: -80px; /* Geser ke atas (adjust sesuai ukuran kue & tombol) */
+      margin-bottom: 20px; /* Beri jarak ke bawah kue */
+      position: relative;
+      z-index: 3; /* Pastikan di atas kue */
       max-width: 600px;
     }
-    
+    /* 🌟 PERUBAHAN: Untuk layar yang lebih lebar, pastikan 4 kolom */
+    @media (min-width: 768px) {
+        .action-cards {
+            max-width: 600px; /* Sesuaikan lebar agar 4 kolom pas */
+        }
+        .action-btn {
+            width: 135px; /* Sesuaikan lebar tombol agar 4 kolom pas dengan gap */
+            height: 110px;
+        }
+    }
+
     .action-btn {
       border: none;
       border-radius: 20px;
@@ -333,7 +352,7 @@
       font-family: "Comic Sans MS", cursive, sans-serif;
       font-size: 14px;
       font-weight: bold;
-      width: 140px;
+      width: 140px; /* Lebar default */
       height: 120px;
       padding: 15px 10px;
       cursor: pointer;
@@ -423,62 +442,39 @@
       margin-top: 5px;
     }
     
-    /* Galeri Foto (Slider/Carousel) */
-    .photo-slider {
-        position: relative;
-        width: 100%;
-        max-width: 400px; 
-        margin: 20px auto 0;
-        overflow: hidden;
-        border-radius: 15px;
-        box-shadow: 0 0 10px rgba(255, 182, 193, 0.5);
+    /* 🌟 PERUBAHAN: Galeri Foto (GRID BUKAN SLIDER) */
+    .gallery-text {
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 15px;
+        text-align: center;
+        line-height: 1.5;
     }
-    .photo-slide {
-        display: none; 
-        width: 100%;
-        animation: fadeEffect 0.5s; 
+    .photos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Responsive grid */
+      gap: 10px;
+      margin-top: 20px;
+      justify-items: center; /* Pusatkan item di grid */
     }
-    .photo-slide img {
-        width: 100%;
-        display: block;
+    .photos-grid img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1/1; /* Agar foto kotak */
+      object-fit: cover; /* Pastikan foto mengisi kotak dengan baik */
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(255, 182, 193, 0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 3px solid transparent; /* Border default */
     }
-    /* Tombol Prev/Next */
-    .slider-nav {
-        cursor: pointer;
-        position: absolute;
-        top: 50%;
-        width: auto;
-        padding: 16px;
-        margin-top: -22px;
-        color: white;
-        font-weight: bold;
-        font-size: 24px;
-        transition: 0.3s ease;
-        border-radius: 0 3px 3px 0;
-        user-select: none;
-        background-color: rgba(0,0,0,0.3);
-    }
-    .slider-nav.next {
-        right: 0;
-        border-radius: 3px 0 0 3px;
-    }
-    .slider-nav:hover {
-        background-color: rgba(0,0,0,0.6);
-    }
-    /* Counter Teks */
-    .slide-counter {
-        color: #f2f2f2;
-        background-color: rgba(0,0,0,0.5);
-        font-size: 14px;
-        padding: 8px 12px;
-        position: absolute;
-        top: 0;
-        left: 0;
-        border-radius: 0 0 10px 0;
-    }
-    @keyframes fadeEffect {
-        from {opacity: 0.4}
-        to {opacity: 1}
+    /* Random border colors for photos */
+    .photos-grid img:nth-child(3n+1) { border-color: #ff9a9e; }
+    .photos-grid img:nth-child(3n+2) { border-color: #a1c4fd; }
+    .photos-grid img:nth-child(3n) { border-color: #84fab0; }
+
+    .photos-grid img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(255, 182, 193, 0.8);
     }
 
     /* Style untuk "Surat Ucapan" */
@@ -564,7 +560,8 @@
 
   </style>
 </head>
-<body class="login-active"> <div class="birthday-pattern-overlay"></div>
+<body class="login-active">
+  <canvas id="interactiveBgCanvas"></canvas> <div class="birthday-pattern-overlay"></div>
 
   <ul class="background-balloons">
     <li></li> <li></li> <li></li> <li></li> <li></li>
@@ -583,12 +580,27 @@
   <div id="giftPage" class="hidden">
     <h1>Hai Elza 💖</h1>
     <p>Klik kadonya untuk membuka kejutan 🎂</p>
-    <img id="giftImage" src="kado.png" alt="Kado Ulang Tahun" class="gift" style="animation: bounce 1.2s infinite ease-in-out;" onclick="explodeGift()">
+    <img id="giftImage" src="kado.png" alt="Kado Ulang Tahun" class="gift" onclick="explodeGift()">
   </div>
 
   <div id="surprise" class="hidden">
     <h1 class="reveal-text" id="main-greeting">🎉 Selamat Ulang Tahun, Elza Savira Chairani Zakaria 🎂</h1>
     <h2>26 Oktober 2025</h2>
+
+    <div class="action-cards">
+      <button class="action-btn" onclick="showModal('modal-gallery')">
+        <span class="emoji-icon">🖼️</span><span class="button-text">Foto Sayangku</span>
+      </button>
+      <button class="action-btn" onclick="showModal('modal-wish')">
+        <span class="emoji-icon">💖</span><span class="button-text">Ucapan Ulang Tahun</span>
+      </button>
+      <button class="action-btn" onclick="showModal('modal-playlist')">
+        <span class="emoji-icon">🎶</span><span class="button-text">Lagu Buat Cantikku</span>
+      </button>
+      <button class="action-btn" onclick="showModal('modal-voucher')">
+        <span class="emoji-icon">🎁</span><span class="button-text">Voucher Dating Nanti Waktu Ketemu</span>
+      </button>
+    </div>
 
     <div class="cake-container" id="cakeContainer">
       <img id="cakeImage" src="kue.png" alt="Kue Ulang Tahun" class="cake">
@@ -598,54 +610,40 @@
       "Semoga hari ini menjadi awal dari tahun yang penuh keajaiban dan cinta!"
     </p>
 
-    <div class="action-cards">
-      <button class="action-btn" onclick="showModal('modal-gallery')">
-        <span class="emoji-icon">🖼️</span><span class="button-text">Galeri Kenangan</span>
-      </button>
-      <button class="action-btn" onclick="showModal('modal-wish')">
-        <span class="emoji-icon">💖</span><span class="button-text">Ucapan Spesial</span>
-      </button>
-      <button class="action-btn" onclick="showModal('modal-playlist')">
-        <span class="emoji-icon">🎶</span><span class="button-text">Playlist Untukmu</span>
-      </button>
-      <button class="action-btn" onclick="showModal('modal-voucher')">
-        <span class="emoji-icon">🎁</span><span class="button-text">Voucher Kencan</span>
-      </button>
-    </div>
+    
   </div>
 
   
   <div id="modal-gallery" class="modal-overlay hidden" onclick="closeModal('modal-gallery', event)">
     <div class="modal-content">
       <span class="modal-close" onclick="closeModal('modal-gallery')">&times;</span>
-      <h2>Galeri Kenangan Kita 💖</h2>
+      <h2>Galeri Foto Sayangku 💖</h2>
       
-      <div class="photo-slider">
-        <div class="slide-counter" id="slide-counter"></div>
-        
-        <div class="photo-slide">
-          <img src="foto1.jpg" alt="Foto kenangan 1">
-        </div>
-        
-        <div class="photo-slide">
-          <img src="foto2.jpg" alt="Foto kenangan 2">
-        </div>
-        
-        <div class="photo-slide">
-          <img src="foto3.jpg" alt="Foto kenangan 3">
-        </div>
-        
-        <div class="photo-slide">
-          <img src="foto4.jpg" alt="Foto kenangan 4">
-        </div>
-        
-        <div class="photo-slide">
-          <img src="foto5.jpg" alt="Foto kenangan 5">
-        </div>
-      
-        <a class="slider-nav prev" onclick="changePhoto(-1)">&#10094;</a>
-        <a class="slider-nav next" onclick="changePhoto(1)">&#10095;</a>
+      <p class="gallery-text">
+        Setiap momen bersamamu adalah kenangan indah. Ini beberapa di antaranya:
+      </p>
+
+      <div class="photos-grid">
+        <img src="foto1.jpg" alt="Foto kenangan 1">
+        <img src="foto2.jpg" alt="Foto kenangan 2">
+        <img src="foto3.jpg" alt="Foto kenangan 3">
+        <img src="foto4.jpg" alt="Foto kenangan 4">
+        <img src="foto5.jpg" alt="Foto kenangan 5">
+        <img src="foto6.jpg" alt="Foto kenangan 6">
+        <img src="foto7.jpg" alt="Foto kenangan 7">
+        <img src="foto8.jpg" alt="Foto kenangan 8">
+        <img src="foto9.jpg" alt="Foto kenangan 9">
+        <img src="foto10.jpg" alt="Foto kenangan 10">
+        <img src="foto11.jpg" alt="Foto kenangan 11">
+        <img src="foto12.jpg" alt="Foto kenangan 12">
+        <img src="foto13.jpg" alt="Foto kenangan 13">
+        <img src="foto14.jpg" alt="Foto kenangan 14">
+        <img src="foto15.jpg" alt="Foto kenangan 15">
       </div>
+
+      <p class="gallery-text" style="margin-top: 20px;">
+        Masih banyak lagi cerita kita yang akan terukir. Aku tak sabar menunggu semuanya!
+      </p>
       
     </div>
   </div>
@@ -686,7 +684,7 @@ Love you always 💕
   <div id="modal-voucher" class="modal-overlay hidden" onclick="closeModal('modal-voucher', event)">
     <div class="modal-content">
       <span class="modal-close" onclick="closeModal('modal-voucher')">&times;</span>
-      <h2>Voucher Kencan Spesial 🎟️</h2>
+      <h2>Voucher Dating Spesial 🎟️</h2>
       <div class="voucher-list">
         <div class="voucher">Jatah 1x Traktiran Es Krim (Bebas Pilih!)</div>
         <div class="voucher">Jatah 1x Nonton Film di Bioskop (Kamu yang Pilih Film)</div>
@@ -739,8 +737,7 @@ Love you always 💕
 
     function explodeGift() {
       const gift = document.getElementById("giftImage");
-      // 🌟 PERBAIKAN: Hapus style animation di sini, karena sudah diatur di HTML
-      // gift.style.animation = "none"; 
+      gift.style.animation = "none"; // Hentikan animasi bounce saat meledak
       
       const rect = gift.getBoundingClientRect();
       const originX = (rect.left + rect.width / 2) / window.innerWidth;
@@ -834,22 +831,11 @@ Love you always 💕
         });
     }
 
-    let currentSlideIndex = 1;
-    let slides = document.getElementsByClassName("photo-slide");
-    let counter = document.getElementById("slide-counter");
-
     function showModal(modalId) {
       const modal = document.getElementById(modalId);
       modal.classList.remove("hidden");
       setTimeout(() => {
         modal.classList.add("visible");
-        
-        if (modalId === 'modal-gallery') {
-            slides = document.getElementsByClassName("photo-slide"); 
-            counter = document.getElementById("slide-counter");
-            currentSlideIndex = 1; 
-            showPhoto(currentSlideIndex);
-        }
       }, 10);
     }
     
@@ -866,25 +852,6 @@ Love you always 💕
       }, 300);
     }
 
-    function changePhoto(n) {
-      showPhoto(currentSlideIndex += n);
-    }
-
-    function showPhoto(n) {
-      if (!slides || slides.length === 0) return; 
-      
-      let i;
-      if (n > slides.length) {currentSlideIndex = 1} 
-      if (n < 1) {currentSlideIndex = slides.length} 
-      
-      for (i = 0; i < slides.length; i++) {
-          slides[i].style.display = "none";
-      }
-      
-      slides[currentSlideIndex-1].style.display = "block";
-      counter.innerText = `${currentSlideIndex} / ${slides.length}`;
-    }
-    
     document.addEventListener('mousemove', function(e) {
         let sparkle = document.createElement('div');
         sparkle.className = 'sparkle-trail';
@@ -897,6 +864,85 @@ Love you always 💕
             sparkle.remove();
         }, 500); 
     });
+
+    // 🌟 BARU: Script untuk Background Interaktif (Confetti/Bubbles)
+    const canvas = document.getElementById('interactiveBgCanvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    const colors = ['#ffb6c1', '#b3e5fc', '#fff5a5', '#ff9a9e', '#c2e9fb', '#84fab0'];
+
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+
+    class Particle {
+        constructor(x, y, radius, color, velocity) {
+            this.x = x;
+            this.y = y;
+            this.radius = radius;
+            this.color = color;
+            this.velocity = velocity;
+            this.alpha = 1;
+        }
+
+        draw() {
+            ctx.save();
+            ctx.globalAlpha = this.alpha;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+            ctx.fillStyle = this.color;
+            ctx.fill();
+            ctx.restore();
+        }
+
+        update() {
+            this.x += this.velocity.x;
+            this.y += this.velocity.y;
+            this.alpha -= 0.008; // Perlahan memudar
+            this.radius -= 0.03; // Perlahan mengecil
+
+            if (this.radius < 0.1) { // Hapus partikel jika terlalu kecil
+                this.alpha = 0;
+            }
+            this.draw();
+        }
+    }
+
+    function createParticle(x, y) {
+        const radius = Math.random() * 5 + 2;
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        const angle = Math.random() * Math.PI * 2;
+        const velocity = {
+            x: Math.cos(angle) * (Math.random() * 1 - 0.5), // Gerak horizontal lebih halus
+            y: Math.sin(angle) * (Math.random() * 1 - 0.5) - 0.5 // Gerak ke atas lebih dominan
+        };
+        particles.push(new Particle(x, y, radius, color, velocity));
+    }
+
+    function animateParticles() {
+        requestAnimationFrame(animateParticles);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Tambahkan partikel baru secara acak dari bawah layar
+        if (Math.random() < 0.3) { // Kontrol frekuensi munculnya partikel
+            createParticle(Math.random() * canvas.width, canvas.height + 10); // Mulai dari bawah
+        }
+
+        for (let i = particles.length - 1; i >= 0; i--) {
+            const particle = particles[i];
+            particle.update();
+
+            if (particle.alpha <= 0 || particle.radius <= 0.1 || particle.y < -particle.radius) {
+                particles.splice(i, 1);
+            }
+        }
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    animateParticles();
+
 
   </script>
 
