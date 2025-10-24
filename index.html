@@ -17,12 +17,11 @@
       text-align: center;
       overflow-x: hidden;
       overflow-y: auto;
-      padding: 30px 20px 20px 20px;
+      padding: 15px 20px 20px 20px; /* Diubah dari 30px agar lebih ke atas */
       box-sizing: border-box;
       position: relative; 
       cursor: default; 
     }
-
     body.login-active {
         justify-content: center; 
     }
@@ -128,14 +127,14 @@
       max-width: 400px;
     }
     
-    #login, #giftPage, #surprise {
+   #login, #giftPage, #surprise {
       transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
       width: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
       margin-top: 0px; 
-      padding-top: 20px; 
+      padding-top: 10px; /* Diubah dari 20px agar lebih ke atas */
     }
     #login {
         margin-top: 0;
@@ -322,17 +321,18 @@
 
 
     /* 🌟 PERUBAHAN UTAMA: Layout Action Cards (di atas kue, 4 sejajar) */
+    /* 🌟 PERUBAHAN UTAMA: Layout Action Cards (di bawah judul, di atas kue) */
     .action-cards {
       display: flex;
-      flex-wrap: wrap; /* Izinkan wrapping jika layar kecil */
+      flex-wrap: wrap; /* Tetap izinkan wrap di layar super kecil */
       justify-content: center;
       gap: 15px;
-      /* 🌟 PERUBAHAN: Posisi disesuaikan agar di atas kue */
-      margin-top: -80px; /* Geser ke atas (adjust sesuai ukuran kue & tombol) */
-      margin-bottom: 20px; /* Beri jarak ke bawah kue */
-      position: relative;
-      z-index: 3; /* Pastikan di atas kue */
-      max-width: 600px;
+      /* 🌟 PERUBAHAN: Menghapus margin negatif agar tidak menutupi judul */
+      margin-top: 25px; /* Jarak dari judul/tanggal */
+      margin-bottom: 30px; /* Jarak ke kue */
+      /* position: relative; (Dihapus) */
+      /* z-index: 3; (Dihapus) */
+      max-width: 620px; /* 🌟 PERUBAHAN: Dilebarkan agar 4 card sejajar (140*4 + 15*3 = 605px) */
     }
     /* 🌟 PERUBAHAN: Untuk layar yang lebih lebar, pastikan 4 kolom */
     @media (min-width: 768px) {
@@ -626,64 +626,64 @@
       <div class="photos-grid">
         
         <figure>
-          <img src="foto1.jpg" alt="Foto 1">
-          <figcaption>foto 1.jpeg</figcaption>
+          <img src="foto1.jpeg" alt="Foto 1">
+          <figcaption>foto ayang</figcaption>
         </figure>
         <figure>
-          <img src="foto2.jpg" alt="Foto 2">
-          <figcaption>foto 2.jpeg</figcaption>
+          <img src="foto2.jpeg" alt="Foto 2">
+          <figcaption>foto ayang</figcaption>
         </figure>
         <figure>
-          <img src="foto3.jpg" alt="Foto 3">
-          <figcaption>foto 3.jpeg</figcaption>
+          <img src="foto3.jpeg" alt="Foto 3">
+          <figcaption>foto ayang</figcaption>
         </figure>
         <figure>
-          <img src="foto4.jpg" alt="Foto 4">
-          <figcaption>foto 4.jpeg</figcaption>
+          <img src="foto4.jpeg" alt="Foto 4">
+          <figcaption>foto ayang</figcaption>
         </figure>
         <figure>
-          <img src="foto5.jpg" alt="Foto 5">
-          <figcaption>foto 5.jpeg</figcaption>
+          <img src="foto5.jpeg" alt="Foto 5">
+          <figcaption>foto ayang</figcaption>
         </figure>
         <figure>
-          <img src="foto6.jpg" alt="Foto 6">
-          <figcaption>foto 6.jpeg</figcaption>
+          <img src="foto6.jpeg" alt="Foto 6">
+          <figcaption>foto ayang</figcaption>
         </figure>
         <figure>
-          <img src="foto7.jpg" alt="Foto 7">
-          <figcaption>foto 7.jpeg</figcaption>
+          <img src="foto7.jpeg" alt="Foto 7">
+          <figcaption>foto ayang</figcaption>
         </figure>
         <figure>
-          <img src="foto8.jpg" alt="Foto 8">
-          <figcaption>foto 8.jpeg</figcaption>
+          <img src="foto8.jpeg" alt="Foto 8">
+          <figcaption>foto ayang</figcaption>
         </figure>
         <figure>
-          <img src="foto9.jpg" alt="Foto 9">
-          <figcaption>foto 9.jpeg</figcaption>
+          <img src="foto9.jpeg" alt="Foto 9">
+          <figcaption>foto ayang</figcaption>
         </figure>
         <figure>
-          <img src="foto10.jpg" alt="Foto 10">
-          <figcaption>foto 10.jpeg</figcaption>
+          <img src="foto10.jpeg" alt="Foto 10">
+          <figcaption>foto ayang</figcaption>
         </figure>
         <figure>
-          <img src="foto11.jpg" alt="Foto 11">
-          <figcaption>foto 11.jpeg</figcaption>
+          <img src="foto11.jpeg" alt="Foto 11">
+          <figcaption>foto ayang</figcaption>
         </figure>
         <figure>
-          <img src="foto12.jpg" alt="Foto 12">
-          <figcaption>foto 12.jpeg</figcaption>
+          <img src="foto12.jpeg" alt="Foto 12">
+          <figcaption>foto ayang</figcaption>
         </figure>
         <figure>
-          <img src="foto13.jpg" alt="Foto 13">
-          <figcaption>foto 13.jpeg</figcaption>
+          <img src="foto13.jpeg" alt="Foto 13">
+          <figcaption>foto ayang</figcaption>
         </figure>
         <figure>
-          <img src="foto14.jpg" alt="Foto 14">
-          <figcaption>foto 14.jpeg</figcaption>
+          <img src="foto14.jpeg" alt="Foto 14">
+          <figcaption>foto ayang</figcaption>
         </figure>
         <figure>
-          <img src="foto15.jpg" alt="Foto 15">
-          <figcaption>foto 15.jpeg</figcaption>
+          <img src="foto15.jpeg" alt="Foto 15">
+          <figcaption>foto ayang</figcaption>
         </figure>
 
       </div>
@@ -997,6 +997,7 @@ Love you always 💕
 
 </body>
 </html>
+
 
 
 
