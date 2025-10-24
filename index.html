@@ -9,15 +9,15 @@
       margin: 0;
       font-family: "Comic Sans MS", "Chalkboard SE", "Marker Felt", cursive, sans-serif;
       background: linear-gradient(135deg, #ffb6c1, #b3e5fc);
-      min-height: 100vh;
+      /* 🌟 PERUBAHAN: Dibuat agar tidak bisa di-scroll di body */
+      height: 100vh;
+      overflow: hidden; 
       display: flex;
       flex-direction: column;
       justify-content: flex-start; 
       align-items: center;
       text-align: center;
-      /* 🌟 PERUBAHAN: Dibuat agar tidak bisa di-scroll di body */
-      overflow: hidden; 
-      padding: 10px 20px 20px 20px;
+      padding: 10px 20px;
       box-sizing: border-box;
       position: relative; 
       cursor: default; 
@@ -120,25 +120,8 @@
     }
 
     
-    /* Style untuk #login (kartu) dipisah */
-    #login {
-      transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 0px; 
-      padding-top: 5px;
-
-      background: white;
-      border-radius: 20px;
-      box-shadow: 0 0 20px rgba(255, 182, 193, 0.6);
-      padding: 30px;
-      width: 90%;
-      max-width: 400px; /* Dikembalikan ke 400px */
-    }
-    
-    /* Style Halaman (non-login) */
-    #giftPage, #surprise {
+    /* 🌟 PERBAIKAN: Style Halaman (non-login) */
+    #loginPage, #giftPage, #surprise {
       transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
       width: 100%;
       max-width: 800px; /* Lebar web dikecilkan */
@@ -147,6 +130,22 @@
       align-items: center;
       margin-top: 0px; 
       padding-top: 5px; 
+    }
+    
+    /* 🌟 PERBAIKAN: Kontainer halaman dibuat setinggi layar agar muat */
+    #giftPage, #surprise {
+        height: 90vh; /* Ambil tinggi layar */
+        justify-content: center; /* Pusatkan konten secara vertikal */
+    }
+
+    /* 🌟 PERBAIKAN: Style untuk #login-card (kartu) dipisah */
+    #login-card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 182, 193, 0.6);
+      padding: 30px;
+      width: 90%;
+      max-width: 400px; /* Dikembalikan ke 400px */
     }
 
 
@@ -206,7 +205,7 @@
       margin-top: 10px;
     }
 
-    #login button {
+    #login-card button {
         animation: buttonPulse 2s infinite ease-in-out;
     }
     @keyframes buttonPulse {
@@ -241,11 +240,11 @@
       transition: 0.3s;
     }
 
-    /* 🌟 PERUBAHAN: Layout dirapatkan */
+    /* Layout dirapatkan */
     .cake-container {
       position: relative;
       display: inline-block;
-      margin-top: 0; /* Dihapus, diatur oleh .surprise-bottom */
+      margin-top: 0; 
       animation: fadeInUp 1s ease;
       filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2)); 
     }
@@ -270,8 +269,8 @@
     }
 
     .cake {
-      /* 🌟 PERUBAHAN: Ukuran dikecilkan */
-      width: 240px;
+      /* Ukuran dikecilkan */
+      width: 220px;
       border-radius: 15px;
       z-index: 2;
       position: relative;
@@ -300,19 +299,19 @@
       100% { transform: scale(0); opacity: 0; }
     }
     
-    /* 🌟 PERUBAHAN: Font size dirapatkan */
+    /* Font size dirapatkan */
     h1 { color: #ff4b91; font-size: 24px; margin-bottom: 10px; margin-top: 5px;}
-    h2 { color: #59a7ff; font-size: 18px; margin-top: 0; }
+    h2 { color: #59a7ff; font-size: 18px; margin-top: 0; margin-bottom: 5px; } /* Margin bottom dikurangi */
 
     .quote-text {
-      /* 🌟 PERUBAHAN: Ukuran dan margin diatur untuk flexbox */
-      font-size: 16px;
+      /* Ukuran dan margin diatur untuk flexbox */
+      font-size: 15px;
       color: #777;
-      margin-top: 0; /* Dihapus, diatur oleh .surprise-bottom */
+      margin-top: 0; 
       font-style: italic;
-      max-width: 300px; /* Batasi lebar agar pas di samping kue */
-      text-align: left; /* Tampil lebih rapi di samping kue */
-      line-height: 1.5;
+      max-width: 280px; 
+      text-align: left; 
+      line-height: 1.4;
     }
     
     /* Animasi Reveal Teks H1 */
@@ -339,11 +338,11 @@
       display: flex;
       flex-wrap: wrap; 
       justify-content: center;
-      gap: 15px;
-      /* 🌟 PERUBAHAN: Layout dirapatkan */
-      margin-top: 15px; 
-      margin-bottom: 0; /* Dihapus, diatur oleh .surprise-bottom */
-      max-width: 570px; 
+      gap: 10px; /* Gap dikecilkan */
+      /* Layout dirapatkan */
+      margin-top: 10px; 
+      margin-bottom: 0;
+      max-width: 540px; /* Disesuaikan dengan tombol baru */
     }
     
     .action-btn {
@@ -351,11 +350,11 @@
       border-radius: 20px;
       color: white;
       font-family: "Comic Sans MS", cursive, sans-serif;
-      font-size: 14px;
+      font-size: 13px; /* Dikecilkan */
       font-weight: bold;
-      /* 🌟 PERUBAHAN: Ukuran dikecilkan */
-      width: 130px; 
-      height: 100px; 
+      /* Ukuran dikecilkan */
+      width: 120px; 
+      height: 90px; 
       padding: 10px;
       cursor: pointer;
       display: flex;
@@ -371,12 +370,12 @@
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     }
     .action-btn .emoji-icon {
-      font-size: 36px; /* Dikecilkan */
+      font-size: 32px; /* Dikecilkan */
       line-height: 1;
       margin-bottom: 5px; 
     }
     .action-btn .button-text {
-      font-size: 14px;
+      font-size: 13px; /* Dikecilkan */
       line-height: 1.2;
     }
     
@@ -385,10 +384,10 @@
     .action-btn:nth-child(3) { background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%); }
     .action-btn:nth-child(4) { background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%); }
     
-    /* 🌟 BARU: Kontainer untuk Kue + Quote */
+    /* Kontainer untuk Kue + Quote */
     .surprise-bottom {
       display: flex;
-      flex-wrap: wrap; /* Akan wrap di layar kecil */
+      flex-wrap: wrap; 
       align-items: center;
       justify-content: center;
       gap: 20px;
@@ -605,7 +604,7 @@
       opacity: 0;
       transform: scale(0.95);
       /* 🌟 PERUBAHAN: Halaman galeri boleh di-scroll */
-      min-height: 100vh;
+      height: 90vh;
       overflow-y: auto;
     }
     #galleryPage h2 {
@@ -644,13 +643,15 @@
     <li></li> <li></li> <li></li>
   </ul>
 
-  <div id="login">
-    <h1>🎀 Halo! 🎀</h1>
-    <p>Masukkan nama & tanggal ulang tahun ya 💕</p>
-    <input type="text" id="name" placeholder="Nama lengkap">
-    <input type="text" id="birthday" placeholder="Tanggal (dd-mm-yyyy)">
-    <p id="error-msg" class="error-msg"></p>
-    <button onclick="checkBirthday()">Masuk 🎁</button>
+  <div id="loginPage">
+    <div id="login-card">
+      <h1>🎀 Halo! 🎀</h1>
+      <p>Masukkan nama & tanggal ulang tahun ya 💕</p>
+      <input type="text" id="name" placeholder="Nama lengkap">
+      <input type="text" id="birthday" placeholder="Tanggal (dd-mm-yyyy)">
+      <p id="error-msg" class="error-msg"></p>
+      <button onclick="checkBirthday()">Masuk 🎁</button>
+    </div>
   </div>
 
   <div id="giftPage" class="hidden">
@@ -823,7 +824,7 @@ Love you always 💕
       const correctName = "elza savira chairani zakaria";
       const correctBirthday = "26-10-2025";
       
-      const loginPage = document.getElementById("login");
+      const loginPage = document.getElementById("loginPage"); // 🌟 PERBAIKAN: Target #loginPage
       const giftPage = document.getElementById("giftPage");
       const errorMsg = document.getElementById("error-msg");
 
@@ -848,9 +849,10 @@ Love you always 💕
       } else {
         errorMsg.textContent = "Coba isi nama & tanggal yang benar ya 💕";
         errorMsg.classList.add("visible");
-        loginPage.classList.add("shake");
+        // 🌟 PERBAIKAN: Target #login-card untuk shake
+        document.getElementById("login-card").classList.add("shake");
         setTimeout(() => {
-          loginPage.classList.remove("shake");
+          document.getElementById("login-card").classList.remove("shake");
         }, 500);
       }
     }
