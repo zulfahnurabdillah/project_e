@@ -10,10 +10,10 @@
       font-family: "Comic Sans MS", "Chalkboard SE", "Marker Felt", cursive, sans-serif;
       background: linear-gradient(135deg, #ffb6c1, #b3e5fc);
       height: 100vh;
-      overflow: hidden; /* Mencegah scroll di body */
+      overflow: hidden; 
       display: flex;
       flex-direction: column;
-      justify-content: flex-start; /* Default untuk halaman 2 & 3 */
+      justify-content: flex-start; 
       align-items: center;
       text-align: center;
       padding: 10px 20px;
@@ -23,7 +23,7 @@
     }
 
     body.login-active {
-        justify-content: center; /* Pusatkan Halaman Login secara vertikal */
+        justify-content: center; 
     }
 
     /* Canvas untuk efek background interaktif */
@@ -120,8 +120,8 @@
     }
 
     
-    /* 🌟 PERBAIKAN: Style Halaman (non-login) */
-    #giftPage, #surprise {
+    /* Style Halaman */
+    .page-container {
       transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
       width: 100%;
       max-width: 800px; /* Lebar web dikecilkan */
@@ -130,24 +130,32 @@
       align-items: center;
       margin-top: 0px; 
       padding-top: 5px; 
-      height: 90vh; /* Ambil tinggi layar */
-      justify-content: center; /* Pusatkan konten secara vertikal */
     }
     
-    /* 🌟 PERBAIKAN: Style #login (sebagai KARTU) dikembalikan */
-    #login {
-      transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out; /* Tambahkan transisi */
+    /* Kontainer halaman dibuat setinggi layar agar muat */
+    #giftPage, #surprise {
+        height: 90vh; 
+        justify-content: center; 
+    }
+    
+    /* 🌟 PERBAIKAN: Pastikan #loginPage terlihat awalnya */
+    #loginPage {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    /* Style #login-card (kartu) */
+    #login-card {
       background: white;
       border-radius: 20px;
       box-shadow: 0 0 20px rgba(255, 182, 193, 0.6);
       padding: 30px;
       width: 90%;
-      max-width: 400px; /* Dikembalikan ke 400px */
-      /* Style display flex TIDAK dibutuhkan di sini */
+      max-width: 400px; 
     }
 
-
-    #giftPage, #surprise {
+    /* Aturan untuk menyembunyikan halaman lain */
+    #giftPage, #surprise, #galleryPage {
       opacity: 0;
       transform: scale(0.95);
     }
@@ -203,7 +211,7 @@
       margin-top: 10px;
     }
 
-    #login button { /* 🌟 PERBAIKAN: Target #login (kartu) */
+    #login-card button { 
         animation: buttonPulse 2s infinite ease-in-out;
     }
     @keyframes buttonPulse {
@@ -267,7 +275,6 @@
     }
 
     .cake {
-      /* Ukuran dikecilkan */
       width: 220px;
       border-radius: 15px;
       z-index: 2;
@@ -336,7 +343,7 @@
       flex-wrap: wrap; 
       justify-content: center;
       gap: 10px; 
-      margin-top: 10px; /* Jarak atas dikecilkan */
+      margin-top: 10px; 
       margin-bottom: 0;
       max-width: 540px; 
     }
@@ -590,7 +597,7 @@
     #galleryPage {
       transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
       width: 100%;
-      max-width: 800px; /* Lebar web dikecilkan */
+      max-width: 800px; 
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -599,7 +606,7 @@
       opacity: 0;
       transform: scale(0.95);
       /* Halaman galeri boleh di-scroll */
-      height: 90vh; /* Sesuaikan tinggi agar pas */
+      height: 90vh; /* Sesuaikan tinggi */
       overflow-y: auto; /* Aktifkan scroll hanya untuk galeri */
     }
     #galleryPage h2 {
@@ -638,7 +645,7 @@
     <li></li> <li></li> <li></li>
   </ul>
 
-  <div id="loginPage"> 
+  <div id="loginPage" class="page-container"> 
     <div id="login"> 
       <h1>🎀 Halo! 🎀</h1>
       <p>Masukkan nama & tanggal ulang tahun ya 💕</p>
@@ -649,13 +656,13 @@
     </div>
   </div>
 
-  <div id="giftPage" class="hidden">
+  <div id="giftPage" class="page-container hidden">
     <h1>Hai Elza 💖</h1>
     <p>Klik kadonya untuk membuka kejutan 🎂</p>
     <img id="giftImage" src="kado.png" alt="Kado Ulang Tahun" class="gift" onclick="explodeGift()">
   </div>
 
-  <div id="surprise" class="hidden">
+  <div id="surprise" class="page-container hidden">
     <h1 class="reveal-text" id="main-greeting">🎉 Selamat Ulang Tahun, Elza Savira Chairani Zakaria 🎂</h1>
     <h2>26 Oktober 2025</h2>
 
@@ -686,7 +693,7 @@
   </div>
 
   
-  <div id="galleryPage" class="hidden">
+  <div id="galleryPage" class="page-container hidden">
     <h2>Galeri Foto Sayangku 💖</h2>
       
     <p class="gallery-text">
@@ -819,10 +826,10 @@ Love you always 💕
       const correctName = "elza savira chairani zakaria";
       const correctBirthday = "26-10-2025";
       
-      const loginPage = document.getElementById("loginPage"); // Target Halaman Login
+      const loginPage = document.getElementById("loginPage"); 
       const giftPage = document.getElementById("giftPage");
       const errorMsg = document.getElementById("error-msg");
-      const loginCard = document.getElementById("login"); // Target Kartu Login
+      const loginCard = document.getElementById("login"); 
 
       if (name === correctName && birthday === correctBirthday) {
         errorMsg.classList.remove("visible");
@@ -845,7 +852,7 @@ Love you always 💕
       } else {
         errorMsg.textContent = "Coba isi nama & tanggal yang benar ya 💕";
         errorMsg.classList.add("visible");
-        loginCard.classList.add("shake"); // Terapkan shake ke kartu
+        loginCard.classList.add("shake"); 
         setTimeout(() => {
           loginCard.classList.remove("shake");
         }, 500);
