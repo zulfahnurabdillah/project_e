@@ -15,8 +15,8 @@
       justify-content: flex-start; 
       align-items: center;
       text-align: center;
-      overflow-x: hidden;
-      overflow-y: auto;
+      /* 🌟 PERUBAHAN: Dibuat agar tidak bisa di-scroll di body */
+      overflow: hidden; 
       padding: 10px 20px 20px 20px;
       box-sizing: border-box;
       position: relative; 
@@ -119,11 +119,9 @@
       display: none;
     }
 
-    /* 🌟 PERBAIKAN: .card dihapus dari sini */
     
-    /* 🌟 PERBAIKAN: Style untuk #login (kartu) dipisah */
+    /* Style untuk #login (kartu) dipisah */
     #login {
-      /* Style Halaman */
       transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
       display: flex;
       flex-direction: column;
@@ -131,7 +129,6 @@
       margin-top: 0px; 
       padding-top: 5px;
 
-      /* Style Kartu */
       background: white;
       border-radius: 20px;
       box-shadow: 0 0 20px rgba(255, 182, 193, 0.6);
@@ -140,7 +137,7 @@
       max-width: 400px; /* Dikembalikan ke 400px */
     }
     
-    /* 🌟 PERBAIKAN: Style Halaman (non-login) */
+    /* Style Halaman (non-login) */
     #giftPage, #surprise {
       transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
       width: 100%;
@@ -244,11 +241,11 @@
       transition: 0.3s;
     }
 
+    /* 🌟 PERUBAHAN: Layout dirapatkan */
     .cake-container {
       position: relative;
       display: inline-block;
-      /* 🌟 PERUBAHAN: Layout dirapatkan */
-      margin-top: 10px; 
+      margin-top: 0; /* Dihapus, diatur oleh .surprise-bottom */
       animation: fadeInUp 1s ease;
       filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2)); 
     }
@@ -273,7 +270,8 @@
     }
 
     .cake {
-      width: 260px;
+      /* 🌟 PERUBAHAN: Ukuran dikecilkan */
+      width: 240px;
       border-radius: 15px;
       z-index: 2;
       position: relative;
@@ -303,16 +301,17 @@
     }
     
     /* 🌟 PERUBAHAN: Font size dirapatkan */
-    h1 { color: #ff4b91; font-size: 26px; margin-bottom: 10px; }
-    h2 { color: #59a7ff; font-size: 20px; margin-top: 0; }
+    h1 { color: #ff4b91; font-size: 24px; margin-bottom: 10px; margin-top: 5px;}
+    h2 { color: #59a7ff; font-size: 18px; margin-top: 0; }
 
     .quote-text {
-      font-size: 18px;
+      /* 🌟 PERUBAHAN: Ukuran dan margin diatur untuk flexbox */
+      font-size: 16px;
       color: #777;
-      /* 🌟 PERUBAHAN: Layout dirapatkan */
-      margin-top: 15px;
+      margin-top: 0; /* Dihapus, diatur oleh .surprise-bottom */
       font-style: italic;
-      max-width: 80%;
+      max-width: 300px; /* Batasi lebar agar pas di samping kue */
+      text-align: left; /* Tampil lebih rapi di samping kue */
       line-height: 1.5;
     }
     
@@ -343,8 +342,8 @@
       gap: 15px;
       /* 🌟 PERUBAHAN: Layout dirapatkan */
       margin-top: 15px; 
-      margin-bottom: 20px; 
-      max-width: 570px; /* Ukuran komponen yang lebih kecil */
+      margin-bottom: 0; /* Dihapus, diatur oleh .surprise-bottom */
+      max-width: 570px; 
     }
     
     .action-btn {
@@ -354,9 +353,10 @@
       font-family: "Comic Sans MS", cursive, sans-serif;
       font-size: 14px;
       font-weight: bold;
-      width: 130px; /* Ukuran komponen yang lebih kecil */
-      height: 110px; /* Ukuran komponen yang lebih kecil */
-      padding: 15px 10px;
+      /* 🌟 PERUBAHAN: Ukuran dikecilkan */
+      width: 130px; 
+      height: 100px; 
+      padding: 10px;
       cursor: pointer;
       display: flex;
       flex-direction: column;
@@ -371,7 +371,7 @@
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     }
     .action-btn .emoji-icon {
-      font-size: 40px; 
+      font-size: 36px; /* Dikecilkan */
       line-height: 1;
       margin-bottom: 5px; 
     }
@@ -384,6 +384,17 @@
     .action-btn:nth-child(2) { background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%); }
     .action-btn:nth-child(3) { background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%); }
     .action-btn:nth-child(4) { background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%); }
+    
+    /* 🌟 BARU: Kontainer untuk Kue + Quote */
+    .surprise-bottom {
+      display: flex;
+      flex-wrap: wrap; /* Akan wrap di layar kecil */
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 15px; /* Jarak dari kartu ke grup bawah */
+      width: 100%;
+    }
     
     
     /* Modal (Popup) Styling (UNTUK 3 KARTU LAINNYA) */
@@ -412,7 +423,7 @@
       padding: 25px;
       border-radius: 20px;
       width: 90%;
-      max-width: 480px; /* Ukuran komponen yang lebih kecil */
+      max-width: 480px; 
       position: relative;
       max-height: 85vh;
       overflow-y: auto;
@@ -459,7 +470,7 @@
       margin-top: 20px;
       justify-items: center;
       width: 90%; 
-      max-width: 700px; /* Ukuran komponen yang lebih kecil */
+      max-width: 700px; 
     }
     
     .photos-grid figure {
@@ -593,7 +604,9 @@
       padding-top: 10px;
       opacity: 0;
       transform: scale(0.95);
-      min-height: 100vh; 
+      /* 🌟 PERUBAHAN: Halaman galeri boleh di-scroll */
+      min-height: 100vh;
+      overflow-y: auto;
     }
     #galleryPage h2 {
       color: #ff4b91;
@@ -665,13 +678,15 @@
       </button>
     </div>
 
-    <div class="cake-container" id="cakeContainer">
-      <img id="cakeImage" src="kue.png" alt="Kue Ulang Tahun" class="cake">
+    <div class="surprise-bottom">
+      <div class="cake-container" id="cakeContainer">
+        <img id="cakeImage" src="kue.png" alt="Kue Ulang Tahun" class="cake">
+      </div>
+      <p class="quote-text">
+        "Semoga hari ini menjadi awal dari tahun yang penuh keajaiban dan cinta!"
+      </p>
     </div>
-
-    <p class="quote-text">
-      "Semoga hari ini menjadi awal dari tahun yang penuh keajaiban dan cinta!"
-    </p>
+    
   </div>
 
   
@@ -1054,6 +1069,7 @@ Love you always 💕
     function showGalleryPage() {
         const surprisePage = document.getElementById('surprise');
         const galleryPage = document.getElementById('galleryPage');
+        document.body.style.overflowY = 'auto'; // Izinkan scroll untuk galeri
 
         surprisePage.style.opacity = '0';
         surprisePage.style.transform = 'scale(0.95)';
@@ -1074,6 +1090,7 @@ Love you always 💕
     function hideGalleryPage() {
         const surprisePage = document.getElementById('surprise');
         const galleryPage = document.getElementById('galleryPage');
+        document.body.style.overflowY = 'hidden'; // Sembunyikan scroll lagi
 
         galleryPage.style.opacity = '0';
         galleryPage.style.transform = 'scale(0.95)';
