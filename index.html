@@ -17,7 +17,6 @@
       text-align: center;
       overflow-x: hidden;
       overflow-y: auto;
-      /* 🌟 PERUBAHAN: Padding atas dikurangi */
       padding: 10px 20px 20px 20px;
       box-sizing: border-box;
       position: relative; 
@@ -120,26 +119,37 @@
       display: none;
     }
 
-    .card {
+    /* 🌟 PERBAIKAN: .card dihapus dari sini */
+    
+    /* 🌟 PERBAIKAN: Style untuk #login (kartu) dipisah */
+    #login {
+      /* Style Halaman */
+      transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 0px; 
+      padding-top: 5px;
+
+      /* Style Kartu */
       background: white;
       border-radius: 20px;
       box-shadow: 0 0 20px rgba(255, 182, 193, 0.6);
       padding: 30px;
       width: 90%;
-      /* 🌟 PERUBAHAN: Dikembalikan ke ukuran semula */
-      max-width: 400px;
+      max-width: 400px; /* Dikembalikan ke 400px */
     }
     
-    #login, #giftPage, #surprise {
+    /* 🌟 PERBAIKAN: Style Halaman (non-login) */
+    #giftPage, #surprise {
       transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
       width: 100%;
-      /* 🌟 PERUBAHAN: Lebar maksimum web dikecilkan lagi */
-      max-width: 800px;
+      max-width: 800px; /* Lebar web dikecilkan */
       display: flex;
-      /* ...sisa kode... */
-    }
-    #login {
-        margin-top: 0;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 0px; 
+      padding-top: 5px; 
     }
 
 
@@ -237,8 +247,8 @@
     .cake-container {
       position: relative;
       display: inline-block;
-      /* 🌟 PERUBAHAN: Jarak atas dikurangi */
-      margin-top: 15px; 
+      /* 🌟 PERUBAHAN: Layout dirapatkan */
+      margin-top: 10px; 
       animation: fadeInUp 1s ease;
       filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2)); 
     }
@@ -292,14 +302,15 @@
       100% { transform: scale(0); opacity: 0; }
     }
     
-    h1 { color: #ff4b91; font-size: 28px; margin-bottom: 10px; }
-    h2 { color: #59a7ff; font-size: 22px; margin-top: 0; }
+    /* 🌟 PERUBAHAN: Font size dirapatkan */
+    h1 { color: #ff4b91; font-size: 26px; margin-bottom: 10px; }
+    h2 { color: #59a7ff; font-size: 20px; margin-top: 0; }
 
     .quote-text {
       font-size: 18px;
       color: #777;
-      /* 🌟 PERUBAHAN: Jarak atas dikurangi */
-      margin-top: 20px;
+      /* 🌟 PERUBAHAN: Layout dirapatkan */
+      margin-top: 15px;
       font-style: italic;
       max-width: 80%;
       line-height: 1.5;
@@ -330,11 +341,10 @@
       flex-wrap: wrap; 
       justify-content: center;
       gap: 15px;
-      /* 🌟 PERUBAHAN: Jarak vertikal dikurangi */
-      margin-top: 20px; 
-      margin-bottom: 25px; 
-      /* 🌟 PERUBAHAN: Lebar disesuaikan dengan tombol baru */
-      max-width: 570px;
+      /* 🌟 PERUBAHAN: Layout dirapatkan */
+      margin-top: 15px; 
+      margin-bottom: 20px; 
+      max-width: 570px; /* Ukuran komponen yang lebih kecil */
     }
     
     .action-btn {
@@ -344,9 +354,8 @@
       font-family: "Comic Sans MS", cursive, sans-serif;
       font-size: 14px;
       font-weight: bold;
-      /* 🌟 PERUBAHAN: Komponen tombol diperkecil */
-      width: 130px;
-      height: 110px;
+      width: 130px; /* Ukuran komponen yang lebih kecil */
+      height: 110px; /* Ukuran komponen yang lebih kecil */
       padding: 15px 10px;
       cursor: pointer;
       display: flex;
@@ -403,8 +412,7 @@
       padding: 25px;
       border-radius: 20px;
       width: 90%;
-      /* 🌟 PERUBAHAN: Komponen diperkecil */
-      max-width: 480px;
+      max-width: 480px; /* Ukuran komponen yang lebih kecil */
       position: relative;
       max-height: 85vh;
       overflow-y: auto;
@@ -451,8 +459,7 @@
       margin-top: 20px;
       justify-items: center;
       width: 90%; 
-      /* 🌟 PERUBAHAN: Komponen diperkecil */
-      max-width: 700px;
+      max-width: 700px; /* Ukuran komponen yang lebih kecil */
     }
     
     .photos-grid figure {
@@ -575,13 +582,18 @@
     }
     
     /* Styling untuk Halaman Galeri Penuh */
-   #galleryPage {
+    #galleryPage {
       transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
       width: 100%;
-      /* 🌟 PERUBAHAN: Lebar maksimum web dikecilkan lagi */
-      max-width: 800px;
+      max-width: 800px; /* Lebar web dikecilkan */
       display: flex;
-      /* ...sisa kode... */
+      flex-direction: column;
+      align-items: center;
+      margin-top: 0px; 
+      padding-top: 10px;
+      opacity: 0;
+      transform: scale(0.95);
+      min-height: 100vh; 
     }
     #galleryPage h2 {
       color: #ff4b91;
@@ -619,7 +631,7 @@
     <li></li> <li></li> <li></li>
   </ul>
 
-  <div id="login" class="card">
+  <div id="login">
     <h1>🎀 Halo! 🎀</h1>
     <p>Masukkan nama & tanggal ulang tahun ya 💕</p>
     <input type="text" id="name" placeholder="Nama lengkap">
@@ -1083,4 +1095,3 @@ Love you always 💕
 
 </body>
 </html>
-
