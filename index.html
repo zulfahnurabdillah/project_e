@@ -9,24 +9,24 @@
       margin: 0;
       font-family: "Comic Sans MS", "Chalkboard SE", "Marker Felt", cursive, sans-serif;
       background: linear-gradient(135deg, #ffb6c1, #b3e5fc);
-      height: 100vh;
-      overflow: hidden; 
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      /* 🌟 PERBAIKAN: Default justify-content diubah ke center */
-      justify-content: center; 
+      justify-content: flex-start; 
       align-items: center;
       text-align: center;
-      padding: 10px 20px;
+      overflow-x: hidden;
+      overflow-y: auto;
+      /* 🌟 PERUBAHAN: Padding atas dikurangi */
+      padding: 10px 20px 20px 20px;
       box-sizing: border-box;
       position: relative; 
       cursor: default; 
     }
 
-    /* 🌟 PERBAIKAN: Kelas ini tidak lagi dibutuhkan untuk centering awal */
-    /* body.login-active {
+    body.login-active {
         justify-content: center; 
-    } */
+    }
 
     /* Canvas untuk efek background interaktif */
     #interactiveBgCanvas {
@@ -79,8 +79,7 @@
       animation: floatUp 25s infinite linear;
       opacity: 0;
     }
-    /* ... (kode balon lainnya tetap sama) ... */
-     .background-balloons li:nth-child(1) { left: 10%; width: 50px; height: 50px; animation-duration: 20s; animation-delay: 0s; background: rgba(255, 200, 220, 0.3); }
+    .background-balloons li:nth-child(1) { left: 10%; width: 50px; height: 50px; animation-duration: 20s; animation-delay: 0s; background: rgba(255, 200, 220, 0.3); }
     .background-balloons li:nth-child(2) { left: 20%; width: 30px; height: 30px; animation-duration: 17s; animation-delay: 2s; background: rgba(180, 220, 255, 0.3); }
     .background-balloons li:nth-child(3) { left: 35%; width: 60px; height: 60px; animation-duration: 22s; animation-delay: 0s; background: rgba(255, 240, 180, 0.3); }
     .background-balloons li:nth-child(4) { left: 50%; width: 40px; height: 40px; animation-duration: 18s; animation-delay: 5s; background: rgba(255, 200, 220, 0.3); }
@@ -121,45 +120,34 @@
       display: none;
     }
 
-    
-    /* Style Halaman */
-    .page-container {
-      transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-      width: 100%;
-      max-width: 800px; 
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 0px; 
-      padding-top: 5px; 
-    }
-    
-    /* Kontainer halaman kado & kejutan dibuat setinggi layar */
-    #giftPage, #surprise {
-        height: 90vh; 
-        justify-content: center; 
-    }
-    
-    /* 🌟 PERBAIKAN: Halaman login terlihat awalnya */
-    #loginPage {
-        opacity: 1;
-        transform: scale(1);
-        /* Hapus transisi agar tidak fade saat load */
-        transition: none; 
-    }
-
-    /* Style #login-card (kartu) */
-    #login-card {
+    .card {
       background: white;
       border-radius: 20px;
       box-shadow: 0 0 20px rgba(255, 182, 193, 0.6);
       padding: 30px;
       width: 90%;
-      max-width: 400px; 
+      /* 🌟 PERUBAHAN: Komponen diperkecil */
+      max-width: 380px;
+    }
+    
+    #login, #giftPage, #surprise {
+      transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+      width: 100%;
+      /* 🌟 PERUBAHAN: Lebar maksimum web dibatasi */
+      max-width: 900px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 0px; 
+      /* 🌟 PERUBAHAN: Padding atas dikurangi */
+      padding-top: 5px; 
+    }
+    #login {
+        margin-top: 0;
     }
 
-    /* Aturan untuk menyembunyikan halaman lain awalnya */
-    #giftPage, #surprise, #galleryPage {
+
+    #giftPage, #surprise {
       opacity: 0;
       transform: scale(0.95);
     }
@@ -215,7 +203,7 @@
       margin-top: 10px;
     }
 
-    #login-card button { 
+    #login button {
         animation: buttonPulse 2s infinite ease-in-out;
     }
     @keyframes buttonPulse {
@@ -250,11 +238,11 @@
       transition: 0.3s;
     }
 
-    /* Layout dirapatkan */
     .cake-container {
       position: relative;
       display: inline-block;
-      margin-top: 0; 
+      /* 🌟 PERUBAHAN: Jarak atas dikurangi */
+      margin-top: 15px; 
       animation: fadeInUp 1s ease;
       filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2)); 
     }
@@ -279,7 +267,7 @@
     }
 
     .cake {
-      width: 220px;
+      width: 260px;
       border-radius: 15px;
       z-index: 2;
       position: relative;
@@ -308,18 +296,17 @@
       100% { transform: scale(0); opacity: 0; }
     }
     
-    /* Font size dirapatkan */
-    h1 { color: #ff4b91; font-size: 24px; margin-bottom: 10px; margin-top: 5px;}
-    h2 { color: #59a7ff; font-size: 18px; margin-top: 0; margin-bottom: 5px; } 
+    h1 { color: #ff4b91; font-size: 28px; margin-bottom: 10px; }
+    h2 { color: #59a7ff; font-size: 22px; margin-top: 0; }
 
     .quote-text {
-      font-size: 15px;
+      font-size: 18px;
       color: #777;
-      margin-top: 0; 
+      /* 🌟 PERUBAHAN: Jarak atas dikurangi */
+      margin-top: 20px;
       font-style: italic;
-      max-width: 280px; 
-      text-align: left; 
-      line-height: 1.4;
+      max-width: 80%;
+      line-height: 1.5;
     }
     
     /* Animasi Reveal Teks H1 */
@@ -346,10 +333,12 @@
       display: flex;
       flex-wrap: wrap; 
       justify-content: center;
-      gap: 10px; 
-      margin-top: 10px; 
-      margin-bottom: 0;
-      max-width: 540px; 
+      gap: 15px;
+      /* 🌟 PERUBAHAN: Jarak vertikal dikurangi */
+      margin-top: 20px; 
+      margin-bottom: 25px; 
+      /* 🌟 PERUBAHAN: Lebar disesuaikan dengan tombol baru */
+      max-width: 570px;
     }
     
     .action-btn {
@@ -357,11 +346,12 @@
       border-radius: 20px;
       color: white;
       font-family: "Comic Sans MS", cursive, sans-serif;
-      font-size: 13px; 
+      font-size: 14px;
       font-weight: bold;
-      width: 120px; 
-      height: 90px; 
-      padding: 10px;
+      /* 🌟 PERUBAHAN: Komponen tombol diperkecil */
+      width: 130px;
+      height: 110px;
+      padding: 15px 10px;
       cursor: pointer;
       display: flex;
       flex-direction: column;
@@ -376,12 +366,12 @@
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     }
     .action-btn .emoji-icon {
-      font-size: 32px; 
+      font-size: 40px; 
       line-height: 1;
       margin-bottom: 5px; 
     }
     .action-btn .button-text {
-      font-size: 13px; 
+      font-size: 14px;
       line-height: 1.2;
     }
     
@@ -389,17 +379,6 @@
     .action-btn:nth-child(2) { background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%); }
     .action-btn:nth-child(3) { background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%); }
     .action-btn:nth-child(4) { background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%); }
-    
-    /* Kontainer untuk Kue + Quote */
-    .surprise-bottom {
-      display: flex;
-      flex-wrap: wrap; 
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
-      margin-top: 15px; 
-      width: 100%;
-    }
     
     
     /* Modal (Popup) Styling (UNTUK 3 KARTU LAINNYA) */
@@ -428,7 +407,8 @@
       padding: 25px;
       border-radius: 20px;
       width: 90%;
-      max-width: 480px; 
+      /* 🌟 PERUBAHAN: Komponen diperkecil */
+      max-width: 480px;
       position: relative;
       max-height: 85vh;
       overflow-y: auto;
@@ -475,7 +455,8 @@
       margin-top: 20px;
       justify-items: center;
       width: 90%; 
-      max-width: 700px; 
+      /* 🌟 PERUBAHAN: Komponen diperkecil */
+      max-width: 700px;
     }
     
     .photos-grid figure {
@@ -601,7 +582,8 @@
     #galleryPage {
       transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
       width: 100%;
-      max-width: 800px; 
+      /* 🌟 PERUBAHAN: Lebar maksimum web dibatasi */
+      max-width: 900px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -609,9 +591,7 @@
       padding-top: 10px;
       opacity: 0;
       transform: scale(0.95);
-      /* Halaman galeri boleh di-scroll */
-      height: 90vh; /* Sesuaikan tinggi */
-      overflow-y: auto; /* Aktifkan scroll hanya untuk galeri */
+      min-height: 100vh; 
     }
     #galleryPage h2 {
       color: #ff4b91;
@@ -649,24 +629,22 @@
     <li></li> <li></li> <li></li>
   </ul>
 
-  <div id="loginPage" class="page-container"> 
-    <div id="login"> 
-      <h1>🎀 Halo! 🎀</h1>
-      <p>Masukkan nama & tanggal ulang tahun ya 💕</p>
-      <input type="text" id="name" placeholder="Nama lengkap">
-      <input type="text" id="birthday" placeholder="Tanggal (dd-mm-yyyy)">
-      <p id="error-msg" class="error-msg"></p>
-      <button onclick="checkBirthday()">Masuk 🎁</button>
-    </div>
+  <div id="login" class="card">
+    <h1>🎀 Halo! 🎀</h1>
+    <p>Masukkan nama & tanggal ulang tahun ya 💕</p>
+    <input type="text" id="name" placeholder="Nama lengkap">
+    <input type="text" id="birthday" placeholder="Tanggal (dd-mm-yyyy)">
+    <p id="error-msg" class="error-msg"></p>
+    <button onclick="checkBirthday()">Masuk 🎁</button>
   </div>
 
-  <div id="giftPage" class="page-container hidden">
+  <div id="giftPage" class="hidden">
     <h1>Hai Elza 💖</h1>
     <p>Klik kadonya untuk membuka kejutan 🎂</p>
     <img id="giftImage" src="kado.png" alt="Kado Ulang Tahun" class="gift" onclick="explodeGift()">
   </div>
 
-  <div id="surprise" class="page-container hidden">
+  <div id="surprise" class="hidden">
     <h1 class="reveal-text" id="main-greeting">🎉 Selamat Ulang Tahun, Elza Savira Chairani Zakaria 🎂</h1>
     <h2>26 Oktober 2025</h2>
 
@@ -685,19 +663,17 @@
       </button>
     </div>
 
-    <div class="surprise-bottom">
-      <div class="cake-container" id="cakeContainer">
-        <img id="cakeImage" src="kue.png" alt="Kue Ulang Tahun" class="cake">
-      </div>
-      <p class="quote-text">
-        "Semoga hari ini menjadi awal dari tahun yang penuh keajaiban dan cinta!"
-      </p>
+    <div class="cake-container" id="cakeContainer">
+      <img id="cakeImage" src="kue.png" alt="Kue Ulang Tahun" class="cake">
     </div>
-    
+
+    <p class="quote-text">
+      "Semoga hari ini menjadi awal dari tahun yang penuh keajaiban dan cinta!"
+    </p>
   </div>
 
   
-  <div id="galleryPage" class="page-container hidden">
+  <div id="galleryPage" class="hidden">
     <h2>Galeri Foto Sayangku 💖</h2>
       
     <p class="gallery-text">
@@ -830,21 +806,16 @@ Love you always 💕
       const correctName = "elza savira chairani zakaria";
       const correctBirthday = "26-10-2025";
       
-      const loginPage = document.getElementById("loginPage"); 
+      const loginPage = document.getElementById("login");
       const giftPage = document.getElementById("giftPage");
       const errorMsg = document.getElementById("error-msg");
-      const loginCard = document.getElementById("login"); 
 
       if (name === correctName && birthday === correctBirthday) {
         errorMsg.classList.remove("visible");
         
         loginPage.style.opacity = '0';
         loginPage.style.transform = 'scale(0.95)';
-        // 🌟 PERBAIKAN: Hapus kelas centering dari body
         document.body.classList.remove('login-active'); 
-        // 🌟 PERBAIKAN: Set justify-content body ke flex-start untuk halaman berikutnya
-        document.body.style.justifyContent = 'flex-start';
-
 
         setTimeout(() => {
           loginPage.classList.add("hidden");
@@ -860,9 +831,9 @@ Love you always 💕
       } else {
         errorMsg.textContent = "Coba isi nama & tanggal yang benar ya 💕";
         errorMsg.classList.add("visible");
-        loginCard.classList.add("shake"); 
+        loginPage.classList.add("shake");
         setTimeout(() => {
-          loginCard.classList.remove("shake");
+          loginPage.classList.remove("shake");
         }, 500);
       }
     }
@@ -1081,7 +1052,6 @@ Love you always 💕
     function showGalleryPage() {
         const surprisePage = document.getElementById('surprise');
         const galleryPage = document.getElementById('galleryPage');
-        document.body.style.overflowY = 'auto'; // Izinkan scroll untuk galeri
 
         surprisePage.style.opacity = '0';
         surprisePage.style.transform = 'scale(0.95)';
@@ -1102,7 +1072,6 @@ Love you always 💕
     function hideGalleryPage() {
         const surprisePage = document.getElementById('surprise');
         const galleryPage = document.getElementById('galleryPage');
-        document.body.style.overflowY = 'hidden'; // Sembunyikan scroll lagi
 
         galleryPage.style.opacity = '0';
         galleryPage.style.transform = 'scale(0.95)';
