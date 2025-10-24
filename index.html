@@ -13,7 +13,8 @@
       overflow: hidden; 
       display: flex;
       flex-direction: column;
-      justify-content: flex-start; 
+      /* 🌟 PERBAIKAN: Default justify-content diubah ke center */
+      justify-content: center; 
       align-items: center;
       text-align: center;
       padding: 10px 20px;
@@ -22,9 +23,10 @@
       cursor: default; 
     }
 
-    body.login-active {
+    /* 🌟 PERBAIKAN: Kelas ini tidak lagi dibutuhkan untuk centering awal */
+    /* body.login-active {
         justify-content: center; 
-    }
+    } */
 
     /* Canvas untuk efek background interaktif */
     #interactiveBgCanvas {
@@ -124,7 +126,7 @@
     .page-container {
       transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
       width: 100%;
-      max-width: 800px; /* Lebar web dikecilkan */
+      max-width: 800px; 
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -132,16 +134,18 @@
       padding-top: 5px; 
     }
     
-    /* Kontainer halaman dibuat setinggi layar agar muat */
+    /* Kontainer halaman kado & kejutan dibuat setinggi layar */
     #giftPage, #surprise {
         height: 90vh; 
         justify-content: center; 
     }
     
-    /* 🌟 PERBAIKAN: Pastikan #loginPage terlihat awalnya */
+    /* 🌟 PERBAIKAN: Halaman login terlihat awalnya */
     #loginPage {
         opacity: 1;
         transform: scale(1);
+        /* Hapus transisi agar tidak fade saat load */
+        transition: none; 
     }
 
     /* Style #login-card (kartu) */
@@ -154,7 +158,7 @@
       max-width: 400px; 
     }
 
-    /* Aturan untuk menyembunyikan halaman lain */
+    /* Aturan untuk menyembunyikan halaman lain awalnya */
     #giftPage, #surprise, #galleryPage {
       opacity: 0;
       transform: scale(0.95);
@@ -836,7 +840,11 @@ Love you always 💕
         
         loginPage.style.opacity = '0';
         loginPage.style.transform = 'scale(0.95)';
+        // 🌟 PERBAIKAN: Hapus kelas centering dari body
         document.body.classList.remove('login-active'); 
+        // 🌟 PERBAIKAN: Set justify-content body ke flex-start untuk halaman berikutnya
+        document.body.style.justifyContent = 'flex-start';
+
 
         setTimeout(() => {
           loginPage.classList.add("hidden");
