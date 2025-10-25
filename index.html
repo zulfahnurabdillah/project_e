@@ -347,18 +347,20 @@
         100% { background-position: 0% 50%; }
     }
 
-    /* 🌟 PERUBAHAN: Styling H1 (Anti-Buram) */
+    /* 🌟 PERUBAHAN: Styling H1 (Solid Color, No Blur) */
     .greeting-card h1 {
       font-size: 32px; 
       margin-bottom: 8px;
-      background: linear-gradient(90deg, #ff4b91, #ff74a5, #ff4b91, #a1c4fd); 
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      background-size: 200% auto;
-      animation: shineText 3s linear infinite;
-      /* 🌟 PERUBAHAN: Shadow lebih tajam, tidak buram */
-      text-shadow: 0 2px 4px rgba(255, 107, 129, 0.3); 
+      /* 🌟 PERUBAHAN: Warna solid pink */
+      color: #ff4b91; 
+      /* Hapus semua efek gradien, shineText, dan text-shadow */
+      background: none;
+      -webkit-background-clip: unset;
+      -webkit-text-fill-color: unset;
+      background-clip: unset;
+      background-size: unset;
+      animation: none;
+      text-shadow: none; 
       line-height: 1.2;
     }
     
@@ -370,7 +372,7 @@
       text-shadow: 0 1px 3px rgba(0,0,0,0.1); 
     }
 
-    /* Keyframe untuk teks berkilau */
+    /* Keyframe untuk teks berkilau (tetap ada jika nanti mau pakai lagi) */
     @keyframes shineText {
       from { background-position: 200% center; }
       to { background-position: 0% center; }
@@ -530,25 +532,23 @@
       max-width: 900px; 
     }
     
-    /* 🌟 PERUBAHAN: Desain kartu foto (figure) baru */
+    /* 🌟 PERUBAHAN: Desain kartu foto (figure) dipercantik dengan warna-warni */
     .photos-grid figure {
         margin: 0;
-        /* 🌟 PERUBAHAN: Padding untuk frame di sekeliling foto */
         padding: 10px; 
         box-sizing: border-box;
-        /* 🌟 PERUBAHAN: Background gradien cantik */
-        background: linear-gradient(145deg, #fff0f2, #eef7ff);
+        /* 🌟 PERUBAHAN: Background gradien multi-warna */
+        background: linear-gradient(135deg, #ffebee, #e3f2fd, #fce4ec, #e8eaf6); /* Pink, Biru, Lavender */
+        border: 1px solid #ffccdd; /* Border pink muda */
         border-radius: 12px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-        /* 🌟 PERUBAHAN: Transisi hover sederhana (shadow) */
-        transition: box-shadow 0.3s ease; 
+        box-shadow: 0 4px 12px rgba(255, 182, 193, 0.4); /* Shadow lebih kuat */
+        transition: box-shadow 0.3s ease, transform 0.2s ease; 
         overflow: hidden; 
         width: 100%;
     }
     .photos-grid figure:hover {
-        /* 🌟 PERUBAHAN: Hapus 3D tilt, ganti shadow */
-        transform: none; 
-        box-shadow: 0 6px 15px rgba(255, 182, 193, 0.5); 
+        transform: translateY(-3px); /* Sedikit naik saat hover */
+        box-shadow: 0 8px 20px rgba(255, 158, 205, 0.6), 0 0 15px rgba(180, 220, 255, 0.4); /* Glow saat hover */
     }
     
     .photos-grid img {
@@ -557,7 +557,6 @@
       aspect-ratio: 1/1; 
       object-fit: cover; 
       display: block; 
-      /* 🌟 PERUBAHAN: Radius untuk foto di dalam card */
       border-radius: 8px; 
     }
     
@@ -569,15 +568,15 @@
       box-shadow: none;
     }
     
-    /* 🌟 PERUBAHAN: Desain figcaption (selalu terlihat) */
+    /* Desain figcaption (selalu terlihat) */
     .photos-grid figcaption {
-        position: static; /* Kembali ke layout normal */
-        transform: none; /* Hapus animasi */
-        opacity: 1; /* Selalu terlihat */
-        background: transparent; /* Background transparan */
-        padding: 10px 5px 0 5px; /* Jarak dari foto */
+        position: static; 
+        transform: none; 
+        opacity: 1; 
+        background: transparent; 
+        padding: 10px 5px 0 5px; 
         font-size: 13px;
-        color: #555; /* Warna teks lebih gelap */
+        color: #555; 
         font-weight: bold;
         text-align: center;
         line-height: 1.3;
@@ -700,12 +699,11 @@
       min-height: 100vh; 
     }
     
-    /* 🌟 PERUBAHAN: Judul Galeri (Sticky) */
+    /* Judul Galeri (Sticky) */
     #galleryPage h2 {
       color: #ff4b91;
       border-bottom: 3px solid #fde7f0;
       margin-top: 0px !important; 
-      /* 🌟 PERUBAHAN: Padding atas dikurangi */
       padding-top: 15px; 
       padding-bottom: 10px;
       margin-bottom: 15px; 
@@ -713,10 +711,8 @@
       width: 100%; 
       box-sizing: border-box;
       
-      /* 🌟 BARU: Efek Sticky agar menempel ke atas */
       position: sticky;
       top: 0;
-      /* 🌟 BARU: Background agar teks terbaca saat scroll */
       background: linear-gradient(180deg, rgba(253, 244, 246, 1) 85%, rgba(253, 244, 246, 0) 100%);
       z-index: 10;
     }
@@ -1034,10 +1030,8 @@ Love you always 💕
             surprisePage.style.opacity = '1';
             surprisePage.style.transform = 'scale(1)';
             
-            // Panggil animasi untuk setiap item fade-in
             document.querySelectorAll('.fade-in-item').forEach((item, index) => {
                 item.style.animationDelay = `${index * 0.2}s`;
-                // Kita perlu re-trigger animasi jika halaman disembunyikan
                 item.style.animationName = 'none'; 
                 requestAnimationFrame(() => {
                     item.style.animationName = 'fadeInUp';
@@ -1072,21 +1066,17 @@ Love you always 💕
         if (greeting.classList.contains('animated')) return;
         greeting.classList.add('animated'); 
 
-        // Ambil innerHTML untuk menjaga tag <span style="display: block;">
         const textContent = greeting.innerHTML; 
         greeting.innerHTML = ''; 
         greeting.style.opacity = 1; 
 
-        // Regex sederhana untuk memecah teks sambil menjaga tag
         const parts = textContent.split(/(<[^>]+>)/); 
         let delayIndex = 0;
 
         parts.forEach((part) => {
             if (part.startsWith('<')) {
-                // Jika itu tag HTML, tambahkan langsung
                 greeting.innerHTML += part;
             } else {
-                // Jika itu teks, animasikan per karakter
                 part.split('').forEach((char) => {
                     const span = document.createElement('span');
                     span.innerText = char === ' ' ? '\u00A0' : char; 
@@ -1213,12 +1203,11 @@ Love you always 💕
     animateParticles();
 
     
-    // 🌟 PERUBAHAN: Fungsi pindah ke Halaman Galeri
+    // Fungsi pindah ke Halaman Galeri
     function showGalleryPage() {
         const surprisePage = document.getElementById('surprise');
         const galleryPage = document.getElementById('galleryPage');
         
-        // Hapus padding dari body agar galeri bisa menempel penuh
         document.body.style.padding = '0px'; 
         
         surprisePage.style.opacity = '0';
@@ -1236,12 +1225,11 @@ Love you always 💕
         }, 500); 
     }
 
-    // 🌟 PERUBAHAN: Fungsi kembali dari Halaman Galeri
+    // Fungsi kembali dari Halaman Galeri
     function hideGalleryPage() {
         const surprisePage = document.getElementById('surprise');
         const galleryPage = document.getElementById('galleryPage');
 
-        // Kembalikan padding ke body
         document.body.style.padding = '20px'; 
 
         galleryPage.style.opacity = '0';
