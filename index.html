@@ -8,7 +8,7 @@
     body {
       margin: 0;
       font-family: "Comic Sans MS", "Chalkboard SE", "Marker Felt", cursive, sans-serif;
-      /* 🌟 PERUBAHAN: Background gradient animasi pink & biru */
+      /* Background gradient animasi pink & biru */
       background: linear-gradient(135deg, #ffb6c1, #b3e5fc, #ff9ecd, #9cd4ff);
       background-size: 400% 400%;
       animation: moveGradient 20s ease infinite;
@@ -20,14 +20,15 @@
       text-align: center;
       overflow-x: hidden;
       overflow-y: auto;
-      /* 🌟 PERUBAHAN: Padding disamakan jadi 20px */
+      /* Padding standar */
       padding: 20px;
       box-sizing: border-box;
       position: relative; 
       cursor: default; 
+      transition: padding-top 0.3s ease; /* 🌟 BARU: Transisi untuk padding */
     }
 
-    /* 🌟 PERUBAHAN: Keyframe untuk background bergerak */
+    /* Keyframe untuk background bergerak */
     @keyframes moveGradient {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
@@ -150,10 +151,8 @@
     }
     #login {
         margin-top: 0;
-        /* 🌟 PERUBAHAN: Animasi 'bernapas' untuk kartu login */
         animation: cardBreathe 3s infinite ease-in-out;
     }
-    /* 🌟 PERUBAHAN: Keyframe untuk card login 'bernapas' */
     @keyframes cardBreathe {
         0%, 100% { box-shadow: 0 0 20px rgba(255, 182, 193, 0.6); }
         50% { box-shadow: 0 0 30px rgba(255, 182, 193, 0.8); }
@@ -255,7 +254,7 @@
       position: relative;
       display: inline-block;
       margin-top: 20px; 
-      animation: fadeInUp 1s ease;
+      /* Animasi dipindah ke class .fade-in-item */
       filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2)); 
     }
 
@@ -290,6 +289,12 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    /* 🌟 BARU: Animasi staggered fade-in untuk elemen di #surprise */
+    .fade-in-item {
+        opacity: 0;
+        animation: fadeInUp 0.8s ease forwards;
+    }
+
     .sparkle {
       position: absolute;
       width: 10px;
@@ -310,6 +315,44 @@
     
     h1 { color: #ff4b91; font-size: 28px; margin-bottom: 10px; }
     h2 { color: #59a7ff; font-size: 22px; margin-top: 0; }
+    
+    /* 🌟 BARU: Kartu Teks untuk Ucapan Selamat */
+    .greeting-card {
+      background: linear-gradient(160deg, #ffffff 0%, #fffafc 100%);
+      border-radius: 20px;
+      padding: 20px 30px;
+      box-shadow: 0 5px 20px rgba(255, 182, 193, 0.4);
+      width: 90%;
+      max-width: 650px;
+      margin-bottom: 25px; /* Jarak ke action cards */
+    }
+    
+    /* 🌟 PERUBAHAN: Styling H1 di dalam kartu */
+    .greeting-card h1 {
+      font-size: 28px;
+      margin-bottom: 5px;
+      /* Warna gradien untuk teks */
+      background: linear-gradient(90deg, #ff4b91, #ff74a5, #ff4b91);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      background-size: 200% auto;
+      animation: shineText 3s linear infinite;
+      text-shadow: 0 2px 5px rgba(255, 182, 193, 0.3);
+    }
+    
+    /* 🌟 PERUBAHAN: Styling H2 di dalam kartu */
+    .greeting-card h2 {
+      font-size: 20px;
+      margin-top: 0;
+      color: #59a7ff;
+    }
+
+    /* 🌟 BARU: Keyframe untuk teks berkilau */
+    @keyframes shineText {
+      from { background-position: 200% center; }
+      to { background-position: 0% center; }
+    }
 
     .quote-text {
       font-size: 18px;
@@ -345,7 +388,7 @@
       flex-wrap: wrap; 
       justify-content: center;
       gap: 15px;
-      margin-top: 25px; 
+      margin-top: 0; /* Margin diatur oleh greeting-card */
       margin-bottom: 30px; 
       max-width: 620px; 
     }
@@ -461,24 +504,22 @@
       gap: 15px; 
       margin-top: 20px;
       justify-items: center;
-      width: 90%; 
+      width: 100%; /* Lebar penuh (diatur oleh padding #galleryPage) */
       max-width: 900px; 
     }
     
-    /* 🌟 PERUBAHAN: Desain kartu foto (figure) dipercantik */
     .photos-grid figure {
         margin: 0;
         padding: 0;
-        /* Jadikan 'figure' sebagai card */
         background: #ffffff;
         border-radius: 12px;
         box-shadow: 0 4px 10px rgba(0,0,0,0.08);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
-        overflow: hidden; /* Agar img tidak keluar radius */
+        overflow: hidden; 
         width: 100%;
     }
     .photos-grid figure:hover {
-        transform: scale(1.04) translateY(-5px); /* Efek hover lebih bagus */
+        transform: scale(1.04) translateY(-5px); 
         box-shadow: 0 8px 20px rgba(255, 182, 193, 0.4);
     }
     
@@ -487,13 +528,11 @@
       height: auto;
       aspect-ratio: 1/1; 
       object-fit: cover; 
-      /* Hapus style dari img, pindah ke figure */
       box-shadow: none;
       border: none;
-      display: block; /* Hapus space bawah */
+      display: block; 
     }
     
-    /* Hapus border-color aneh */
     .photos-grid figure:nth-child(3n+1) img { border-color: transparent; }
     .photos-grid figure:nth-child(3n+2) img { border-color: transparent; }
     .photos-grid figure:nth-child(3n) img { border-color: transparent; }
@@ -502,16 +541,15 @@
       box-shadow: none;
     }
     
-    /* 🌟 PERUBAHAN: Desain figcaption dipercantik */
     .photos-grid figcaption {
         font-size: 13px;
         color: #444;
         font-weight: bold;
-        margin: 0; /* Hapus margin atas */
-        padding: 10px 12px; /* Beri padding */
+        margin: 0; 
+        padding: 10px 12px; 
         text-align: center;
         line-height: 1.3;
-        background: #fffafc; /* Warna background caption */
+        background: #fffafc; 
     }
 
     /* Style untuk "Surat Ucapan" */
@@ -594,8 +632,7 @@
       background: radial-gradient(circle at 10px 10px, transparent 4px, #fff8f9 5px) repeat-y;
       background-size: 10px 20px;
     }
-
-    /* 🌟 PERUBAHAN: Card Teks Penutup di Galeri */
+    
     .closing-card {
       background: #fffafb;
       border: 1px solid #fde7f0;
@@ -603,7 +640,8 @@
       padding: 15px 25px;
       margin-top: 30px;
       max-width: 600px;
-      width: 90%;
+      width: 100%; /* Lebar penuh (diatur padding #galleryPage) */
+      box-sizing: border-box; /* 🌟 BARU */
       box-shadow: 0 4px 10px rgba(255, 182, 193, 0.2);
       text-align: center;
       font-size: 17px;
@@ -614,7 +652,7 @@
       margin: 0;
     }
     
-    /* Styling untuk Halaman Galeri Penuh */
+    /* 🌟 PERUBAHAN: Styling Halaman Galeri Penuh */
     #galleryPage {
       transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
       width: 100%;
@@ -622,8 +660,11 @@
       flex-direction: column;
       align-items: center;
       margin-top: 0px; 
-      /* 🌟 PERUBAHAN: Dihapus agar lebih ke atas */
-      padding-top: 0; 
+      padding-top: 0px !important; /* Paksa padding 0 */
+      /* 🌟 BARU: Padding horizontal untuk mengganti body padding */
+      padding-left: 20px;
+      padding-right: 20px;
+      box-sizing: border-box; 
       opacity: 0;
       transform: scale(0.95);
       min-height: 100vh; 
@@ -632,9 +673,10 @@
       color: #ff4b91;
       border-bottom: 3px solid #fde7f0;
       padding-bottom: 10px;
-      /* 🌟 PERUBAHAN: Dihapus agar lebih ke atas */
-      margin-top: 0; 
+      margin-top: 0px !important; /* Paksa margin 0 */
+      padding-top: 20px; /* Jarak dari atas layar */
       font-size: 28px;
+      width: 100%; /* Agar border-bottom penuh */
     }
     #galleryCloseButton {
       background: linear-gradient(90deg, #ff9ecd, #9cd4ff);
@@ -681,10 +723,13 @@
   </div>
 
   <div id="surprise" class="hidden">
-    <h1 class="reveal-text" id="main-greeting">🎉 Selamat Ulang Tahun, Elza Savira Chairani Zakaria 🎂</h1>
-    <h2>26 Oktober 2025</h2>
+    
+    <div class="greeting-card fade-in-item" style="animation-delay: 0.1s;">
+      <h1 class="reveal-text" id="main-greeting">🎉 Selamat Ulang Tahun, Elza Savira Chairani Zakaria 🎂</h1>
+      <h2>26 Oktober 2025</h2>
+    </div>
 
-    <div class="action-cards">
+    <div class="action-cards fade-in-item" style="animation-delay: 0.3s;">
       <button class="action-btn" onclick="showGalleryPage()">
         <span class="emoji-icon">🖼️</span><span class="button-text">Foto Sayangku</span>
       </button>
@@ -699,11 +744,11 @@
       </button>
     </div>
 
-    <div class="cake-container" id="cakeContainer">
+    <div class="cake-container fade-in-item" id="cakeContainer" style="animation-delay: 0.5s;">
       <img id="cakeImage" src="kue.png" alt="Kue Ulang Tahun" class="cake">
     </div>
 
-    <p class="quote-text">
+    <p class="quote-text fade-in-item" style="animation-delay: 0.7s;">
       "Semoga hari ini menjadi awal dari tahun yang penuh keajaiban dan cinta!"
     </p>
   </div>
@@ -876,6 +921,7 @@ Love you always 💕
       }
     }
 
+    // 🌟 PERUBAHAN: Fungsi explodeGift() dibuat lebih meriah
     function explodeGift() {
       const gift = document.getElementById("giftImage");
       gift.style.animation = "none"; // Hentikan animasi bounce
@@ -884,18 +930,22 @@ Love you always 💕
       const originX = (rect.left + rect.width / 2) / window.innerWidth;
       const originY = (rect.top + rect.height / 2) / window.innerHeight;
 
+      // 🌟 Ledakan awal lebih besar
       confetti({
-        particleCount: 150,
-        spread: 100,
+        particleCount: 250, // Lebih banyak
+        spread: 120, // Lebih menyebar
         origin: { x: originX, y: originY },
-        startVelocity: 60,
-        colors: ["#ff9ecd", "#9cd4ff", "#fff5a5", "#ffffff"]
+        startVelocity: 70, // Lebih kencang
+        decay: 0.9,
+        colors: ["#ff9ecd", "#9cd4ff", "#fff5a5", "#ffffff", "#ff4b91", "#84fab0"]
       });
 
-      const duration = 2000;
+      // 🌟 Durasi "hujan" confetti
+      const duration = 2500; // Perpanjang
       const end = Date.now() + duration;
 
       (function frame() {
+        // Tembakan dari samping
         confetti({
           particleCount: 3,
           startVelocity: 40,
@@ -910,6 +960,19 @@ Love you always 💕
           origin: { x: 1, y: 0.7 },
           colors: ["#ff9ecd", "#9cd4ff"]
         });
+        
+        // 🌟 BARU: Tembakan "kembang api" acak
+        if (Math.random() < 0.1) { // 10% chance setiap frame
+             confetti({
+                particleCount: 50,
+                startVelocity: 30,
+                spread: 100,
+                origin: { x: Math.random(), y: Math.random() * 0.5 }, // Acak di paruh atas
+                colors: ["#fff5a5", "#ff9a9e", "#a1c4fd"],
+                decay: 0.92,
+                scalar: 0.8
+            });
+        }
 
         if (Date.now() < end) {
           requestAnimationFrame(frame);
@@ -917,6 +980,7 @@ Love you always 💕
       }());
 
 
+      // 🌟 Sesuaikan timeout (munculkan halaman baru sebelum confetti selesai)
       setTimeout(() => {
         const giftPage = document.getElementById("giftPage");
         const surprisePage = document.getElementById("surprise");
@@ -938,7 +1002,7 @@ Love you always 💕
           addSparkles();
         }, 500);
 
-      }, 2000);
+      }, duration - 500); // Tampilkan halaman baru 500ms sebelum confetti berakhir
     }
 
     function addSparkles() {
@@ -1086,12 +1150,13 @@ Love you always 💕
     animateParticles();
 
     
-    // Fungsi untuk pindah ke Halaman Galeri
+    // 🌟 PERUBAHAN: Fungsi pindah ke Halaman Galeri (Mengatur padding body)
     function showGalleryPage() {
         const surprisePage = document.getElementById('surprise');
         const galleryPage = document.getElementById('galleryPage');
+        
+        document.body.style.paddingTop = '0px'; // Hapus padding atas body
 
-        // Sembunyikan halaman surprise
         surprisePage.style.opacity = '0';
         surprisePage.style.transform = 'scale(0.95)';
 
@@ -1099,21 +1164,21 @@ Love you always 💕
             surprisePage.classList.add("hidden");
             galleryPage.classList.remove("hidden");
             
-            // Tampilkan halaman galeri
             setTimeout(() => {
                 galleryPage.style.opacity = '1';
                 galleryPage.style.transform = 'scale(1)';
-                window.scrollTo(0, 0); // Selalu scroll ke atas halaman
+                window.scrollTo(0, 0); 
             }, 20);
-        }, 500); // 500ms = durasi transisi
+        }, 500); 
     }
 
-    // Fungsi untuk kembali dari Halaman Galeri
+    // 🌟 PERUBAHAN: Fungsi kembali dari Halaman Galeri (Mengatur padding body)
     function hideGalleryPage() {
         const surprisePage = document.getElementById('surprise');
         const galleryPage = document.getElementById('galleryPage');
 
-        // Sembunyikan halaman galeri
+        document.body.style.paddingTop = '20px'; // Kembalikan padding atas body
+
         galleryPage.style.opacity = '0';
         galleryPage.style.transform = 'scale(0.95)';
 
@@ -1121,7 +1186,6 @@ Love you always 💕
             galleryPage.classList.add("hidden");
             surprisePage.classList.remove("hidden");
             
-            // Tampilkan kembali halaman surprise
             setTimeout(() => {
                 surprisePage.style.opacity = '1';
                 surprisePage.style.transform = 'scale(1)';
