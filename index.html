@@ -8,7 +8,10 @@
     body {
       margin: 0;
       font-family: "Comic Sans MS", "Chalkboard SE", "Marker Felt", cursive, sans-serif;
-      background: linear-gradient(135deg, #ffb6c1, #b3e5fc);
+      /* 🌟 PERUBAHAN: Background gradient animasi pink & biru */
+      background: linear-gradient(135deg, #ffb6c1, #b3e5fc, #ff9ecd, #9cd4ff);
+      background-size: 400% 400%;
+      animation: moveGradient 20s ease infinite;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -17,11 +20,18 @@
       text-align: center;
       overflow-x: hidden;
       overflow-y: auto;
-      /* 🌟 PERUBAHAN: Padding atas dikurangi agar semua lebih ke atas */
-      padding: 15px 20px 20px 20px;
+      /* 🌟 PERUBAHAN: Padding disamakan jadi 20px */
+      padding: 20px;
       box-sizing: border-box;
       position: relative; 
       cursor: default; 
+    }
+
+    /* 🌟 PERUBAHAN: Keyframe untuk background bergerak */
+    @keyframes moveGradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     body.login-active {
@@ -136,11 +146,17 @@
       flex-direction: column;
       align-items: center;
       margin-top: 0px; 
-      /* 🌟 PERUBAHAN: Padding atas dikurangi agar lebih ke atas */
       padding-top: 10px; 
     }
     #login {
         margin-top: 0;
+        /* 🌟 PERUBAHAN: Animasi 'bernapas' untuk kartu login */
+        animation: cardBreathe 3s infinite ease-in-out;
+    }
+    /* 🌟 PERUBAHAN: Keyframe untuk card login 'bernapas' */
+    @keyframes cardBreathe {
+        0%, 100% { box-shadow: 0 0 20px rgba(255, 182, 193, 0.6); }
+        50% { box-shadow: 0 0 30px rgba(255, 182, 193, 0.8); }
     }
 
 
@@ -323,16 +339,15 @@
     }
 
 
-    /* 🌟 PERUBAHAN: Layout Action Cards (di bawah judul, di atas kue) */
+    /* Layout Action Cards */
     .action-cards {
       display: flex;
-      flex-wrap: wrap; /* Tetap izinkan wrap di layar super kecil */
+      flex-wrap: wrap; 
       justify-content: center;
       gap: 15px;
-      /* 🌟 PERUBAHAN: Menghapus margin negatif agar tidak menutupi judul */
-      margin-top: 25px; /* Jarak dari judul/tanggal */
-      margin-bottom: 30px; /* Jarak ke kue */
-      max-width: 620px; /* 🌟 PERUBAHAN: Dilebarkan agar 4 card sejajar */
+      margin-top: 25px; 
+      margin-bottom: 30px; 
+      max-width: 620px; 
     }
     
     .action-btn {
@@ -374,7 +389,7 @@
     .action-btn:nth-child(4) { background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%); }
     
     
-    /* Modal (Popup) Styling (UNTUK 3 KARTU LAINNYA) */
+    /* Modal (Popup) Styling */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -432,7 +447,7 @@
       margin-top: 5px;
     }
     
-    /* 🌟 PERUBAHAN: Galeri Foto (GRID) */
+    /* Galeri Foto (GRID) */
     .gallery-text {
         font-size: 16px;
         color: #555;
@@ -442,51 +457,61 @@
     }
     .photos-grid {
       display: grid;
-      /* 🌟 PERUBAHAN: Ukuran minimal foto 200px */
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 15px; 
       margin-top: 20px;
       justify-items: center;
-      width: 90%; /* Batasi lebar grid */
-      max-width: 900px; /* Batas maksimum agar tidak terlalu lebar di PC */
+      width: 90%; 
+      max-width: 900px; 
     }
     
+    /* 🌟 PERUBAHAN: Desain kartu foto (figure) dipercantik */
     .photos-grid figure {
         margin: 0;
         padding: 0;
+        /* Jadikan 'figure' sebagai card */
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        overflow: hidden; /* Agar img tidak keluar radius */
         width: 100%;
-        transition: transform 0.3s ease;
     }
     .photos-grid figure:hover {
-        transform: scale(1.05); /* Efek hover di pembungkus */
+        transform: scale(1.04) translateY(-5px); /* Efek hover lebih bagus */
+        box-shadow: 0 8px 20px rgba(255, 182, 193, 0.4);
     }
     
     .photos-grid img {
       width: 100%;
       height: auto;
-      aspect-ratio: 1/1; /* Agar foto kotak */
-      object-fit: cover; /* Pastikan foto mengisi kotak dengan baik */
-      border-radius: 10px;
-      box-shadow: 0 0 8px rgba(255, 182, 193, 0.4);
-      transition: box-shadow 0.3s ease;
-      border: 3px solid transparent; /* Border default */
+      aspect-ratio: 1/1; 
+      object-fit: cover; 
+      /* Hapus style dari img, pindah ke figure */
+      box-shadow: none;
+      border: none;
+      display: block; /* Hapus space bawah */
     }
     
-    .photos-grid figure:nth-child(3n+1) img { border-color: #ff9a9e; }
-    .photos-grid figure:nth-child(3n+2) img { border-color: #a1c4fd; }
-    .photos-grid figure:nth-child(3n) img { border-color: #84fab0; }
+    /* Hapus border-color aneh */
+    .photos-grid figure:nth-child(3n+1) img { border-color: transparent; }
+    .photos-grid figure:nth-child(3n+2) img { border-color: transparent; }
+    .photos-grid figure:nth-child(3n) img { border-color: transparent; }
 
     .photos-grid figure:hover img {
-      box-shadow: 0 0 15px rgba(255, 182, 193, 0.8);
+      box-shadow: none;
     }
     
+    /* 🌟 PERUBAHAN: Desain figcaption dipercantik */
     .photos-grid figcaption {
-        font-size: 12px;
-        color: #555;
+        font-size: 13px;
+        color: #444;
         font-weight: bold;
-        margin-top: 5px;
+        margin: 0; /* Hapus margin atas */
+        padding: 10px 12px; /* Beri padding */
         text-align: center;
-        line-height: 1.2;
+        line-height: 1.3;
+        background: #fffafc; /* Warna background caption */
     }
 
     /* Style untuk "Surat Ucapan" */
@@ -569,8 +594,27 @@
       background: radial-gradient(circle at 10px 10px, transparent 4px, #fff8f9 5px) repeat-y;
       background-size: 10px 20px;
     }
+
+    /* 🌟 PERUBAHAN: Card Teks Penutup di Galeri */
+    .closing-card {
+      background: #fffafb;
+      border: 1px solid #fde7f0;
+      border-radius: 15px;
+      padding: 15px 25px;
+      margin-top: 30px;
+      max-width: 600px;
+      width: 90%;
+      box-shadow: 0 4px 10px rgba(255, 182, 193, 0.2);
+      text-align: center;
+      font-size: 17px;
+      color: #555;
+      line-height: 1.6;
+    }
+    .closing-card p {
+      margin: 0;
+    }
     
-    /* 🌟 BARU: Styling untuk Halaman Galeri Penuh */
+    /* Styling untuk Halaman Galeri Penuh */
     #galleryPage {
       transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
       width: 100%;
@@ -578,7 +622,8 @@
       flex-direction: column;
       align-items: center;
       margin-top: 0px; 
-      padding-top: 10px;
+      /* 🌟 PERUBAHAN: Dihapus agar lebih ke atas */
+      padding-top: 0; 
       opacity: 0;
       transform: scale(0.95);
       min-height: 100vh; 
@@ -587,7 +632,8 @@
       color: #ff4b91;
       border-bottom: 3px solid #fde7f0;
       padding-bottom: 10px;
-      margin-top: 5px;
+      /* 🌟 PERUBAHAN: Dihapus agar lebih ke atas */
+      margin-top: 0; 
       font-size: 28px;
     }
     #galleryCloseButton {
@@ -733,9 +779,11 @@
       </figure>
     </div>
 
-    <p class="gallery-text" style="margin-top: 20px;">
-      Masih banyak lagi cerita kita yang akan terukir. Aku tak sabar menunggu semuanya!
-    </p>
+    <div class="closing-card">
+      <p>
+        Masih banyak lagi cerita kita yang akan terukir. 💖 Aku tak sabar menunggu semuanya!
+      </p>
+    </div>
     
     <button id="galleryCloseButton" onclick="hideGalleryPage()">Kembali</button>
   </div>
@@ -1038,7 +1086,7 @@ Love you always 💕
     animateParticles();
 
     
-    // 🌟 BARU: Fungsi untuk pindah ke Halaman Galeri
+    // Fungsi untuk pindah ke Halaman Galeri
     function showGalleryPage() {
         const surprisePage = document.getElementById('surprise');
         const galleryPage = document.getElementById('galleryPage');
@@ -1060,7 +1108,7 @@ Love you always 💕
         }, 500); // 500ms = durasi transisi
     }
 
-    // 🌟 BARU: Fungsi untuk kembali dari Halaman Galeri
+    // Fungsi untuk kembali dari Halaman Galeri
     function hideGalleryPage() {
         const surprisePage = document.getElementById('surprise');
         const galleryPage = document.getElementById('galleryPage');
@@ -1087,4 +1135,3 @@ Love you always 💕
 
 </body>
 </html>
-
