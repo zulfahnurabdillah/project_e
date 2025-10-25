@@ -5,6 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🎂 Happy Birthday sayanggg 💖</title>
   <style>
+    /* 🌟 BARU: Styling untuk Pre-loader (Layar Loading) */
+    #preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #ffb6c1, #b3e5fc);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+      transition: opacity 0.5s ease-out;
+      font-family: "Comic Sans MS", cursive, sans-serif;
+    }
+    .heart-loader {
+      font-size: 50px;
+      animation: heartbeat 1s infinite ease-in-out;
+    }
+    .loader-text {
+      margin-top: 15px;
+      font-size: 18px;
+      color: #ff4b91;
+      font-weight: bold;
+    }
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+    }
+    
     body {
       margin: 0;
       font-family: "Comic Sans MS", "Chalkboard SE", "Marker Felt", cursive, sans-serif;
@@ -153,7 +184,6 @@
         50% { box-shadow: 0 0 30px rgba(255, 182, 193, 0.8); }
     }
 
-    /* 🌟 BARU: Animasi spin untuk emoji di login */
     .emoji-spin {
       display: inline-block;
       animation: spin 4s linear infinite;
@@ -236,14 +266,12 @@
         50% { opacity: 1; }
     }
     
-    /* 🌟 BARU: Styling untuk prompt "Klik Aku!" di halaman kado */
     .gift-prompt {
       margin-top: 15px;
       font-size: 18px;
       color: #ff4b91;
       font-weight: bold;
       animation: breathe 1.5s infinite ease-in-out;
-      /* Pastikan animasi 'breathe' tidak bentrok dengan #giftPage p */
       opacity: 1; 
     }
 
@@ -297,6 +325,27 @@
       border-radius: 15px;
       z-index: 2;
       position: relative;
+    }
+    
+    /* 🌟 BARU: Animasi Lilin di Kue */
+    .flame {
+      position: absolute;
+      width: 14px;
+      height: 22px;
+      background: radial-gradient(circle, #fff, #ffeda0 30%, #ffc107 80%);
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      top: 70px; /* Sesuaikan posisi ini agar pas di atas lilin pada kue.png */
+      left: 49%; /* Sesuaikan posisi ini */
+      transform: translateX(-50%);
+      z-index: 3;
+      box-shadow: 0 0 10px #ffc107, 0 0 15px #ffc107;
+      transform-origin: bottom center;
+      animation: flicker 1s infinite ease-in-out alternate;
+    }
+    @keyframes flicker {
+      0%   { transform: scaleY(1) scaleX(1) skewY(0deg); opacity: 1; }
+      50%  { transform: scaleY(0.9) scaleX(1.05) skewY(5deg); opacity: 0.8; }
+      100% { transform: scaleY(1.05) scaleX(0.95) skewY(-5deg); opacity: 1; }
     }
 
     @keyframes fadeInUp {
@@ -383,7 +432,6 @@
       text-shadow: 0 1px 3px rgba(0,0,0,0.1); 
     }
 
-    /* 🌟 BARU: Kartu untuk kutipan */
     .quote-card {
       background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 240, 245, 0.8));
       border: 1px solid #fde7f0;
@@ -397,7 +445,7 @@
     .quote-text {
       font-size: 18px;
       color: #777;
-      margin: 0; /* Hapus margin default */
+      margin: 0;
       font-style: italic;
       line-height: 1.5;
     }
@@ -449,12 +497,9 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
       text-shadow: 0 1px 3px rgba(0,0,0,0.2);
-      
-      /* 🌟 BARU: Animasi tombol subtle */
       animation: buttonPulseSubtle 3s infinite ease-in-out;
     }
     
-    /* 🌟 BARU: Delay animasi agar tidak barengan */
     .action-btn:nth-child(2) { animation-delay: 0.3s; }
     .action-btn:nth-child(3) { animation-delay: 0.6s; }
     .action-btn:nth-child(4) { animation-delay: 0.1s; }
@@ -463,10 +508,9 @@
     .action-btn:hover {
       transform: scale(1.05) translateY(-5px);
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-      animation-play-state: paused; /* Jeda animasi saat di-hover */
+      animation-play-state: paused; 
     }
     
-    /* 🌟 BARU: Keyframe untuk animasi tombol */
     @keyframes buttonPulseSubtle {
       0%, 100% { box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); }
       50% { box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); }
@@ -519,8 +563,6 @@
       max-height: 85vh;
       overflow-y: auto;
       box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      
-      /* 🌟 PERUBAHAN: Animasi modal meluncur dari atas */
       transform: translateY(-50px) scale(0.98);
       transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
@@ -574,10 +616,21 @@
         border: 1px solid #ffccdd; 
         border-radius: 12px;
         box-shadow: 0 4px 12px rgba(255, 182, 193, 0.4); 
-        transition: box-shadow 0.3s ease, transform 0.2s ease; 
+        transition: box-shadow 0.3s ease, transform 0.2s ease, opacity 0.6s ease-out; /* 🌟 PERUBAHAN: Transisi scroll-reveal */
         overflow: hidden; 
         width: 100%;
+        cursor: pointer;
+        
+        /* 🌟 BARU: Styling awal untuk Scroll-Reveal */
+        opacity: 0;
+        transform: translateY(30px);
     }
+    /* 🌟 BARU: Styling saat terlihat (dinyalakan oleh JS) */
+    .photos-grid figure.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
     .photos-grid figure:hover {
         transform: translateY(-3px); 
         box-shadow: 0 8px 20px rgba(255, 158, 205, 0.6), 0 0 15px rgba(180, 220, 255, 0.4); 
@@ -756,9 +809,75 @@
         transform: scale(1.05);
     }
 
+    /* 🌟 BARU: Styling untuk Lightbox Galeri */
+    .lightbox-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s;
+    }
+    .lightbox-overlay.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    .lightbox-image {
+      max-width: 90vw;
+      max-height: 80vh;
+      border-radius: 10px;
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 40px;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: #fff;
+      font-size: 30px;
+      font-weight: bold;
+      padding: 10px 15px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .lightbox-nav:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+    .lightbox-nav.prev {
+      left: 15px;
+    }
+    .lightbox-nav.next {
+      right: 15px;
+    }
+
   </style>
 </head>
 <body class="login-active">
+
+  <div id="preloader">
+    <div class="heart-loader">💖</div>
+    <p class="loader-text">Mempersiapkan kejutan...</p>
+  </div>
+
   <canvas id="interactiveBgCanvas"></canvas> 
   <div class="birthday-pattern-overlay"></div>
 
@@ -806,6 +925,7 @@
     </div>
 
     <div class="cake-container fade-in-item" id="cakeContainer" style="animation-delay: 0.5s;">
+      <div class="flame"></div>
       <img id="cakeImage" src="kue.png" alt="Kue Ulang Tahun" class="cake">
     </div>
 
@@ -943,9 +1063,25 @@ Love you always 💕
       <p style="text-align:center; margin-top:15px; font-size: 14px; color: #888;">*Berlaku selamanya, tidak bisa diuangkan, dan harus diklaim ya! 😉</p>
     </div>
   </div>
+  
+  <div id="lightbox" class="lightbox-overlay hidden" onclick="closeLightbox(event)">
+    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+    <img src="" class="lightbox-image" alt="Foto Galeri Dibesarkan">
+    <button class="lightbox-nav prev" onclick="showPrevImage()">◄</button>
+    <button class="lightbox-nav next" onclick="showNextImage()">►</button>
+  </div>
 
 
   <script>
+    // 🌟 BARU: Logika untuk Pre-loader
+    window.addEventListener('load', () => {
+      const preloader = document.getElementById('preloader');
+      preloader.style.opacity = '0';
+      setTimeout(() => {
+        preloader.style.display = 'none';
+      }, 500); // 500ms = durasi transisi
+    });
+  
     function checkBirthday() {
       const name = document.getElementById("name").value.trim().toLowerCase();
       const birthday = document.getElementById("birthday").value.trim();
@@ -1123,8 +1259,9 @@ Love you always 💕
     }
     
     function closeModal(modalId, event) {
-      if (event && event.target !== event.currentTarget) {
-        return;
+      // 🌟 PERUBAHAN: Cek jika target adalah overlay, bukan konten modal
+      if (event && event.target.id !== modalId && event.target.classList.contains('modal-content')) {
+        return; // Jangan tutup jika klik di dalam konten
       }
       
       const modal = document.getElementById(modalId);
@@ -1149,7 +1286,7 @@ Love you always 💕
         }, 500); 
     });
 
-    // Background Interaktif
+    // 🌟 PERUBAHAN: Background Interaktif (Hati & Bintang)
     const canvas = document.getElementById('interactiveBgCanvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
@@ -1164,19 +1301,20 @@ Love you always 💕
         constructor(x, y, radius, color, velocity) {
             this.x = x;
             this.y = y;
-            this.radius = radius;
+            this.radius = radius; // Radius akan kita gunakan untuk mengatur ukuran emoji
             this.color = color;
             this.velocity = velocity;
             this.alpha = 1;
+            // 🌟 BARU: Pilih bentuk emoji
+            this.shape = Math.random() > 0.5 ? '💖' : '✨';
         }
 
         draw() {
             ctx.save();
             ctx.globalAlpha = this.alpha;
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-            ctx.fillStyle = this.color;
-            ctx.fill();
+            // 🌟 PERUBAHAN: Menggambar emoji, bukan lingkaran
+            ctx.font = `${this.radius * 2.5}px "Comic Sans MS"`; // Ukuran emoji berdasarkan radius
+            ctx.fillText(this.shape, this.x, this.y);
             ctx.restore();
         }
 
@@ -1184,7 +1322,7 @@ Love you always 💕
             this.x += this.velocity.x;
             this.y += this.velocity.y;
             this.alpha -= 0.008; 
-            this.radius -= 0.03; 
+            this.radius -= 0.03; // Emoji akan mengecil
 
             if (this.radius < 0.1) { 
                 this.alpha = 0;
@@ -1194,7 +1332,8 @@ Love you always 💕
     }
 
     function createParticle(x, y) {
-        const radius = Math.random() * 5 + 2;
+        // 🌟 PERUBAHAN: Ukuran radius disesuaikan untuk emoji
+        const radius = Math.random() * 6 + 4; // Ukuran 4px - 10px
         const color = colors[Math.floor(Math.random() * colors.length)];
         const angle = Math.random() * Math.PI * 2;
         const velocity = {
@@ -1227,6 +1366,51 @@ Love you always 💕
     animateParticles();
 
     
+    // 🌟 BARU: Variabel dan fungsi untuk Lightbox
+    let currentImageIndex = 0;
+    let galleryImagesSrc = [];
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = lightbox.querySelector('.lightbox-image');
+    const lightboxNavPrev = lightbox.querySelector('.lightbox-nav.prev');
+    const lightboxNavNext = lightbox.querySelector('.lightbox-nav.next');
+
+    // 🌟 BARU: Fungsi untuk membuka Lightbox
+    function openLightbox(index) {
+        currentImageIndex = index;
+        lightboxImage.src = galleryImagesSrc[currentImageIndex];
+        lightbox.classList.add('visible');
+        updateLightboxNav();
+    }
+
+    // 🌟 BARU: Fungsi untuk menutup Lightbox
+    function closeLightbox(event) {
+        // Cek jika klik adalah pada overlay (latar belakang), bukan gambar atau tombol
+        if (!event || event.target === lightbox || event.target.classList.contains('lightbox-close')) {
+            lightbox.classList.remove('visible');
+        }
+    }
+
+    // 🌟 BARU: Fungsi untuk update tombol navigasi
+    function updateLightboxNav() {
+        lightboxNavPrev.style.display = (currentImageIndex === 0) ? 'none' : 'block';
+        lightboxNavNext.style.display = (currentImageIndex === galleryImagesSrc.length - 1) ? 'none' : 'block';
+    }
+
+    // 🌟 BARU: Fungsi ganti gambar
+    function showNextImage() {
+        if (currentImageIndex < galleryImagesSrc.length - 1) {
+            openLightbox(currentImageIndex + 1);
+        }
+    }
+    function showPrevImage() {
+        if (currentImageIndex > 0) {
+            openLightbox(currentImageIndex - 1);
+        }
+    }
+    
+    // 🌟 BARU: Variabel untuk Scroll-Reveal
+    let scrollObserver = null;
+
     // Fungsi pindah ke Halaman Galeri
     function showGalleryPage() {
         const surprisePage = document.getElementById('surprise');
@@ -1245,9 +1429,43 @@ Love you always 💕
                 galleryPage.style.opacity = '1';
                 galleryPage.style.transform = 'scale(1)';
                 window.scrollTo(0, 0); 
+                
+                // 🌟 BARU: Panggil setup Scroll-Reveal SETELAH galeri tampil
+                setupScrollObserver();
             }, 20);
         }, 500); 
     }
+    
+    // 🌟 BARU: Fungsi untuk setup Intersection Observer (Scroll-Reveal)
+    function setupScrollObserver() {
+        // Jika observer sudah ada, putuskan dulu
+        if (scrollObserver) {
+            scrollObserver.disconnect();
+        }
+
+        const figures = document.querySelectorAll('.photos-grid figure');
+        
+        // Reset state (jika galeri dibuka lagi)
+        figures.forEach(figure => {
+            figure.classList.remove('is-visible');
+        });
+
+        scrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    scrollObserver.unobserve(entry.target); // Hanya animasikan sekali
+                }
+            });
+        }, {
+            rootMargin: '0px 0px -50px 0px' // Muncul saat 50px dari bawah layar
+        });
+
+        figures.forEach(figure => {
+            scrollObserver.observe(figure);
+        });
+    }
+
 
     // Fungsi kembali dari Halaman Galeri
     function hideGalleryPage() {
@@ -1269,6 +1487,36 @@ Love you always 💕
             }, 20);
         }, 500);
     }
+    
+    // 🌟 BARU: Setup event listener untuk Lightbox saat DOM siap
+    document.addEventListener('DOMContentLoaded', () => {
+        const galleryFigures = document.querySelectorAll('.photos-grid figure');
+        
+        galleryFigures.forEach((figure, index) => {
+            // 1. Simpan src gambar ke array
+            const img = figure.querySelector('img');
+            galleryImagesSrc.push(img.src);
+            
+            // 2. Tambahkan event klik ke figure
+            figure.addEventListener('click', (e) => {
+                e.stopPropagation(); // Hentikan event agar tidak konflik
+                openLightbox(index);
+            });
+        });
+        
+        // 3. Tambahkan listener untuk navigasi keyboard (panah kiri/kanan)
+        document.addEventListener('keydown', (e) => {
+            if (lightbox.classList.contains('visible')) {
+                if (e.key === 'ArrowRight') {
+                    showNextImage();
+                } else if (e.key === 'ArrowLeft') {
+                    showPrevImage();
+                } else if (e.key === 'Escape') {
+                    closeLightbox();
+                }
+            }
+        });
+    });
 
   </script>
 
