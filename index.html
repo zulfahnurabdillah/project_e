@@ -8,7 +8,6 @@
     body {
       margin: 0;
       font-family: "Comic Sans MS", "Chalkboard SE", "Marker Felt", cursive, sans-serif;
-      /* Background gradient animasi pink & biru */
       background: linear-gradient(135deg, #ffb6c1, #b3e5fc, #ff9ecd, #9cd4ff);
       background-size: 400% 400%;
       animation: moveGradient 20s ease infinite;
@@ -20,14 +19,13 @@
       text-align: center;
       overflow-x: hidden;
       overflow-y: auto;
-      padding: 20px; /* Default padding */
+      padding: 20px;
       box-sizing: border-box;
       position: relative; 
       cursor: default; 
-      transition: padding 0.3s ease; /* Transisi untuk padding */
+      transition: padding 0.3s ease;
     }
 
-    /* Keyframe untuk background bergerak */
     @keyframes moveGradient {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
@@ -38,7 +36,6 @@
         justify-content: center; 
     }
 
-    /* Canvas untuk efek background interaktif */
     #interactiveBgCanvas {
         position: fixed;
         top: 0;
@@ -66,7 +63,6 @@
       to { background-position: 200px 200px; }
     }
 
-    /* Balon Latar Belakang */
     .background-balloons {
       position: fixed;
       top: 0;
@@ -157,6 +153,16 @@
         50% { box-shadow: 0 0 30px rgba(255, 182, 193, 0.8); }
     }
 
+    /* 🌟 BARU: Animasi spin untuk emoji di login */
+    .emoji-spin {
+      display: inline-block;
+      animation: spin 4s linear infinite;
+    }
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
 
     #giftPage, #surprise {
       opacity: 0;
@@ -229,6 +235,17 @@
         0%, 100% { opacity: 0.7; }
         50% { opacity: 1; }
     }
+    
+    /* 🌟 BARU: Styling untuk prompt "Klik Aku!" di halaman kado */
+    .gift-prompt {
+      margin-top: 15px;
+      font-size: 18px;
+      color: #ff4b91;
+      font-weight: bold;
+      animation: breathe 1.5s infinite ease-in-out;
+      /* Pastikan animasi 'breathe' tidak bentrok dengan #giftPage p */
+      opacity: 1; 
+    }
 
     button:hover { transform: scale(1.05); }
 
@@ -287,7 +304,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Animasi staggered fade-in untuk elemen di #surprise */
     .fade-in-item {
         opacity: 0;
         animation: fadeInUp 0.8s ease forwards;
@@ -314,7 +330,6 @@
     h1 { color: #ff4b91; font-size: 28px; margin-bottom: 10px; }
     h2 { color: #59a7ff; font-size: 22px; margin-top: 0; }
     
-    /* Kartu Teks untuk Ucapan Selamat */
     .greeting-card {
       position: relative; 
       background: linear-gradient(160deg, #ffe0e6 0%, #e0f2ff 100%); 
@@ -347,13 +362,10 @@
         100% { background-position: 0% 50%; }
     }
 
-    /* 🌟 PERUBAHAN: Styling H1 (Solid Color, No Blur) */
     .greeting-card h1 {
       font-size: 32px; 
       margin-bottom: 8px;
-      /* 🌟 PERUBAHAN: Warna solid pink */
       color: #ff4b91; 
-      /* Hapus semua efek gradien, shineText, dan text-shadow */
       background: none;
       -webkit-background-clip: unset;
       -webkit-text-fill-color: unset;
@@ -364,7 +376,6 @@
       line-height: 1.2;
     }
     
-    /* Styling H2 di dalam kartu */
     .greeting-card h2 {
       font-size: 24px; 
       margin-top: 5px;
@@ -372,22 +383,25 @@
       text-shadow: 0 1px 3px rgba(0,0,0,0.1); 
     }
 
-    /* Keyframe untuk teks berkilau (tetap ada jika nanti mau pakai lagi) */
-    @keyframes shineText {
-      from { background-position: 200% center; }
-      to { background-position: 0% center; }
+    /* 🌟 BARU: Kartu untuk kutipan */
+    .quote-card {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 240, 245, 0.8));
+      border: 1px solid #fde7f0;
+      border-radius: 15px;
+      padding: 20px 25px;
+      margin-top: 30px;
+      width: 80%;
+      max-width: 600px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     }
-
     .quote-text {
       font-size: 18px;
       color: #777;
-      margin-top: 25px;
+      margin: 0; /* Hapus margin default */
       font-style: italic;
-      max-width: 80%;
       line-height: 1.5;
     }
     
-    /* Animasi Reveal Teks H1 */
     .reveal-text {
         opacity: 0; 
         position: relative;
@@ -435,11 +449,29 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
       text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+      
+      /* 🌟 BARU: Animasi tombol subtle */
+      animation: buttonPulseSubtle 3s infinite ease-in-out;
     }
+    
+    /* 🌟 BARU: Delay animasi agar tidak barengan */
+    .action-btn:nth-child(2) { animation-delay: 0.3s; }
+    .action-btn:nth-child(3) { animation-delay: 0.6s; }
+    .action-btn:nth-child(4) { animation-delay: 0.1s; }
+
+
     .action-btn:hover {
       transform: scale(1.05) translateY(-5px);
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      animation-play-state: paused; /* Jeda animasi saat di-hover */
     }
+    
+    /* 🌟 BARU: Keyframe untuk animasi tombol */
+    @keyframes buttonPulseSubtle {
+      0%, 100% { box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); }
+      50% { box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); }
+    }
+
     .action-btn .emoji-icon {
       font-size: 40px; 
       line-height: 1;
@@ -486,12 +518,14 @@
       position: relative;
       max-height: 85vh;
       overflow-y: auto;
-      transform: scale(0.9);
-      transition: transform 0.3s ease;
       box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      
+      /* 🌟 PERUBAHAN: Animasi modal meluncur dari atas */
+      transform: translateY(-50px) scale(0.98);
+      transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
     .modal-overlay.visible .modal-content {
-      transform: scale(1);
+      transform: translateY(0) scale(1);
     }
     
     .modal-close {
@@ -532,23 +566,21 @@
       max-width: 900px; 
     }
     
-    /* 🌟 PERUBAHAN: Desain kartu foto (figure) dipercantik dengan warna-warni */
     .photos-grid figure {
         margin: 0;
         padding: 10px; 
         box-sizing: border-box;
-        /* 🌟 PERUBAHAN: Background gradien multi-warna */
-        background: linear-gradient(135deg, #ffebee, #e3f2fd, #fce4ec, #e8eaf6); /* Pink, Biru, Lavender */
-        border: 1px solid #ffccdd; /* Border pink muda */
+        background: linear-gradient(135deg, #ffebee, #e3f2fd, #fce4ec, #e8eaf6);
+        border: 1px solid #ffccdd; 
         border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(255, 182, 193, 0.4); /* Shadow lebih kuat */
+        box-shadow: 0 4px 12px rgba(255, 182, 193, 0.4); 
         transition: box-shadow 0.3s ease, transform 0.2s ease; 
         overflow: hidden; 
         width: 100%;
     }
     .photos-grid figure:hover {
-        transform: translateY(-3px); /* Sedikit naik saat hover */
-        box-shadow: 0 8px 20px rgba(255, 158, 205, 0.6), 0 0 15px rgba(180, 220, 255, 0.4); /* Glow saat hover */
+        transform: translateY(-3px); 
+        box-shadow: 0 8px 20px rgba(255, 158, 205, 0.6), 0 0 15px rgba(180, 220, 255, 0.4); 
     }
     
     .photos-grid img {
@@ -560,15 +592,6 @@
       border-radius: 8px; 
     }
     
-    .photos-grid figure:nth-child(3n+1) img { border-color: transparent; }
-    .photos-grid figure:nth-child(3n+2) img { border-color: transparent; }
-    .photos-grid figure:nth-child(3n) img { border-color: transparent; }
-
-    .photos-grid figure:hover img {
-      box-shadow: none;
-    }
-    
-    /* Desain figcaption (selalu terlihat) */
     .photos-grid figcaption {
         position: static; 
         transform: none; 
@@ -699,7 +722,6 @@
       min-height: 100vh; 
     }
     
-    /* Judul Galeri (Sticky) */
     #galleryPage h2 {
       color: #ff4b91;
       border-bottom: 3px solid #fde7f0;
@@ -710,7 +732,6 @@
       font-size: 28px;
       width: 100%; 
       box-sizing: border-box;
-      
       position: sticky;
       top: 0;
       background: linear-gradient(180deg, rgba(253, 244, 246, 1) 85%, rgba(253, 244, 246, 0) 100%);
@@ -747,7 +768,7 @@
   </ul>
 
   <div id="login" class="card">
-    <h1>🎀 Halo! 🎀</h1>
+    <h1><span class="emoji-spin">🎀</span> Halo! <span class="emoji-spin">🎀</span></h1>
     <p>Masukkan nama & tanggal ulang tahun ya 💕</p>
     <input type="text" id="name" placeholder="Nama lengkap">
     <input type="text" id="birthday" placeholder="Tanggal (dd-mm-yyyy)">
@@ -759,6 +780,7 @@
     <h1>Hai Elza 💖</h1>
     <p>Klik kadonya untuk membuka kejutan 🎂</p>
     <img id="giftImage" src="kado.png" alt="Kado Ulang Tahun" class="gift" onclick="explodeGift()">
+    <p class="gift-prompt">Klik Aku! 💖</p>
   </div>
 
   <div id="surprise" class="hidden">
@@ -787,9 +809,11 @@
       <img id="cakeImage" src="kue.png" alt="Kue Ulang Tahun" class="cake">
     </div>
 
-    <p class="quote-text fade-in-item" style="animation-delay: 0.7s;">
-      "Semoga hari ini menjadi awal dari tahun yang penuh keajaiban dan cinta!"
-    </p>
+    <div class="quote-card fade-in-item" style="animation-delay: 0.7s;">
+      <p class="quote-text">
+        "Semoga hari ini menjadi awal dari tahun yang penuh keajaiban dan cinta!"
+      </p>
+    </div>
   </div>
 
   
