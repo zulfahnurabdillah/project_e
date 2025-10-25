@@ -54,7 +54,6 @@
       box-sizing: border-box;
       position: relative; 
       cursor: default; 
-      /* 🌟 PERUBAHAN: Padding tidak perlu transisi lagi */
     }
 
     @keyframes moveGradient {
@@ -499,7 +498,6 @@
       animation: buttonPulseSubtle 3s infinite ease-in-out;
     }
     
-    /* 🌟 PERUBAHAN: Delay animasi disesuaikan untuk 3 tombol */
     .action-btn:nth-child(1) { animation-delay: 0s; }
     .action-btn:nth-child(2) { animation-delay: 0.3s; }
     .action-btn:nth-child(3) { animation-delay: 0.6s; }
@@ -526,7 +524,6 @@
       line-height: 1.2;
     }
     
-    /* 🌟 PERUBAHAN: Hapus style tombol ke-4 */
     .action-btn:nth-child(1) { background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); }
     .action-btn:nth-child(2) { background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%); }
     .action-btn:nth-child(3) { background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%); }
@@ -590,13 +587,13 @@
       margin-top: 5px;
     }
     
-    /* 🌟 PERUBAHAN: Galeri Foto (GRID) kini ada di halaman utama */
+    /* Galeri Foto (GRID) di halaman utama */
     .gallery-text {
-        font-size: 18px; /* Sedikit lebih besar */
-        color: #ff4b91; /* Samakan dengan warna judul */
+        font-size: 18px;
+        color: #ff4b91;
         font-weight: bold;
         text-shadow: 0 1px 3px rgba(255,255,255,0.5);
-        margin-top: 40px; /* Jarak dari quote card */
+        margin-top: 40px; 
         margin-bottom: 15px;
         text-align: center;
         line-height: 1.5;
@@ -608,7 +605,7 @@
       margin-top: 20px;
       justify-items: center;
       width: 100%;
-      max-width: 900px; /* Batasi lebar grid di #surprise */
+      max-width: 900px; 
     }
     
     .photos-grid figure {
@@ -619,15 +616,19 @@
         border: 1px solid #ffccdd; 
         border-radius: 12px;
         box-shadow: 0 4px 12px rgba(255, 182, 193, 0.4); 
-        transition: box-shadow 0.3s ease, transform 0.2s ease, opacity 0.6s ease-out;
+        /* 🌟 PERUBAHAN: Transisi diperhalus dan diatur untuk fade-in/out */
+        transition: box-shadow 0.3s ease, 
+                    transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                    opacity 0.6s ease-out;
         overflow: hidden; 
         width: 100%;
         cursor: pointer;
         
-        /* Styling awal untuk Scroll-Reveal */
+        /* Status awal untuk fade-in */
         opacity: 0;
         transform: translateY(30px);
     }
+    /* Status saat terlihat (fade-in) */
     .photos-grid figure.is-visible {
         opacity: 1;
         transform: translateY(0);
@@ -748,7 +749,7 @@
       padding: 15px 25px;
       margin-top: 30px;
       max-width: 600px;
-      width: 90%; /* Disesuaikan agar konsisten */
+      width: 90%; 
       box-sizing: border-box; 
       box-shadow: 0 4px 10px rgba(255, 182, 193, 0.2);
       text-align: center;
@@ -759,8 +760,6 @@
     .closing-card p {
       margin: 0;
     }
-    
-    /* 🌟 HAPUS: Semua style untuk #galleryPage, #galleryPage h2, #galleryCloseButton */
     
 
     /* Styling untuk Lightbox Galeri */
@@ -960,7 +959,7 @@
     </div>
     
   </div>
-  
+
   <div id="modal-wish" class="modal-overlay hidden" onclick="closeModal('modal-wish', event)">
     <div class="modal-content">
       <span class="modal-close" onclick="closeModal('modal-wish')">&times;</span>
@@ -1133,8 +1132,6 @@ Love you always 💕
             surprisePage.style.transform = 'scale(1)';
             
             document.querySelectorAll('.fade-in-item').forEach((item, index) => {
-                // 🌟 PERUBAHAN: Hati-hati, .photos-grid dll. sekarang punya class fade-in-item
-                // Pastikan delay-nya berurutan
                 item.style.animationDelay = `${index * 0.2}s`;
                 item.style.animationName = 'none'; 
                 requestAnimationFrame(() => {
@@ -1143,6 +1140,10 @@ Love you always 💕
             });
 
             animateTextReveal('main-greeting');
+            
+            // 🌟 PERUBAHAN: Setup scroll-reveal untuk galeri setelah halaman muncul
+            setupScrollObserver();
+
           }, 20);
 
           addSparkles();
@@ -1346,9 +1347,7 @@ Love you always 💕
     // Variabel untuk Scroll-Reveal
     let scrollObserver = null;
 
-    // 🌟 HAPUS: Fungsi showGalleryPage() dan hideGalleryPage()
-    
-    // Fungsi untuk setup Intersection Observer (Scroll-Reveal)
+    // 🌟 PERUBAHAN: Fungsi setupScrollObserver diperbarui
     function setupScrollObserver() {
         if (scrollObserver) {
             scrollObserver.disconnect();
@@ -1360,15 +1359,18 @@ Love you always 💕
             figure.classList.remove('is-visible');
         });
 
+        // 🌟 PERUBAHAN: Opsi diubah ke 'threshold: 0.1'
         scrollObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
+                // 🌟 PERUBAHAN: Logika if/else untuk fade-in dan fade-out
                 if (entry.isIntersecting) {
                     entry.target.classList.add('is-visible');
-                    scrollObserver.unobserve(entry.target);
+                } else {
+                    entry.target.classList.remove('is-visible'); // Ini akan memicu fade-out
                 }
             });
         }, {
-            rootMargin: '0px 0px -50px 0px'
+            threshold: 0.1 // Memicu saat 10% item terlihat/tersembunyi
         });
 
         figures.forEach(figure => {
@@ -1379,15 +1381,17 @@ Love you always 💕
 
     // Setup event listener saat DOM siap
     document.addEventListener('DOMContentLoaded', () => {
-        // 🌟 PERUBAHAN: Panggil setup scroll-reveal di sini
-        setupScrollObserver();
+        // Panggil setup scroll-reveal
+        setupScrollObserver(); 
     
         const galleryFigures = document.querySelectorAll('.photos-grid figure');
-        
-        // Kosongkan array dulu jika DOM di-refresh
-        galleryImagesSrc = [];
+        galleryImagesSrc = []; 
         
         galleryFigures.forEach((figure, index) => {
+            // 🌟 BARU: Tambahkan delay transisi staggered untuk "percantik"
+            // Ini akan membuat efek domino (0ms, 100ms, 200ms, 0ms, 100ms, ...)
+            figure.style.transitionDelay = `${(index % 3) * 100}ms`;
+            
             const img = figure.querySelector('img');
             galleryImagesSrc.push(img.src);
             
